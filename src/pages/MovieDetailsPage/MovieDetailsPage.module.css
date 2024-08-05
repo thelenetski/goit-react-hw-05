@@ -1,0 +1,36 @@
+.mainMovie {
+  display: flex;
+}
+
+.moviePoster {
+  width: 300px;
+  height: auto;
+  margin: 30px;
+}
+
+.mainMovie h2 {
+  font-size: 40px;
+}
+
+.mainMovie h4 {
+  font-size: 30px;
+  margin: 0;
+}
+
+.movieDescription {
+  text-align: left;
+}
+
+.genresBox {
+  display: flex;
+}
+
+.genresBox p {
+  padding: 0 15px;
+  border-left: 1px solid #999;
+}
+
+.genresBox p:first-child {
+  padding-left: 0;
+  border-left: none;
+}
