@@ -86,7 +86,7 @@ function App() {
               />
             }
           >
-            <Route path="cast" element={<MovieCast />} />
+            <Route path="cast" element={<MovieCast IMG_LINK={IMG_LINK} />} />
             <Route path="reviews" element={<MovieReviews />} />
           </Route>
           <Route path="*" element={<NotFound />} />

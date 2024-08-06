@@ -3,7 +3,7 @@ import { useEffect, Suspense } from 'react';
 import css from './MovieDetailsPage.module.css';
 import BackLink from '../../copmponents/BackLink/BackLink';
 
-const MovieDetailsPage = ({ setUrl, data, IMG_LINK, loading }) => {
+const MovieDetailsPage = ({ setUrl, data, IMG_LINK }) => {
   const { id } = useParams();
   const URL = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
   const location = useLocation();
@@ -11,10 +11,10 @@ const MovieDetailsPage = ({ setUrl, data, IMG_LINK, loading }) => {
 
   useEffect(() => {
     setUrl(URL);
-  }, [URL]);
+  }, []);
 
   return (
-    loading && (
+    data.poster_path && (
       <main className={css.mainMovie}>
         <BackLink to={backLinkHref}>Back</BackLink>
         <img

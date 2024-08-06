@@ -14,18 +14,20 @@
 
 .mainMovie h2 {
   font-size: 40px;
-  margin-top: 0;
+  margin: 0;
   line-height: 1;
 }
 
 .mainMovie h4 {
   font-size: 30px;
   margin: 0;
+  margin-top: 40px;
 }
 
 .movieDescription {
   max-width: 70%;
   text-align: left;
+  border-bottom: 1px solid #999;
 }
 
 .genresBox {
@@ -42,11 +44,29 @@
   border-left: none;
 }
 
+.addInfo {
+  width: 100%;
+}
+
+.addInfo ul {
+  list-style-type: none;
+  margin: 50px 0;
+  padding: 0;
+  text-align: left;
+  font-size: 20px;
+}
+
+.addInfo ul a:hover {
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 450px) {
   .moviePoster {
     width: 100%;
   }
-
+  .mainMovie h2 {
+    margin: 20px 0;
+  }
   .movieDescription {
     max-width: 100%;
   }
