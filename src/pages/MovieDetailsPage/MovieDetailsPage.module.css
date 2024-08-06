@@ -9,10 +9,13 @@
   width: 300px;
   height: auto;
   margin-right: 30px;
+  border-radius: 10px;
 }
 
 .mainMovie h2 {
   font-size: 40px;
+  margin-top: 0;
+  line-height: 1;
 }
 
 .mainMovie h4 {

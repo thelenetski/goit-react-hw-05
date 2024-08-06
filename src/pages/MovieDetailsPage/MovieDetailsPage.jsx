@@ -1,46 +1,22 @@
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
+import { useEffect, Suspense } from 'react';
 import css from './MovieDetailsPage.module.css';
-import axios from 'axios';
+import BackLink from '../../copmponents/BackLink/BackLink';
 
-const MovieDetailsPage = ({ IMG_LINK }) => {
+const MovieDetailsPage = ({ setUrl, data, IMG_LINK, loading }) => {
   const { id } = useParams();
-  const [data, setData] = useState('');
-  const [loading, setLoading] = useState(false);
+  const URL = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+  const location = useLocation();
+  const backLinkHref = location.state ?? '/movies';
 
   useEffect(() => {
-    try {
-      setLoading(false);
-      const dataRequest = async () => {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
-          {
-            headers: {
-              Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNTU4YmVjZWNmNTM4OTQ3N2RlN2E3MmI1ODRkZDViZiIsIm5iZiI6MTcyMjg3MDkzNy4xODc2MzMsInN1YiI6IjYzODVhZjliMmUwNjk3MDI5MmU0YTYyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.504sSMw6xkLbLg9EtJxY9BlIZvH_Gi1hHxNm_ILzwVY',
-              accept: 'application/json',
-            },
-          }
-        );
-        return response.data;
-      };
-
-      dataRequest()
-        .then(data => {
-          setData(data);
-          setLoading(true);
-        })
-        .catch(error => {
-          console.log(error.message);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }, [id]);
+    setUrl(URL);
+  }, [URL]);
 
   return (
     loading && (
       <main className={css.mainMovie}>
+        <BackLink to={backLinkHref}>Back</BackLink>
         <img
           src={IMG_LINK + data.poster_path}
           alt={data.original_title}
@@ -57,6 +33,20 @@ const MovieDetailsPage = ({ IMG_LINK }) => {
               return <p key={item.id}>{item.name}</p>;
             })}
           </div>
+        </div>
+        <div className={css.addInfo}>
+          <ul>
+            <li>
+              <Link to="cast">Cast</Link>
+            </li>
+            <li>
+              <Link to="reviews">Reviews</Link>
+            </li>
+          </ul>
+
+          <Suspense fallback={<div>Loading subpage...</div>}>
+            <Outlet />
+          </Suspense>
         </div>
       </main>
     )

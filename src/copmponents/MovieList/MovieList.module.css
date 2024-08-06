@@ -1,21 +1,19 @@
 .moviesList {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
 
 .moviesItem {
+  width: 17%;
   display: flex;
-  text-align: left;
-  padding: 0 30px;
+  margin-bottom: 50px;
 }
 
 .moviesItem a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: rgb(15, 31, 68);
 }
 
@@ -24,19 +22,26 @@
 }
 
 .moviePoster {
-  width: 50px;
-  height: 50px;
+  width: 100%;
   object-fit: cover;
-  border-radius: 100%;
-  margin-right: 20px;
+  border-radius: 10px;
 }
 
 .movieTitle {
-  font-size: 25px;
+  font-size: 1.3rem;
+  margin: 5px 0;
 }
 
 @media screen and (max-width: 450px) {
+  .moviesList {
+    padding: 0 30px;
+  }
+  .moviesItem {
+    width: 100%;
+  }
+
   .movieTitle {
-    max-width: 80%;
+    font-size: 30px;
+    margin: 5px 0;
   }
 }
