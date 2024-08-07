@@ -13,8 +13,6 @@ const MovieDetailsPage = ({ setUrl, data, IMG_LINK }) => {
     setUrl(URL);
   }, []);
 
-  console.log(location.state);
-
   return (
     data.poster_path && (
       <main className={css.mainMovie}>

@@ -26,9 +26,8 @@ const SearchBar = ({ onSubmit }) => {
           type="text"
           name="search"
           autoComplete="off"
-          autoFocus
+          // autoFocus
           placeholder="Search movies"
-          // value={value}
         />
         <button type="submit">
           <FaSearch />
