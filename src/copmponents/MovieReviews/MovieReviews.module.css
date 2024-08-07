@@ -1,0 +1,56 @@
+.reviews {
+  margin-top: 50px;
+}
+
+.reviews ul {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.reviews ul li {
+  width: 29%;
+  margin-bottom: 70px;
+  padding: 15px;
+  border: 1px solid #999;
+  border-radius: 10px;
+}
+
+.reviews ul li p {
+  max-height: 290px;
+  font-size: 18px;
+  overflow: scroll;
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+}
+
+.reviews ul li p::-webkit-scrollbar {
+  display: none;
+}
+
+.reviewsAuthorBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #999;
+  border-radius: 20px;
+  margin-top: -31px;
+  background: #fff;
+}
+
+.authorAvatar {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.reviewsAuthorBox h6 {
+  font-size: 20px;
+  margin: 0 0 0 10px;
+}
+
+@media screen and (max-width: 450px) {
+  .reviews ul li {
+    width: 100%;
+  }
+}

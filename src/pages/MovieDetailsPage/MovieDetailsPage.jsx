@@ -7,11 +7,13 @@ const MovieDetailsPage = ({ setUrl, data, IMG_LINK }) => {
   const { id } = useParams();
   const URL = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
   const location = useLocation();
-  const backLinkHref = location.state ?? '/movies';
+  const backLinkHref = location.state;
 
   useEffect(() => {
     setUrl(URL);
   }, []);
+
+  console.log(location.state);
 
   return (
     data.poster_path && (
@@ -25,8 +27,12 @@ const MovieDetailsPage = ({ setUrl, data, IMG_LINK }) => {
         <div className={css.movieDescription}>
           <h2>{data.original_title}</h2>
           <p>User score: {Math.round(data.vote_average * 10)}%</p>
-          <h4>Overview</h4>
-          <p>{data.overview}</p>
+          {data.overview && (
+            <>
+              <h4>Overview</h4>
+              <p>{data.overview}</p>
+            </>
+          )}
           <h4>Genres</h4>
           <div className={css.genresBox}>
             {data.genres.map(item => {
@@ -35,12 +41,17 @@ const MovieDetailsPage = ({ setUrl, data, IMG_LINK }) => {
           </div>
         </div>
         <div className={css.addInfo}>
+          <h4>Additional information</h4>
           <ul>
             <li>
-              <Link to="cast">Cast</Link>
+              <Link to="cast" state={backLinkHref}>
+                Cast
+              </Link>
             </li>
             <li>
-              <Link to="reviews">Reviews</Link>
+              <Link to="reviews" state={backLinkHref}>
+                Reviews
+              </Link>
             </li>
           </ul>
 

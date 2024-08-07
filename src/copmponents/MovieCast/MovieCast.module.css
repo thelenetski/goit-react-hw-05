@@ -2,8 +2,14 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   list-style-type: none;
+}
+
+.cast ul li svg {
+  width: 100%;
+  height: auto;
+  color: #656cf630;
 }
 
 .castPoster {

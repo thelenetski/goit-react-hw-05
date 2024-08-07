@@ -14,11 +14,22 @@
 }
 
 .moviesItem a {
+  overflow: hidden;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
   color: rgb(15, 31, 68);
 }
 
 .moviesItem a:hover {
   text-decoration: underline;
+}
+
+.moviesItem a svg {
+  width: 450px;
+  height: auto;
+  color: #98342f17;
 }
 
 .moviePoster {

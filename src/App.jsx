@@ -3,7 +3,6 @@ import { useEffect, useState, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Navigation from './copmponents/Navigation/Navigation';
-import NotFound from './pages/NotFoundPage/NotFoundPage';
 
 const Home = lazy(() => import('./pages/HomePage/HomePage'));
 const Movies = lazy(() => import('./pages/MoviesPage/MoviesPage'));
@@ -14,6 +13,7 @@ const MovieCast = lazy(() => import('./copmponents/MovieCast/MovieCast'));
 const MovieReviews = lazy(() =>
   import('./copmponents/MovieReviews/MovieReviews')
 );
+const NotFound = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 function App() {
   const IMG_LINK = 'https://image.tmdb.org/t/p/w500';
@@ -87,7 +87,10 @@ function App() {
             }
           >
             <Route path="cast" element={<MovieCast IMG_LINK={IMG_LINK} />} />
-            <Route path="reviews" element={<MovieReviews />} />
+            <Route
+              path="reviews"
+              element={<MovieReviews IMG_LINK={IMG_LINK} />}
+            />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

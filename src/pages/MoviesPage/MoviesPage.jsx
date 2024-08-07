@@ -3,7 +3,7 @@ import SearchBar from '../../copmponents/SearchBar/SearchBar';
 import MovieList from '../../copmponents/MovieList/MovieList';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 const MoviePage = ({ IMG_LINK }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,6 +12,7 @@ const MoviePage = ({ IMG_LINK }) => {
     results: [],
   });
   const [search, setSearch] = useState(movieName ?? '');
+  const location = useLocation();
 
   const params = new URLSearchParams({
     query: search,
@@ -63,7 +64,7 @@ const MoviePage = ({ IMG_LINK }) => {
       <div>
         <Toaster position="top-left" reverseOrder={true} />
       </div>
-      {data && <MovieList data={data} IMG_LINK={IMG_LINK} />}
+      {data && <MovieList data={data} IMG_LINK={IMG_LINK} state={location} />}
     </>
   );
 };
