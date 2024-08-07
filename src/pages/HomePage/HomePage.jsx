@@ -1,17 +1,24 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import MovieList from '../../copmponents/MovieList/MovieList';
 import css from './HomePage.module.css';
 import { useLocation } from 'react-router-dom';
 
 const Home = ({ setUrl, url, data, IMG_LINK }) => {
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setUrl(url);
+    setUrl(url)
+      .then(() => {
+        setLoading(true);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
   }, [url]);
 
   return (
-    data.results && (
+    loading && (
       <main className={css.main}>
         <h1>Tranding today</h1>
         {data && (

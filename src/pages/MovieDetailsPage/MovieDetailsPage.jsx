@@ -1,20 +1,31 @@
 import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
-import { useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import css from './MovieDetailsPage.module.css';
 import BackLink from '../../copmponents/BackLink/BackLink';
 
-const MovieDetailsPage = ({ setUrl, data, IMG_LINK }) => {
+const MovieDetailsPage = ({ setUrl, IMG_LINK }) => {
   const { id } = useParams();
+  const [loading, setLoading] = useState(false);
   const URL = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
   const location = useLocation();
   const backLinkHref = location.state;
+  const [data, setData] = useState({
+    results: [],
+  });
 
   useEffect(() => {
-    setUrl(URL);
+    setUrl(URL)
+      .then(data => {
+        setData(data);
+        setLoading(true);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
   }, []);
 
   return (
-    data.poster_path && (
+    loading && (
       <main className={css.mainMovie}>
         <BackLink to={backLinkHref}>Back</BackLink>
         <img

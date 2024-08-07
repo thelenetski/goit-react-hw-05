@@ -19,3 +19,7 @@
 .active {
   color: brown;
 }
+
+.nav a:hover {
+  text-decoration: underline;
+}

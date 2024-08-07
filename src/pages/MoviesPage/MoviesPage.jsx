@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import SearchBar from '../../copmponents/SearchBar/SearchBar';
 import MovieList from '../../copmponents/MovieList/MovieList';
 import toast, { Toaster } from 'react-hot-toast';
-import axios from 'axios';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
-const MoviePage = ({ IMG_LINK }) => {
+const MoviePage = ({ setUrl, IMG_LINK }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const movieName = searchParams.get('querry') ?? '';
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     results: [],
   });
@@ -18,25 +18,14 @@ const MoviePage = ({ IMG_LINK }) => {
     query: search,
   });
 
+  const URL = `https://api.themoviedb.org/3/search/movie?${params}`;
+
   useEffect(() => {
     try {
-      const dataRequest = async () => {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/search/movie?${params}`,
-          {
-            headers: {
-              Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNTU4YmVjZWNmNTM4OTQ3N2RlN2E3MmI1ODRkZDViZiIsIm5iZiI6MTcyMjg3MDkzNy4xODc2MzMsInN1YiI6IjYzODVhZjliMmUwNjk3MDI5MmU0YTYyOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.504sSMw6xkLbLg9EtJxY9BlIZvH_Gi1hHxNm_ILzwVY',
-              accept: 'application/json',
-            },
-          }
-        );
-        return response.data;
-      };
-
-      dataRequest()
+      setUrl(URL)
         .then(data => {
           setData(data);
+          setLoading(true);
         })
         .catch(error => {
           console.log(error.message);
@@ -64,7 +53,9 @@ const MoviePage = ({ IMG_LINK }) => {
       <div>
         <Toaster position="top-left" reverseOrder={true} />
       </div>
-      {data && <MovieList data={data} IMG_LINK={IMG_LINK} state={location} />}
+      {loading && (
+        <MovieList data={data} IMG_LINK={IMG_LINK} state={location} />
+      )}
     </>
   );
 };
