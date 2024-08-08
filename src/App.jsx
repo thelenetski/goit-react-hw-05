@@ -2,16 +2,16 @@ import './App.css';
 import { useEffect, useState, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
-import Navigation from './copmponents/Navigation/Navigation';
+import Navigation from './components/Navigation/Navigation';
 
 const Home = lazy(() => import('./pages/HomePage/HomePage'));
 const Movies = lazy(() => import('./pages/MoviesPage/MoviesPage'));
 const MoviesDetailsPage = lazy(() =>
   import('./pages/MovieDetailsPage/MovieDetailsPage')
 );
-const MovieCast = lazy(() => import('./copmponents/MovieCast/MovieCast'));
+const MovieCast = lazy(() => import('./components/MovieCast/MovieCast'));
 const MovieReviews = lazy(() =>
-  import('./copmponents/MovieReviews/MovieReviews')
+  import('./components/MovieReviews/MovieReviews')
 );
 const NotFound = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 

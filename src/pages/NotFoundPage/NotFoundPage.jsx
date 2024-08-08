@@ -1,4 +1,4 @@
-import BackLink from '../../copmponents/BackLink/BackLink';
+import BackLink from '../../components/BackLink/BackLink';
 import css from './NotFoundPage.module.css';
 
 const NotFound = () => {

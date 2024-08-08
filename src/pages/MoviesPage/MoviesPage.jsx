@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import SearchBar from '../../copmponents/SearchBar/SearchBar';
-import MovieList from '../../copmponents/MovieList/MovieList';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import MovieList from '../../components/MovieList/MovieList';
 import toast, { Toaster } from 'react-hot-toast';
 import { useLocation, useSearchParams } from 'react-router-dom';
 

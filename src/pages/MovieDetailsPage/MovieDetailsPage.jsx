@@ -1,7 +1,7 @@
 import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
 import css from './MovieDetailsPage.module.css';
-import BackLink from '../../copmponents/BackLink/BackLink';
+import BackLink from '../../components/BackLink/BackLink';
 
 const MovieDetailsPage = ({ setUrl, IMG_LINK }) => {
   const { id } = useParams();

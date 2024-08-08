@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import MovieList from '../../copmponents/MovieList/MovieList';
+import MovieList from '../../components/MovieList/MovieList';
 import css from './HomePage.module.css';
 import { useLocation } from 'react-router-dom';
 
