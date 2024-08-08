@@ -37,6 +37,16 @@ const MovieDetailsPage = ({ setUrl, IMG_LINK }) => {
           <h2>{data.original_title}</h2>
           <span>User score: {Math.round(data.vote_average * 10)}%</span>
           <span>Release: {data.release_date}</span>
+          <div>
+            {data.production_countries.length > 0 && (
+              <div>
+                <span>Country: </span>
+                {data.production_countries.map((item, index) => {
+                  return <span key={index}>{item.name}</span>;
+                })}
+              </div>
+            )}
+          </div>
           {data.overview && (
             <>
               <h4>Overview</h4>

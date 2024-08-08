@@ -26,6 +26,7 @@ const MoviePage = ({ setUrl, IMG_LINK }) => {
         .then(data => {
           setData(data);
           setLoading(true);
+          checkSearchData(data);
         })
         .catch(error => {
           console.log(error.message);
@@ -45,6 +46,10 @@ const MoviePage = ({ setUrl, IMG_LINK }) => {
     const nextParams = querry !== '' ? { querry } : {};
     setSearchParams(nextParams);
     setSearch(querry);
+  };
+
+  const checkSearchData = data => {
+    data.results.length < 1 && toast.error('Nothing found, try another one');
   };
 
   return (
