@@ -22,15 +22,16 @@ const MoviePage = ({ setUrl, IMG_LINK }) => {
 
   useEffect(() => {
     try {
-      setUrl(URL)
-        .then(data => {
-          setData(data);
-          setLoading(true);
-          checkSearchData(data);
-        })
-        .catch(error => {
-          console.log(error.message);
-        });
+      search !== '' &&
+        setUrl(URL)
+          .then(data => {
+            setData(data);
+            setLoading(true);
+            checkSearchData(data);
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
     } catch (error) {
       console.log(error);
     }
