@@ -8,7 +8,7 @@ const MovieDetailsPage = ({ setUrl, IMG_LINK }) => {
   const [loading, setLoading] = useState(false);
   const URL = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
   const location = useLocation();
-  const backLinkHref = location.state;
+  const backLinkHref = location.state ?? '/movies';
   const [data, setData] = useState({
     results: [],
   });

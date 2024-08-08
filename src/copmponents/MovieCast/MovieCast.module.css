@@ -6,6 +6,10 @@
   list-style-type: none;
 }
 
+.cast ul li {
+  margin-bottom: 40px;
+}
+
 .cast ul li svg {
   width: 100%;
   height: auto;
@@ -23,4 +27,6 @@
   width: 100px;
   text-align: center;
   line-height: 1.2;
+  margin: 0;
+  margin-top: 5px;
 }
