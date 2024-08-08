@@ -13,7 +13,7 @@ const SearchBar = ({ onSubmit }) => {
       return toast.error('Empty request, please write some text.');
     }
     onSubmit(form.elements.search.value.trim());
-    form.reset();
+    // form.reset();
   };
 
   return (
