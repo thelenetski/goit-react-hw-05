@@ -35,7 +35,8 @@ const MovieDetailsPage = ({ setUrl, IMG_LINK }) => {
         />
         <div className={css.movieDescription}>
           <h2>{data.original_title}</h2>
-          <p>User score: {Math.round(data.vote_average * 10)}%</p>
+          <span>User score: {Math.round(data.vote_average * 10)}%</span>
+          <span>Release: {data.release_date}</span>
           {data.overview && (
             <>
               <h4>Overview</h4>

@@ -30,6 +30,15 @@
   border-bottom: 1px solid #999;
 }
 
+.movieDescription span {
+  display: inline-block;
+  margin: 20px 20px 20px 0;
+}
+
+.movieDescription p {
+  margin: 20px 0;
+}
+
 .genresBox {
   display: flex;
   flex-wrap: wrap;
@@ -37,8 +46,10 @@
 }
 
 .genresBox p {
-  padding: 0 15px;
+  font-size: 15px;
+  padding: 0 10px;
   margin: 5px 0;
+  line-height: 1.2;
   border-left: 1px solid #999;
 }
 
@@ -77,7 +88,7 @@
     width: 100%;
   }
   .mainMovie h2 {
-    margin: 20px 0;
+    margin: 20px 0 0 0;
   }
   .movieDescription {
     max-width: 100%;
