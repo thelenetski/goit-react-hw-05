@@ -41,7 +41,7 @@ const MovieCast = ({ setUrl, IMG_LINK }) => {
                     <FaRegUserCircle />
                   )}
 
-                  <p className={css.castTitle}>{item.character}</p>
+                  <p className={css.castTitle}>{item.name}</p>
                 </li>
               )
             );
