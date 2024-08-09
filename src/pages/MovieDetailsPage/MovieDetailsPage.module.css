@@ -1,8 +1,15 @@
 .mainMovie {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   width: calc(100% - 40px);
   padding: 20px;
+}
+
+.detailsWrap {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .posterSVG {
