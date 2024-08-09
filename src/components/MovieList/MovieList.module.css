@@ -14,11 +14,11 @@
 }
 
 .moviesItem a {
-  overflow: hidden;
-  flex-wrap: wrap;
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: baseline;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   color: rgb(15, 31, 68);
 }
 
@@ -27,15 +27,17 @@
 }
 
 .moviesItem a svg {
-  width: 450px;
-  height: auto;
+  width: 100%;
+  height: 100%;
   color: #98342f17;
 }
 
 .moviePoster {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 10px;
+  box-shadow: 5px 5px 10px #0000004f;
 }
 
 .movieTitle {

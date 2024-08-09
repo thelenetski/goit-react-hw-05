@@ -2,25 +2,27 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import css from './MovieCast.module.css';
 import { FaRegUserCircle } from 'react-icons/fa';
+import dataRequest, { IMG_LINK } from '../Services/Services';
 
-const MovieCast = ({ setUrl, IMG_LINK }) => {
+const MovieCast = () => {
   const { id } = useParams();
   const URL = `https://api.themoviedb.org/3/movie/${id}/credits`;
 
-  const [data, setData] = useState({
-    results: [],
-  });
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setUrl(URL)
-      .then(data => {
+    const requestData = async () => {
+      try {
+        const data = await dataRequest(URL);
         setData(data);
         setLoading(true);
-      })
-      .catch(error => {
+      } catch (error) {
         console.log(error.message);
-      });
+      }
+    };
+
+    requestData();
   }, []);
 
   return (

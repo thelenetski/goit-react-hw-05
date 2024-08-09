@@ -2,35 +2,38 @@ import { useState, useEffect } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import css from './HomePage.module.css';
 import { useLocation } from 'react-router-dom';
+import dataRequest, { TREND_URL } from '../../components/Services/Services';
+import Loader from '../../components/Loader/Loader';
 
-const Home = ({ setUrl, url, data, IMG_LINK }) => {
+const Home = () => {
   const location = useLocation();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    setUrl(url)
-      .then(() => {
+    const requestData = async () => {
+      try {
         setLoading(true);
-      })
-      .catch(error => {
+        const { results } = await dataRequest(TREND_URL);
+        setData(results);
+      } catch (error) {
         console.log(error.message);
-      });
-  }, [url]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    requestData();
+  }, []);
 
   return (
-    loading && (
+    <>
       <main className={css.main}>
         <h1>Tranding today</h1>
-        {data && (
-          <MovieList
-            to={'movies/'}
-            data={data}
-            IMG_LINK={IMG_LINK}
-            state={location}
-          />
-        )}
+        {loading && <Loader />}
+        {!loading && <MovieList to={'movies/'} data={data} state={location} />}
       </main>
-    )
+    </>
   );
 };
 

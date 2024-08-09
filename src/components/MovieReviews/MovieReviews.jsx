@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import css from './MovieReviews.module.css';
 import { FaRegUserCircle } from 'react-icons/fa';
+import dataRequest, { IMG_LINK } from '../Services/Services';
 
-const MovieReviews = ({ setUrl, IMG_LINK }) => {
+const MovieReviews = () => {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const URL = `https://api.themoviedb.org/3/movie/${id}/reviews`;
@@ -13,18 +14,17 @@ const MovieReviews = ({ setUrl, IMG_LINK }) => {
   });
 
   useEffect(() => {
-    try {
-      setUrl(URL)
-        .then(data => {
-          setData(data);
-          setLoading(true);
-        })
-        .catch(error => {
-          console.log(error.message);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    const requestData = async () => {
+      try {
+        const data = await dataRequest(URL);
+        setData(data);
+        setLoading(true);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    requestData();
   }, []);
 
   return (

@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import css from './MovieList.module.css';
 import { FaRegFileImage } from 'react-icons/fa';
+import { IMG_LINK } from '../Services/Services';
 
-const MovieList = ({ to, data, IMG_LINK, state }) => {
+const MovieList = ({ to, data, state }) => {
   return (
     <>
       <ul className={css.moviesList}>
-        {data.results.map(item => {
+        {data.map(item => {
           return (
             <li key={item.id} className={css.moviesItem}>
               <Link to={(to ?? '') + item.id.toString()} state={state}>

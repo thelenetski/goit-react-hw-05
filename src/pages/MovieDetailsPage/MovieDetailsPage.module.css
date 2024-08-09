@@ -5,11 +5,20 @@
   padding: 20px;
 }
 
+.posterSVG {
+  width: 300px;
+  height: auto;
+  margin-right: 30px;
+  border-radius: 10px;
+  color: #98342f17;
+}
+
 .moviePoster {
   width: 300px;
   height: auto;
   margin-right: 30px;
   border-radius: 10px;
+  box-shadow: 5px 5px 10px #0000004f;
 }
 
 .mainMovie h2 {
