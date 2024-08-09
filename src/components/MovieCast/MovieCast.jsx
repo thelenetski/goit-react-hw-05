@@ -5,8 +5,8 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import dataRequest, { IMG_LINK } from '../Services/Services';
 
 const MovieCast = () => {
-  const { id } = useParams();
-  const URL = `https://api.themoviedb.org/3/movie/${id}/credits`;
+  const { movieId } = useParams();
+  const URL = `https://api.themoviedb.org/3/movie/${movieId}/credits`;
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);

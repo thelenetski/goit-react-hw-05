@@ -1,5 +1,5 @@
 import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useRef } from 'react';
 import css from './MovieDetailsPage.module.css';
 import BackLink from '../../components/BackLink/BackLink';
 import dataRequest, { IMG_LINK } from '../../components/Services/Services';
@@ -11,7 +11,7 @@ const MovieDetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const URL = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
   const location = useLocation();
-  const backLinkHref = location.state ?? '/movies';
+  const backLinkHref = useRef(location.state ?? '/');
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const MovieDetailsPage = () => {
 
   return (
     <main className={css.mainMovie}>
-      <BackLink to={backLinkHref}>Back</BackLink>
+      <BackLink to={backLinkHref.current}>Back</BackLink>
       {loading && <Loader />}
       {!loading && (
         <>
@@ -78,14 +78,10 @@ const MovieDetailsPage = () => {
             <h4>Additional information</h4>
             <ul>
               <li>
-                <Link to="cast" state={backLinkHref}>
-                  Cast
-                </Link>
+                <Link to="cast">Cast</Link>
               </li>
               <li>
-                <Link to="reviews" state={backLinkHref}>
-                  Reviews
-                </Link>
+                <Link to="reviews">Reviews</Link>
               </li>
             </ul>
 

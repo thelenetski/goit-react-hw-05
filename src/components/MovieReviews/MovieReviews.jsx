@@ -6,12 +6,10 @@ import dataRequest, { IMG_LINK } from '../Services/Services';
 
 const MovieReviews = () => {
   const [loading, setLoading] = useState(false);
-  const { id } = useParams();
-  const URL = `https://api.themoviedb.org/3/movie/${id}/reviews`;
+  const { movieId } = useParams();
+  const URL = `https://api.themoviedb.org/3/movie/${movieId}/reviews`;
 
-  const [data, setData] = useState({
-    results: [],
-  });
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     const requestData = async () => {
