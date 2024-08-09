@@ -7,9 +7,9 @@ import Loader from '../../components/Loader/Loader';
 import { FaRegFileImage } from 'react-icons/fa';
 
 const MovieDetailsPage = () => {
-  const { id } = useParams();
+  const { movieId } = useParams();
   const [loading, setLoading] = useState(true);
-  const URL = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+  const URL = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
   const location = useLocation();
   const backLinkHref = location.state ?? '/movies';
   const [data, setData] = useState(null);

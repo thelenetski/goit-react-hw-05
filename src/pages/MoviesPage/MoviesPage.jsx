@@ -6,7 +6,7 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import dataRequest from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 
-const MoviePage = () => {
+const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const movieName = searchParams.get('querry') ?? '';
   const [loading, setLoading] = useState(null);
@@ -63,4 +63,4 @@ const MoviePage = () => {
   );
 };
 
-export default MoviePage;
+export default MoviesPage;
