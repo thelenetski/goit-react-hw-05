@@ -28,7 +28,6 @@ const MoviePage = () => {
         const { results } = await dataRequest(URL);
         checkSearchData(results);
         setData(results);
-        console.log(results);
       } catch (error) {
         console.log(error.message);
       } finally {
