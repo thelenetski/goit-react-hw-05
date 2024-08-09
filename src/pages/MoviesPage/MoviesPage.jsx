@@ -43,14 +43,13 @@ const MoviePage = () => {
     if (querry === search) {
       return toast.error('This request already done, try another one');
     }
-    setData(null);
     const nextParams = querry !== '' ? { querry } : {};
     setSearchParams(nextParams);
     setSearch(querry);
   };
 
   const checkSearchData = data => {
-    data.length < 1 && toast.error('Nothing found, try another one');
+    data.length === 0 && toast.error('Nothing found, try another one');
   };
 
   return (

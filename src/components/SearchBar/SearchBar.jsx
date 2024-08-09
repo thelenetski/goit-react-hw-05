@@ -2,7 +2,7 @@ import css from './SearchBar.module.css';
 import { FaSearch } from 'react-icons/fa';
 import toast, { Toaster } from 'react-hot-toast';
 
-const SearchBar = ({ onSubmit }) => {
+const SearchBar = ({ value, onSubmit }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
@@ -27,7 +27,7 @@ const SearchBar = ({ onSubmit }) => {
           name="search"
           autoComplete="off"
           // autoFocus
-          placeholder="Search movies"
+          placeholder={value === '' ? 'Search movies' : value}
         />
         <button type="submit">
           <FaSearch />
