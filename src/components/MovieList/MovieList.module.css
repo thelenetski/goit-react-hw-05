@@ -34,7 +34,7 @@
 
 .moviePoster {
   width: 100%;
-  height: 100%;
+  height: 85%;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 5px 5px 10px #0000004f;
@@ -46,8 +46,13 @@
 }
 
 @media screen and (max-width: 450px) {
+  .moviePoster {
+    height: 75%;
+  }
+
   .moviesItem {
     width: 47%;
+    margin-bottom: 30px;
   }
 
   .movieTitle {
