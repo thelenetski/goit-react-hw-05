@@ -5,6 +5,11 @@ import BackLink from '../../components/BackLink/BackLink';
 import dataRequest, { IMG_LINK } from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 import { FaRegFileImage } from 'react-icons/fa';
+import clsx from 'clsx';
+
+const buildLinkClass = ({ isActive }) => {
+  return clsx(css.link, isActive && css.active);
+};
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -79,16 +84,24 @@ const MovieDetailsPage = () => {
               <h4>Additional information</h4>
               <ul>
                 <li>
-                  <Link to="cast">Cast</Link>
+                  <Link to="cast" className={buildLinkClass}>
+                    Cast
+                  </Link>
                 </li>
                 <li>
-                  <Link to="reviews">Reviews</Link>
+                  <Link to="reviews" className={buildLinkClass}>
+                    Reviews
+                  </Link>
                 </li>
                 <li>
-                  <Link to="images">Images</Link>
+                  <Link to="images" className={buildLinkClass}>
+                    Images
+                  </Link>
                 </li>
                 <li>
-                  <Link to="videos">Videos</Link>
+                  <Link to="videos" className={buildLinkClass}>
+                    Videos
+                  </Link>
                 </li>
               </ul>
 

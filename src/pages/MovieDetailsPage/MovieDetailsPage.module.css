@@ -99,6 +99,10 @@
   text-decoration: underline;
 }
 
+.active {
+  color: brown;
+}
+
 @media screen and (max-width: 450px) {
   .moviePoster {
     width: 100%;
