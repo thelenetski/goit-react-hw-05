@@ -1,4 +1,4 @@
-import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
+import { useParams, useLocation, NavLink, Outlet } from 'react-router-dom';
 import { useState, useEffect, Suspense, useRef } from 'react';
 import css from './MovieDetailsPage.module.css';
 import BackLink from '../../components/BackLink/BackLink';
@@ -84,24 +84,24 @@ const MovieDetailsPage = () => {
               <h4>Additional information</h4>
               <ul>
                 <li>
-                  <Link to="cast" className={buildLinkClass}>
+                  <NavLink to="cast" className={buildLinkClass}>
                     Cast
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="reviews" className={buildLinkClass}>
+                  <NavLink to="reviews" className={buildLinkClass}>
                     Reviews
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="images" className={buildLinkClass}>
+                  <NavLink to="images" className={buildLinkClass}>
                     Images
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="videos" className={buildLinkClass}>
+                  <NavLink to="videos" className={buildLinkClass}>
                     Videos
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
 
