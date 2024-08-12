@@ -14,6 +14,6 @@ const dataRequest = async url => {
 
 export const IMG_LINK = 'https://image.tmdb.org/t/p/w500';
 export const TREND_URL =
-  'https://api.themoviedb.org/3/trending/movie/day?language=en-US';
+  'https://api.themoviedb.org/3/trending/movie/day?language=uk-UA';
 
 export default dataRequest;

@@ -9,7 +9,7 @@ import { FaRegFileImage } from 'react-icons/fa';
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [loading, setLoading] = useState(true);
-  const URL = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
+  const URL = `https://api.themoviedb.org/3/movie/${movieId}?language=uk-UA`;
   const location = useLocation();
   const backLinkHref = useRef(location.state ?? '/');
   const [data, setData] = useState(null);
@@ -49,7 +49,7 @@ const MovieDetailsPage = () => {
             )}
 
             <div className={css.movieDescription}>
-              <h2>{data.original_title}</h2>
+              <h2>{data.title}</h2>
               <span>User score: {Math.round(data.vote_average * 10)}%</span>
               <span>Release: {data.release_date}</span>
               <div>
