@@ -20,6 +20,10 @@
   color: brown;
 }
 
+.active:focus {
+  color: brown;
+}
+
 .nav a:hover {
   text-decoration: underline;
 }
