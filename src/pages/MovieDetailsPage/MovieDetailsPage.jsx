@@ -84,6 +84,12 @@ const MovieDetailsPage = () => {
                 <li>
                   <Link to="reviews">Reviews</Link>
                 </li>
+                <li>
+                  <Link to="images">Images</Link>
+                </li>
+                <li>
+                  <Link to="videos">Videos</Link>
+                </li>
               </ul>
 
               <Suspense fallback={<div>Loading subpage...</div>}>

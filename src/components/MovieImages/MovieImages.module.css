@@ -1,0 +1,19 @@
+.imgBox ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.imgBox ul li {
+  width: 24.5%;
+}
+
+.image {
+  width: 100%;
+}
+
+@media screen and (max-width: 450px) {
+  .imgBox ul li {
+    width: 100%;
+  }
+}

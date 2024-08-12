@@ -1,0 +1,20 @@
+.videosBox ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.videosBox ul li {
+  width: 33%;
+}
+
+.video {
+  width: 100%;
+  border: none;
+}
+
+@media screen and (max-width: 450px) {
+  .videosBox ul li {
+    width: 100%;
+  }
+}
