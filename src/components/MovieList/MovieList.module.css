@@ -1,16 +1,19 @@
 .moviesList {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 0 20px;
   margin: 0;
+  gap: 30px;
   list-style-type: none;
 }
 
 .moviesItem {
   width: 17%;
   display: flex;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
+  box-sizing: border-box;
 }
 
 .moviesItem a {
@@ -46,13 +49,16 @@
 }
 
 @media screen and (max-width: 450px) {
+  .moviesList {
+    gap: 15px;
+  }
   .moviePoster {
     height: 75%;
   }
 
   .moviesItem {
     width: 47%;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
   }
 
   .movieTitle {
