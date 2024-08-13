@@ -10,7 +10,7 @@ const Navigation = () => {
   return (
     <header className={css.header}>
       <nav className={css.nav}>
-        <NavLink to="/" className={buildLinkClass}>
+        <NavLink to="/home" className={buildLinkClass}>
           Головна
         </NavLink>
         <NavLink to="/movies" className={buildLinkClass}>

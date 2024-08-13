@@ -31,7 +31,7 @@ const Home = () => {
       <main className={css.main}>
         <h1>Сьогодні у тренді</h1>
         {loading && <Loader />}
-        {!loading && <MovieList to={'movies/'} data={data} state={location} />}
+        {!loading && <MovieList data={data} state={location} />}
       </main>
     </>
   );

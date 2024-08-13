@@ -3,14 +3,14 @@ import css from './MovieList.module.css';
 import { FaRegFileImage } from 'react-icons/fa';
 import { IMG_LINK } from '../Services/Services';
 
-const MovieList = ({ to, data, state }) => {
+const MovieList = ({ data, state }) => {
   return (
     <>
       <ul className={css.moviesList}>
         {data.map(item => {
           return (
             <li key={item.id} className={css.moviesItem}>
-              <Link to={(to ?? '') + item.id.toString()} state={state}>
+              <Link to={item.id.toString()} state={state}>
                 {item.poster_path ? (
                   <img
                     src={IMG_LINK + item.poster_path}
