@@ -11,10 +11,10 @@ const Navigation = () => {
     <header className={css.header}>
       <nav className={css.nav}>
         <NavLink to="/" className={buildLinkClass}>
-          Home
+          Головна
         </NavLink>
         <NavLink to="/movies" className={buildLinkClass}>
-          Movies
+          Фільми
         </NavLink>
       </nav>
     </header>

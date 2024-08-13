@@ -1,9 +1,37 @@
 .mainMovie {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   flex-wrap: wrap;
   width: calc(100% - 40px);
   padding: 20px;
+}
+
+.controls {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls button {
+  padding: 0;
+  margin-right: 10px;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+}
+.controls button:hover {
+  text-decoration: underline;
+  border: none;
+}
+
+.controls button + svg {
+  width: 25px;
+  height: 40px;
+  color: #a3a3a38c;
+}
+
+.favactive {
+  color: red !important;
 }
 
 .detailsWrap {
@@ -108,6 +136,9 @@
 }
 
 @media screen and (max-width: 450px) {
+  .controls {
+    width: 100%;
+  }
   .moviePoster {
     width: 100%;
   }
