@@ -50,6 +50,7 @@
 
 @media screen and (max-width: 450px) {
   .moviesList {
+    justify-content: space-between;
     gap: 15px;
   }
   .moviePoster {

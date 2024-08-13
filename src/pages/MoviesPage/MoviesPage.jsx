@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import dataRequest from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
+import css from './MoviesPage.module.css';
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -53,12 +54,14 @@ const MoviesPage = () => {
 
   return (
     <>
-      <SearchBar value={movieName} onSubmit={handleSearch} />
-      <div>
-        <Toaster position="top-left" reverseOrder={true} />
-      </div>
-      {loading && <Loader />}
-      {loading === false && <MovieList data={data} state={location} />}
+      <main className={css.main}>
+        <SearchBar value={movieName} onSubmit={handleSearch} />
+        <div>
+          <Toaster position="top-left" reverseOrder={true} />
+        </div>
+        {loading && <Loader />}
+        {loading === false && <MovieList data={data} state={location} />}
+      </main>
     </>
   );
 };
