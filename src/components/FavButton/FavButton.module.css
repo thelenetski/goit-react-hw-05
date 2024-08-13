@@ -1,0 +1,8 @@
+.favbtn {
+  display: flex;
+  align-items: center;
+}
+
+.favbtn svg {
+  margin-left: 5px;
+}

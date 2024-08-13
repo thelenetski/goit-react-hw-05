@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
-import css from './HomePage.module.css';
+import css from './FavPage.module.css';
 import { useLocation } from 'react-router-dom';
-import dataRequest, { TREND_URL } from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 
 const Home = () => {
@@ -11,27 +10,18 @@ const Home = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const requestData = async () => {
-      try {
-        setLoading(true);
-        const { results } = await dataRequest(TREND_URL);
-        setData(results);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    requestData();
+    setLoading(true);
+    const results = JSON.parse(localStorage.getItem('favorite'));
+    setData(results);
+    setLoading(false);
   }, []);
 
   return (
     <>
       <main className={css.main}>
-        <h1>Сьогодні у тренді</h1>
+        <h1>Список обраних фільмів</h1>
         {loading && <Loader />}
-        {!loading && <MovieList to={'movies/'} data={data} state={location} />}
+        {!loading && <MovieList data={data} state={location} />}
       </main>
     </>
   );

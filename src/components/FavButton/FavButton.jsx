@@ -1,10 +1,10 @@
 import css from './FavButton.module.css';
 
-const FavButton = ({ onAdd }) => {
+const FavButton = ({ onAdd, children }) => {
   return (
     <>
       <button type="button" className={css.favbtn} onClick={onAdd}>
-        Додати
+        {children}
       </button>
     </>
   );

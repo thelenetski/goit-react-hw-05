@@ -26,7 +26,7 @@ const MovieDetailsPage = () => {
     if (localStorage.getItem('favorite')) {
       const favArray = JSON.parse(localStorage.getItem('favorite'));
       Array.isArray(favArray) &&
-        favArray.some(item => item.movieId === movieId) &&
+        favArray.some(item => item.id === movieId) &&
         setIsFav(true);
     }
 
@@ -49,9 +49,9 @@ const MovieDetailsPage = () => {
   const handlerAddFav = () => {
     if (localStorage.getItem('favorite') !== null) {
       const favArray = JSON.parse(localStorage.getItem('favorite'));
-      if (favArray.some(item => item.movieId === movieId)) {
+      if (favArray.some(item => item.id === movieId)) {
         const newFav = favArray.filter(
-          item => parseInt(item.movieId) !== parseInt(movieId)
+          item => parseInt(item.id) !== parseInt(movieId)
         );
         localStorage.setItem('favorite', JSON.stringify(newFav));
         setIsFav(false);
@@ -59,7 +59,7 @@ const MovieDetailsPage = () => {
       }
 
       favArray.push({
-        movieId,
+        id: movieId,
         poster_path: [data.poster_path],
         title: [data.title],
       });
@@ -73,7 +73,7 @@ const MovieDetailsPage = () => {
       'favorite',
       JSON.stringify([
         {
-          movieId,
+          id: movieId,
           poster_path: [data.poster_path],
           title: [data.title],
         },
@@ -86,8 +86,10 @@ const MovieDetailsPage = () => {
     <main className={css.mainMovie}>
       <div className={css.controls}>
         <BackLink to={backLinkHref.current}>Назад</BackLink>
-        <FavButton onAdd={handlerAddFav} />
-        <FaHeart className={clsx(isFav && css.favactive)} />
+        <FavButton onAdd={handlerAddFav}>
+          {isFav ? `Прибрати` : `Додати`}
+          <FaHeart className={clsx(isFav && css.favactive)} />
+        </FavButton>
       </div>
       {loading && <Loader />}
       <div className={css.detailsWrap}>
