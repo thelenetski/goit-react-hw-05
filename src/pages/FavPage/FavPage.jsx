@@ -19,9 +19,15 @@ const Home = () => {
   return (
     <>
       <main className={css.main}>
-        <h1>Список обраних фільмів</h1>
+        <h1>
+          {data !== null && data.length > 0
+            ? `Список обраних фільмів`
+            : `Немає обраних фільмів`}
+        </h1>
         {loading && <Loader />}
-        {!loading && <MovieList data={data} state={location} />}
+        {!loading && data !== null && (
+          <MovieList data={data} state={location} />
+        )}
       </main>
     </>
   );
