@@ -21,7 +21,7 @@ const Home = () => {
       <main className={css.main}>
         <h1>
           {data !== null && data.length > 0
-            ? `Список обраних фільмів`
+            ? `Мої фільми`
             : `Немає обраних фільмів`}
         </h1>
         {loading && <Loader />}

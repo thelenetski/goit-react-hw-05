@@ -14,7 +14,7 @@ const Navigation = () => {
           Головна
         </NavLink>
         <NavLink to="/movies" className={buildLinkClass}>
-          Фільми
+          Пошук
         </NavLink>
         <NavLink to="/favorites" className={buildLinkClass}>
           Обране
