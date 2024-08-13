@@ -84,17 +84,17 @@ const MovieDetailsPage = () => {
 
   return (
     <main className={css.mainMovie}>
-      <div className={css.controls}>
-        <BackLink to={backLinkHref.current}>Назад</BackLink>
-        <FavButton onAdd={handlerAddFav}>
-          {isFav ? `Прибрати` : `Додати`}
-          <FaHeart className={clsx(isFav && css.favactive)} />
-        </FavButton>
-      </div>
       {loading && <Loader />}
-      <div className={css.detailsWrap}>
-        {!loading && (
-          <>
+      {!loading && (
+        <>
+          <div className={css.controls}>
+            <BackLink to={backLinkHref.current}>Назад</BackLink>
+            <FavButton onAdd={handlerAddFav}>
+              {isFav ? `Прибрати` : `Додати`}
+              <FaHeart className={clsx(isFav && css.favactive)} />
+            </FavButton>
+          </div>
+          <div className={css.detailsWrap}>
             {data.poster_path ? (
               <img
                 src={IMG_LINK + data.poster_path}
@@ -161,9 +161,9 @@ const MovieDetailsPage = () => {
                 <Outlet />
               </Suspense>
             </div>
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </main>
   );
 };
