@@ -33,9 +33,7 @@ const MovieReviews = () => {
       {loading && <Loader />}
       {!loading && (
         <div className={css.reviews}>
-          {data['results'].length == 0 && (
-            <p>We don&apos;t have any reviews for this movie</p>
-          )}
+          {data['results'].length == 0 && <p>Поки немає жодних відгуків</p>}
           <ul>
             {data.results.map((item, index) => {
               return (

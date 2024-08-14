@@ -32,6 +32,7 @@ const MovieVideos = () => {
       {loading && <Loader />}
       {!loading && (
         <div className={css.videosBox}>
+          {data.results.length === 0 && <p>Немає жодних відео</p>}
           <ul>
             {data.results.map((item, index) => {
               return (

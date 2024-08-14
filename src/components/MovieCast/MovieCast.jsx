@@ -33,6 +33,7 @@ const MovieCast = () => {
       {loading && <Loader />}
       {!loading && (
         <div className={css.cast}>
+          {data.cast.length === 0 && <p>Немає списку акторів</p>}
           <ul>
             {data.cast.map((item, index) => {
               return (

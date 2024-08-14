@@ -1,7 +1,7 @@
 .videosBox ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 20px;
 }
 
 .videosBox ul li {
@@ -13,6 +13,11 @@
   height: 315px;
   border: none;
   border-radius: 10px;
+}
+
+.videosBox > p {
+  text-align: left;
+  font-size: 20px;
 }
 
 @media screen and (max-width: 450px) {
