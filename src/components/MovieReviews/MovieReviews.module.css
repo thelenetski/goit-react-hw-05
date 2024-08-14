@@ -1,7 +1,3 @@
-.reviews {
-  /* margin-top: 50px; */
-}
-
 .reviews > p {
   text-align: left;
   font-size: 20px;
@@ -9,7 +5,7 @@
 
 .reviews ul {
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 20px;
 }
 
 .reviews ul li {
