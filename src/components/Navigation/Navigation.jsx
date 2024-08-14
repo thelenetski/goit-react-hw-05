@@ -10,15 +10,18 @@ const Navigation = () => {
   return (
     <header className={css.header}>
       <nav className={css.nav}>
-        <NavLink to="/home" className={buildLinkClass}>
-          Головна
-        </NavLink>
-        <NavLink to="/movies" className={buildLinkClass}>
-          Пошук
-        </NavLink>
-        <NavLink to="/favorites" className={buildLinkClass}>
-          Обране
-        </NavLink>
+        <h1 className={css.title}>Movie DES</h1>
+        <div>
+          <NavLink to="/home" className={buildLinkClass}>
+            Головна
+          </NavLink>
+          <NavLink to="/movies" className={buildLinkClass}>
+            Пошук
+          </NavLink>
+          <NavLink to="/favorites" className={buildLinkClass}>
+            Обране
+          </NavLink>
+        </div>
       </nav>
     </header>
   );
