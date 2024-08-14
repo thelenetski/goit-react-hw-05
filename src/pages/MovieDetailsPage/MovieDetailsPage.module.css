@@ -7,7 +7,7 @@
 }
 
 .controls {
-  width: 300px;
+  width: 360px;
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
@@ -41,7 +41,7 @@
 }
 
 .posterSVG {
-  width: 300px;
+  width: 360px;
   height: auto;
   margin-right: 30px;
   border-radius: 10px;
@@ -49,7 +49,7 @@
 }
 
 .moviePoster {
-  width: 300px;
+  width: 360px;
   height: auto;
   object-fit: cover;
   margin-right: 30px;
