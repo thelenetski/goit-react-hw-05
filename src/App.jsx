@@ -5,6 +5,18 @@ import Navigation from './components/Navigation/Navigation';
 
 const Home = lazy(() => import('./pages/HomePage/HomePage'));
 const Movies = lazy(() => import('./pages/MoviesPage/MoviesPage'));
+const NowPlaying = lazy(() =>
+  import('./pages/MoviesPage/Cats/NowPlaying/NowPlaying')
+);
+const Populars = lazy(() =>
+  import('./pages/MoviesPage/Cats/Populars/Populars')
+);
+const TopRating = lazy(() =>
+  import('./pages/MoviesPage/Cats/TopRating/TopRating')
+);
+const Upcoming = lazy(() =>
+  import('./pages/MoviesPage/Cats/Upcoming/Upcoming')
+);
 const MoviesDetailsPage = lazy(() =>
   import('./pages/MovieDetailsPage/MovieDetailsPage')
 );
@@ -25,7 +37,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies" element={<Movies />}>
+            <Route path="nowplaying" element={<NowPlaying />} />
+            <Route path="populars" element={<Populars />} />
+            <Route path="toprating" element={<TopRating />} />
+            <Route path="upcoming" element={<Upcoming />} />
+          </Route>
           <Route path="/favorites" element={<FavMovies />} />
           <Route path="home/:movieId" element={<MoviesDetailsPage />}>
             <Route path="cast" element={<MovieCast />} />
@@ -40,6 +57,42 @@ function App() {
             <Route path="videos" element={<MovieVideos />} />
           </Route>
           <Route path="favorites/:movieId" element={<MoviesDetailsPage />}>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
+            <Route path="images" element={<MovieImages />} />
+            <Route path="videos" element={<MovieVideos />} />
+          </Route>
+          <Route
+            path="movies/nowplaying/:movieId"
+            element={<MoviesDetailsPage />}
+          >
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
+            <Route path="images" element={<MovieImages />} />
+            <Route path="videos" element={<MovieVideos />} />
+          </Route>
+          <Route
+            path="movies/populars/:movieId"
+            element={<MoviesDetailsPage />}
+          >
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
+            <Route path="images" element={<MovieImages />} />
+            <Route path="videos" element={<MovieVideos />} />
+          </Route>
+          <Route
+            path="movies/toprating/:movieId"
+            element={<MoviesDetailsPage />}
+          >
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
+            <Route path="images" element={<MovieImages />} />
+            <Route path="videos" element={<MovieVideos />} />
+          </Route>
+          <Route
+            path="movies/upcoming/:movieId"
+            element={<MoviesDetailsPage />}
+          >
             <Route path="cast" element={<MovieCast />} />
             <Route path="reviews" element={<MovieReviews />} />
             <Route path="images" element={<MovieImages />} />

@@ -1,19 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import MovieList from '../../components/MovieList/MovieList';
 import toast, { Toaster } from 'react-hot-toast';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import {
+  useLocation,
+  useSearchParams,
+  NavLink,
+  Outlet,
+  useNavigate,
+} from 'react-router-dom';
 import dataRequest from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 import css from './MoviesPage.module.css';
+import clsx from 'clsx';
+
+const buildLinkClass = ({ isActive }) => {
+  return clsx(css.link, isActive && css.active);
+};
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const movieName = searchParams.get('querry') ?? '';
+  const movieName = searchParams.get('query') ?? '';
   const [loading, setLoading] = useState(null);
   const [data, setData] = useState(null);
   const [search, setSearch] = useState(movieName ?? '');
   const location = useLocation();
+  const navigate = useNavigate();
 
   const params = new URLSearchParams({
     query: search,
@@ -39,13 +51,14 @@ const MoviesPage = () => {
     requestData();
   }, [search]);
 
-  const handleSearch = querry => {
-    if (querry === search) {
+  const handleSearch = query => {
+    if (query === search) {
       return toast.error('This request already done, try another one');
     }
-    const nextParams = querry !== '' ? { querry } : {};
+    const nextParams = query !== '' ? { query } : {};
     setSearchParams(nextParams);
-    setSearch(querry);
+    setSearch(query);
+    navigate(`/movies?query=${query}`, { replace: true });
   };
 
   const checkSearchData = data => {
@@ -55,12 +68,67 @@ const MoviesPage = () => {
   return (
     <>
       <main className={css.main}>
-        <SearchBar value={movieName} onSubmit={handleSearch} />
         <div>
           <Toaster position="top-left" reverseOrder={true} />
         </div>
+        <div className={css.searchCatsBox}>
+          <SearchBar value={movieName} onSubmit={handleSearch} />
+          <div className={css.cats}>
+            <ul>
+              <li>
+                <NavLink
+                  to="nowplaying"
+                  onClick={() => {
+                    setData(null);
+                  }}
+                  className={buildLinkClass}
+                >
+                  Зараз дивляться
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="populars"
+                  onClick={() => {
+                    setData(null);
+                  }}
+                  className={buildLinkClass}
+                >
+                  Популярні
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="toprating"
+                  onClick={() => {
+                    setData(null);
+                  }}
+                  className={buildLinkClass}
+                >
+                  Топові
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="upcoming"
+                  onClick={() => {
+                    setData(null);
+                  }}
+                  className={buildLinkClass}
+                >
+                  Скоро у прокаті
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
         {loading && <Loader />}
-        {loading === false && <MovieList data={data} state={location} />}
+        {loading === false && data !== null && (
+          <MovieList data={data} state={location} />
+        )}
+        <Suspense fallback={<div>Завантаження...</div>}>
+          <Outlet />
+        </Suspense>
       </main>
     </>
   );

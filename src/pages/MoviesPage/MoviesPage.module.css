@@ -3,3 +3,53 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.searchCatsBox {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.cats {
+  margin: 0 20px;
+}
+
+.cats ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cats ul li {
+  margin-right: 20px;
+}
+
+.cats ul a {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  color: #555;
+  background: none;
+  /*border: 1px solid #777;*/
+  border-radius: 5px;
+  text-transform: uppercase;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.cats ul a:hover {
+  color: #656cf6;
+}
+
+.active {
+  color: brown !important;
+}
+
+@media screen and (max-width: 450px) {
+  .cats {
+    margin: 0 20px 20px;
+  }
+}
