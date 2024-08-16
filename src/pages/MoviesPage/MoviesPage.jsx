@@ -10,6 +10,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import dataRequest from '../../components/Services/Services';
+import { genres } from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 import css from './MoviesPage.module.css';
 import clsx from 'clsx';
@@ -75,50 +76,21 @@ const MoviesPage = () => {
           <SearchBar value={movieName} onSubmit={handleSearch} />
           <div className={css.cats}>
             <ul>
-              <li>
-                <NavLink
-                  to="now_playing"
-                  onClick={() => {
-                    setData(null);
-                  }}
-                  className={buildLinkClass}
-                >
-                  Зараз дивляться
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="popular"
-                  onClick={() => {
-                    setData(null);
-                  }}
-                  className={buildLinkClass}
-                >
-                  Популярні
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="top_rated"
-                  onClick={() => {
-                    setData(null);
-                  }}
-                  className={buildLinkClass}
-                >
-                  Топові
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="upcoming"
-                  onClick={() => {
-                    setData(null);
-                  }}
-                  className={buildLinkClass}
-                >
-                  Скоро у прокаті
-                </NavLink>
-              </li>
+              {genres.map(item => {
+                return (
+                  <li key={item.id}>
+                    <NavLink
+                      to={`${item.id}-${item.name.toLocaleLowerCase()}`}
+                      onClick={() => {
+                        setData(null);
+                      }}
+                      className={buildLinkClass}
+                    >
+                      {item.name}
+                    </NavLink>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  /* width: 100%; */
+  width: 20%;
   padding: 1rem 0;
 }
 
@@ -28,7 +28,6 @@
 }
 
 .search input:focus {
-  width: 300px;
   border: none;
   outline: none;
 }
@@ -62,6 +61,9 @@
 }
 
 @media screen and (max-width: 450px) {
+  .search {
+    width: 100%;
+  }
   .search form {
     width: 100%;
   }

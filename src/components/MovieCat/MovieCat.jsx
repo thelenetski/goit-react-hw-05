@@ -9,7 +9,9 @@ const MovieCat = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const { catName } = useParams();
-  const URL = `https://api.themoviedb.org/3/movie/${catName}?language=uk-UA`;
+  const URL = `https://api.themoviedb.org/3/discover/movie?include_adult=true&language=uk-UA&sort_by=popularity.desc&with_genres=${catName.match(
+    /\d+/g
+  )}`;
 
   useEffect(() => {
     const requestData = async () => {
