@@ -9,7 +9,7 @@ const MovieCat = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const { catName } = useParams();
-  const URL = `https://api.themoviedb.org/3/discover/movie?include_adult=true&language=uk-UA&sort_by=primary_release_date.desc&with_genres=${catName.match(
+  const URL = `https://api.themoviedb.org/3/discover/movie?include_adult=true&language=uk-UA&primary_release_year=2024&sort_by=primary_release_date.desc&with_genres=${catName.match(
     /\d+/g
   )}`;
 
