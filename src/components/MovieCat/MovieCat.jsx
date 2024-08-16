@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import dataRequest from '../../../../components/Services/Services';
-import Loader from '../../../../components/Loader/Loader';
-import MovieList from '../../../../components/MovieList/MovieList';
+import { useParams, useLocation } from 'react-router-dom';
+import dataRequest from '../Services/Services';
+import Loader from '../Loader/Loader';
+import MovieList from '../MovieList/MovieList';
 
-const TopRating = () => {
-  const URL = `https://api.themoviedb.org/3/movie/top_rated?language=uk-UA`;
-
+const MovieCat = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const { catName } = useParams();
+  const URL = `https://api.themoviedb.org/3/movie/${catName}?language=uk-UA`;
 
   useEffect(() => {
     const requestData = async () => {
@@ -23,16 +25,16 @@ const TopRating = () => {
     };
 
     requestData();
-  }, []);
+  }, [catName]);
 
   return (
     <>
       {loading && <Loader />}
       {loading === false && data !== null && (
-        <MovieList data={data} state={'/movies/toprating'} />
+        <MovieList data={data} state={location} />
       )}
     </>
   );
 };
 
-export default TopRating;
+export default MovieCat;

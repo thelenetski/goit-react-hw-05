@@ -77,7 +77,7 @@ const MoviesPage = () => {
             <ul>
               <li>
                 <NavLink
-                  to="nowplaying"
+                  to="now_playing"
                   onClick={() => {
                     setData(null);
                   }}
@@ -88,7 +88,7 @@ const MoviesPage = () => {
               </li>
               <li>
                 <NavLink
-                  to="populars"
+                  to="popular"
                   onClick={() => {
                     setData(null);
                   }}
@@ -99,7 +99,7 @@ const MoviesPage = () => {
               </li>
               <li>
                 <NavLink
-                  to="toprating"
+                  to="top_rated"
                   onClick={() => {
                     setData(null);
                   }}
