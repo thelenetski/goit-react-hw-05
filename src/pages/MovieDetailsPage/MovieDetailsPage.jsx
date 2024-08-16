@@ -18,7 +18,7 @@ const MovieDetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const URL = `https://api.themoviedb.org/3/movie/${movieId}?language=uk-UA`;
   const location = useLocation();
-  const backLinkHref = useRef(location.state ?? '/');
+  const backLinkHref = useRef(location.state ?? '/movies');
   const [data, setData] = useState(null);
   const [isFav, setIsFav] = useState(false);
 

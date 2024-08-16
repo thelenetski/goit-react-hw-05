@@ -92,15 +92,16 @@
 
 .genresBox p {
   font-size: 15px;
-  padding: 0 10px;
+  padding-right: 10px;
   margin: 5px 0;
+  margin-right: 10px;
   line-height: 1.2;
-  border-left: 1px solid #999;
+  border-right: 1px solid #999;
 }
 
-.genresBox p:first-child {
-  padding-left: 0;
-  border-left: none;
+.genresBox p:last-child {
+  padding-right: 0;
+  border-right: none;
 }
 
 .addInfo {
@@ -148,10 +149,5 @@
   }
   .movieDescription {
     max-width: 100%;
-  }
-
-  .genresBox p:nth-child(5) {
-    padding-left: 0;
-    border-left: none;
   }
 }
