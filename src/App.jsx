@@ -19,7 +19,18 @@ const MovieVideos = lazy(() => import('./components/MovieVideos/MovieVideos'));
 const FavMovies = lazy(() => import('./pages/FavPage/FavPage'));
 const NotFound = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
-const basePaths = ['home', 'movies', 'favorites'];
+const basePaths = ['home', 'favorites'];
+
+function renderMovieSubRoutes() {
+  return (
+    <>
+      <Route path="cast" element={<MovieCast />} />
+      <Route path="reviews" element={<MovieReviews />} />
+      <Route path="images" element={<MovieImages />} />
+      <Route path="videos" element={<MovieVideos />} />
+    </>
+  );
+}
 
 function App() {
   return (
@@ -29,31 +40,29 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/favorites" element={<FavMovies />} />
+
           <Route path="/movies" element={<Movies />}>
             <Route path=":catName" element={<MovieCat />} />
+            <Route path=":catName/:movieId" element={<MoviesDetailsPage />}>
+              {renderMovieSubRoutes()}
+            </Route>
           </Route>
-          <Route path="/favorites" element={<FavMovies />} />
+          <Route
+            path="/movies/search-article/:movieId"
+            element={<MoviesDetailsPage />}
+          >
+            {renderMovieSubRoutes()}
+          </Route>
           {basePaths.map((basePath, index) => (
             <Route
               path={`${basePath}/:movieId`}
               element={<MoviesDetailsPage />}
               key={index}
             >
-              <Route path="cast" element={<MovieCast />} />
-              <Route path="reviews" element={<MovieReviews />} />
-              <Route path="images" element={<MovieImages />} />
-              <Route path="videos" element={<MovieVideos />} />
+              {renderMovieSubRoutes()}
             </Route>
           ))}
-          <Route
-            path="movies/:catName/:movieId"
-            element={<MoviesDetailsPage />}
-          >
-            <Route path="cast" element={<MovieCast />} />
-            <Route path="reviews" element={<MovieReviews />} />
-            <Route path="images" element={<MovieImages />} />
-            <Route path="videos" element={<MovieVideos />} />
-          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

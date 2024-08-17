@@ -96,9 +96,9 @@ const MoviesPage = () => {
         </div>
         {loading && <Loader />}
         {loading === false && data !== null && (
-          <MovieList data={data} state={location} />
+          <MovieList link={'search-article'} data={data} state={location} />
         )}
-        <Suspense fallback={<div>Завантаження...</div>}>
+        <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
       </main>

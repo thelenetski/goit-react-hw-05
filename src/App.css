@@ -3,3 +3,26 @@
   margin: 0 auto;
   text-align: center;
 }
+
+/* Работает в Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #b8bcff #ffffff;
+}
+
+/* Работает в Chrome, Edge и Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 2px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(171, 171, 171);
+}
+
+*::-webkit-scrollbar-thumb {
+  width: 6px;
+  height: 2px;
+  background-color: #646cff;
+  border-radius: 20px;
+}
