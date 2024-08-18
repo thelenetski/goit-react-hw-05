@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   width: calc(100% - 40px);
   padding: 20px;
+  margin-top: 100px;
 }
 
 .controls {
@@ -125,16 +126,20 @@
   margin-right: 20px;
 }
 
+.addInfo ul li a {
+  color: var(--color-link);
+}
+
 .addInfo ul a:hover {
   text-decoration: underline;
 }
 
 .active {
-  color: brown;
+  color: var(--color-active);
 }
 
 .active:focus {
-  color: brown;
+  color: var(--color-active);
 }
 
 @media screen and (max-width: 450px) {
@@ -143,6 +148,10 @@
   }
   .moviePoster {
     width: 100%;
+  }
+
+  .mainMovie {
+    margin: 0;
   }
   .mainMovie h2 {
     margin: 20px 0 0 0;

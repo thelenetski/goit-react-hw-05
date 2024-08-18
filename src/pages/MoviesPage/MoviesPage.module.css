@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 100px;
 }
 
 .searchCatsBox {
@@ -13,8 +14,12 @@
 }
 
 .cats {
-  width: 75%;
+  width: 70%;
   margin: 0 20px;
+  padding: 10px 20px;
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 15px;
 }
 
 .cats ul {
@@ -33,7 +38,7 @@
   display: flex;
   align-items: center;
   height: 25px;
-  color: #666cee;
+  color: var(--color-link);
   background: none;
   border-radius: 5px;
   transition: 0.3s;
@@ -41,14 +46,17 @@
 }
 
 .cats ul a:hover {
-  color: #656cf6;
+  color: var(--color-hover);
 }
 
 .active {
-  color: brown !important;
+  color: var(--color-active) !important;
 }
 
 @media screen and (max-width: 450px) {
+  .main {
+    margin: 0;
+  }
   .cats {
     width: 100%;
   }

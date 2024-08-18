@@ -1,6 +1,6 @@
 .lds-facebook {
   /* change color here */
-  color: #646cff;
+  color: var(--color-active);
 }
 .lds-facebook,
 .lds-facebook div {

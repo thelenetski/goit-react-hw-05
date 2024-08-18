@@ -44,9 +44,12 @@ function App() {
 
           <Route path="/movies" element={<Movies />}>
             <Route path=":catName" element={<MovieCat />} />
-            <Route path=":catName/:movieId" element={<MoviesDetailsPage />}>
-              {renderMovieSubRoutes()}
-            </Route>
+          </Route>
+          <Route
+            path="/movies/:catName/:movieId"
+            element={<MoviesDetailsPage />}
+          >
+            {renderMovieSubRoutes()}
           </Route>
           <Route
             path="/movies/search-article/:movieId"
