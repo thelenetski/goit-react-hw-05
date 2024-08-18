@@ -7,9 +7,13 @@
   font-weight: 300;
   font-style: normal;
 
-  --color-link: #f5b342;
+  /* --color-link: #f5b342;
   --color-active: #e5554d;
-  --color-hover: #e5554d;
+  --color-hover: #e5554d; */
+
+  --color-link: #2d3033;
+  --color-active: #aa4b41;
+  --color-hover: #788c95;
 }
 
 /* Работает в Firefox */

@@ -37,6 +37,14 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  padding: 15px 20px;
+  margin: 20px;
+  font-size: 40px;
+  background: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid #e1e1e1;
+  box-shadow: 5px 5px 10px #00000017;
 }
 
 button {

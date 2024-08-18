@@ -4,14 +4,20 @@
   flex-wrap: wrap;
   width: calc(100% - 40px);
   padding: 20px;
-  margin-top: 100px;
+  margin-top: 75px;
 }
 
 .controls {
   width: 360px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid #e1e1e1;
+  box-shadow: 5px 5px 10px #00000017;
 }
 
 .controls button {
@@ -114,12 +120,18 @@
 }
 
 .addInfo ul {
+  width: fit-content;
   display: flex;
   list-style-type: none;
   margin: 20px 0 40px;
-  padding: 0;
+  padding: 20px;
   text-align: left;
   font-size: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid #e1e1e1;
+  box-shadow: 5px 5px 10px #00000017;
 }
 
 .addInfo > ul li {
@@ -158,5 +170,9 @@
   }
   .movieDescription {
     max-width: 100%;
+  }
+
+  .addInfo ul {
+    width: 100%;
   }
 }
