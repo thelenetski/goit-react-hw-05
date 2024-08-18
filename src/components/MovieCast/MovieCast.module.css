@@ -16,7 +16,7 @@
 }
 
 .cast ul li svg {
-  width: 100%;
+  width: 100px;
   height: auto;
   color: #656cf630;
 }
@@ -44,6 +44,10 @@
   .cast ul li {
     margin-bottom: 40px;
     margin-right: 0;
+  }
+
+  .cast ul li svg {
+    width: 90px;
   }
   .castPoster {
     width: 90px;
