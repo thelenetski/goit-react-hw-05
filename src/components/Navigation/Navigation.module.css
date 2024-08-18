@@ -80,6 +80,7 @@
     justify-content: center;
     width: calc(60% - 40px);
     padding: 15px 20px;
+    margin-left: 0;
   }
   .title {
     display: none;
@@ -89,6 +90,10 @@
     padding: 10px;
     margin: 0;
     box-shadow: 3px 5px 15px #00000038;
+  }
+
+  .link svg {
+    font-size: 30px;
   }
 
   .linkBox {
