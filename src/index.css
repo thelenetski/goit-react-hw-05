@@ -63,9 +63,7 @@ button {
     color: #213547;
     background-color: #ffffff;
   }
-  h1 {
-    font-size: 2rem;
-  }
+
   a:hover {
     color: #747bff;
   }
@@ -77,5 +75,6 @@ button {
 @media screen and (max-width: 450px) {
   h1 {
     width: 100%;
+    font-size: 2rem;
   }
 }
