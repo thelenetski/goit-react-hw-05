@@ -15,7 +15,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-link);
   text-decoration: inherit;
 }
 a:hover {
@@ -55,12 +55,16 @@ button {
   font-family: inherit;
   cursor: pointer;
   outline: none;
+  color: var(--color-link);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
+  }
+  h1 {
+    font-size: 2rem;
   }
   a:hover {
     color: #747bff;

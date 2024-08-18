@@ -45,4 +45,8 @@
     margin-bottom: 40px;
     margin-right: 0;
   }
+  .castPoster {
+    width: 90px;
+    height: 90px;
+  }
 }

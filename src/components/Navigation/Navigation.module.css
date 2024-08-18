@@ -5,6 +5,7 @@
   justify-content: flex-start;
   width: 100%;
   padding-top: 10px;
+  z-index: 9999;
 }
 
 .nav {
@@ -24,8 +25,12 @@
 .title {
   margin: 0;
   font-size: 25px;
+  padding: 0;
   padding-right: 20px;
+  border: none;
   border-right: 1px solid #dddddd;
+  box-shadow: none;
+  border-radius: 0;
   color: var(--color-active);
   text-transform: uppercase;
 }
@@ -44,7 +49,6 @@
   color: var(--color-link);
   background-color: #fff;
   border-radius: 10px;
-  /* box-shadow: 3px 5px 15px #00000038; */
   transition: 0.3s;
 }
 .link svg {
