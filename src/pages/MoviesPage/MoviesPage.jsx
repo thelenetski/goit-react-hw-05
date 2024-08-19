@@ -14,6 +14,8 @@ import { genres } from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 import css from './MoviesPage.module.css';
 import clsx from 'clsx';
+import { GrFormNext } from 'react-icons/gr';
+import { GrFormPrevious } from 'react-icons/gr';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -27,9 +29,11 @@ const MoviesPage = () => {
   const [search, setSearch] = useState(movieName ?? '');
   const location = useLocation();
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
 
   const params = new URLSearchParams({
     query: search,
+    page,
   });
 
   const URL = `https://api.themoviedb.org/3/search/movie?${params}`;
@@ -39,9 +43,9 @@ const MoviesPage = () => {
     const requestData = async () => {
       try {
         setLoading(true);
-        const { results } = await dataRequest(URL);
-        checkSearchData(results);
-        setData(results);
+        const data = await dataRequest(URL);
+        checkSearchData(data.results);
+        setData(data);
       } catch (error) {
         console.log(error.message);
       } finally {
@@ -50,7 +54,7 @@ const MoviesPage = () => {
     };
 
     requestData();
-  }, [search]);
+  }, [search, page]);
 
   const handleSearch = query => {
     if (query === search) {
@@ -95,8 +99,30 @@ const MoviesPage = () => {
           </div>
         </div>
         {loading && <Loader />}
-        {loading === false && data !== null && (
-          <MovieList link={'search-article'} data={data} state={location} />
+        {loading === false && data.results && (
+          <>
+            <MovieList
+              link={'search-article'}
+              data={data.results}
+              state={location}
+            />
+            <div className="navePageWrap">
+              {page > 1 && (
+                <div className="navPage">
+                  <button type="button" onClick={() => setPage(page - 1)}>
+                    <GrFormPrevious />
+                  </button>
+                </div>
+              )}
+              {page < data.total_pages && (
+                <div className="navPage">
+                  <button type="button" onClick={() => setPage(page + 1)}>
+                    <GrFormNext />
+                  </button>
+                </div>
+              )}
+            </div>
+          </>
         )}
         <Suspense fallback={<Loader />}>
           <Outlet />

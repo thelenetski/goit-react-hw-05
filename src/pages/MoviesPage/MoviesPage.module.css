@@ -53,6 +53,10 @@
   color: var(--color-active) !important;
 }
 
+.navPage button:hover {
+  box-shadow: 3px 5px 15px #00000038;
+}
+
 @media screen and (max-width: 450px) {
   .main {
     margin: 0 0 100px 0;

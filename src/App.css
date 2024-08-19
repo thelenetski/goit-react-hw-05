@@ -15,6 +15,22 @@
   --color-active: #aa4b41;
   --color-hover: #788c95;
 }
+.navePageWrap {
+  display: flex;
+  justify-content: center;
+}
+.navPage {
+  margin: 20px 10px;
+}
+
+.navPage button {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  padding: 10px;
+  border: none;
+  transition: 0.3s;
+}
 
 /* Работает в Firefox */
 * {
