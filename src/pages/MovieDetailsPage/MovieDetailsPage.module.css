@@ -120,7 +120,7 @@
 }
 
 .addInfo ul {
-  width: fit-content;
+  width: 360px;
   display: flex;
   list-style-type: none;
   margin: 20px 0;
