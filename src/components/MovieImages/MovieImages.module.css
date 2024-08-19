@@ -1,4 +1,5 @@
 .imgBox ul {
+  width: fit-content;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
