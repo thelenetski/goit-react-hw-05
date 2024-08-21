@@ -38,11 +38,11 @@ const MoviesPage = () => {
   const [search, setSearch] = useState(movieName ?? '');
   const location = useLocation();
   const navigate = useNavigate();
-  const [page, setPage] = useState(parseInt(searchParams.get('page')) ?? 1);
+  const [page, setPage] = useState(searchParams.get('page') ?? 1);
 
   const params = new URLSearchParams({
     query: search,
-    page,
+    page: parseInt(page),
   });
 
   const url = `https://api.themoviedb.org/3/search/movie?${params}`;
