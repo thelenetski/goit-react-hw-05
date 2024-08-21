@@ -41,7 +41,6 @@ function App() {
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home />} />
           <Route path="/favorites" element={<FavMovies />} />
-
           <Route path="/movies" element={<Movies />}>
             <Route path=":catName" element={<MovieCat />} />
           </Route>

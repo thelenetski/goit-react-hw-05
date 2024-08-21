@@ -1,44 +1,40 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import dataRequest from '../Services/Services';
 import Loader from '../Loader/Loader';
 import MovieList from '../MovieList/MovieList';
 import { GrFormNext } from 'react-icons/gr';
 import { GrFormPrevious } from 'react-icons/gr';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectError,
+  selectLoading,
+  selectOutlet,
+} from '../../redux/selectors';
+import { fetchOutlet } from '../../redux/moviesOps';
 
 const MovieCat = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const location = useLocation();
   const { catName } = useParams();
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const data = useSelector(selectOutlet);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   const URL = `https://api.themoviedb.org/3/discover/movie?include_adult=true&language=uk-UA&page=${page}&sort_by=popularity.desc&with_genres=${catName.match(
     /\d+/g
   )}`;
 
   useEffect(() => {
-    const requestData = async () => {
-      try {
-        setLoading(true);
-        const data = await dataRequest(URL);
-        setData(data);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    requestData();
-  }, [catName, page]);
+    dispatch(fetchOutlet(URL));
+  }, [dispatch, URL]);
 
   return (
     <>
-      {loading && <Loader />}
-      {loading === false && data.results && (
+      {loading.outlet && !error && <Loader />}
+      {!loading.outlet && data.results && (
         <>
-          <MovieList data={data.results} state={location} />
+          <MovieList results={data.results} state={location} />
           <div className="navePageWrap">
             {page > 1 && (
               <div className="navPage">

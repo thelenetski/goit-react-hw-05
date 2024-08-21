@@ -2,12 +2,19 @@ import { useParams, useLocation, NavLink, Outlet } from 'react-router-dom';
 import { useState, useEffect, Suspense, useRef } from 'react';
 import css from './MovieDetailsPage.module.css';
 import BackLink from '../../components/BackLink/BackLink';
-import dataRequest, { IMG_LINK } from '../../components/Services/Services';
+import { IMG_LINK } from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 import { FaRegFileImage } from 'react-icons/fa';
 import clsx from 'clsx';
 import FavButton from '../../components/FavButton/FavButton';
 import { FaHeart } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectError,
+  selectLoading,
+  selectMovies,
+} from '../../redux/selectors';
+import { fetchMovies } from '../../redux/moviesOps';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -15,36 +22,25 @@ const buildLinkClass = ({ isActive }) => {
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  const [loading, setLoading] = useState(true);
+  const data = useSelector(selectMovies);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const dispatch = useDispatch();
   const URL = `https://api.themoviedb.org/3/movie/${movieId}?language=uk-UA`;
   const location = useLocation();
   const backLinkHref = useRef(location.state ?? '/movies');
-  const [data, setData] = useState(null);
   const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
+    dispatch(fetchMovies(URL));
+
     if (localStorage.getItem('favorite')) {
       const favArray = JSON.parse(localStorage.getItem('favorite'));
       Array.isArray(favArray) &&
         favArray.some(item => item.id === movieId) &&
         setIsFav(true);
     }
-
-    const requestData = async () => {
-      try {
-        setLoading(true);
-        const data = await dataRequest(URL);
-        setData(data);
-        setLoading(true);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    requestData();
-  }, []);
+  }, [dispatch, URL, movieId]);
 
   const handlerAddFav = () => {
     if (localStorage.getItem('favorite') !== null) {
@@ -84,8 +80,8 @@ const MovieDetailsPage = () => {
 
   return (
     <main className={css.mainMovie}>
-      {loading && <Loader />}
-      {!loading && (
+      {loading.main && !error && <Loader />}
+      {!loading.main && data.id && (
         <>
           <div className={css.controls}>
             <BackLink to={backLinkHref.current}>Назад</BackLink>

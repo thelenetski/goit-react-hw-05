@@ -9,13 +9,20 @@ import {
   Outlet,
   useNavigate,
 } from 'react-router-dom';
-import dataRequest from '../../components/Services/Services';
 import { genres } from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 import css from './MoviesPage.module.css';
 import clsx from 'clsx';
 import { GrFormNext } from 'react-icons/gr';
 import { GrFormPrevious } from 'react-icons/gr';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectMovies,
+  selectLoading,
+  selectError,
+} from '../../redux/selectors';
+import { fetchMovies } from '../../redux/moviesOps';
+import { changeItems } from '../../redux/moviesSlice';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -24,51 +31,40 @@ const buildLinkClass = ({ isActive }) => {
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const movieName = searchParams.get('query') ?? '';
-  const [loading, setLoading] = useState(null);
-  const [data, setData] = useState(null);
+  const dispatch = useDispatch();
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const data = useSelector(selectMovies);
   const [search, setSearch] = useState(movieName ?? '');
   const location = useLocation();
   const navigate = useNavigate();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(parseInt(searchParams.get('page')) ?? 1);
 
   const params = new URLSearchParams({
     query: search,
     page,
   });
 
-  const URL = `https://api.themoviedb.org/3/search/movie?${params}`;
+  const url = `https://api.themoviedb.org/3/search/movie?${params}`;
 
   useEffect(() => {
-    if (search === '') return;
-    const requestData = async () => {
-      try {
-        setLoading(true);
-        const data = await dataRequest(URL);
-        checkSearchData(data.results);
-        setData(data);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    requestData();
-  }, [search, page]);
+    dispatch(fetchMovies(url));
+  }, [dispatch, url, page]);
 
   const handleSearch = query => {
     if (query === search) {
       return toast.error('This request already done, try another one');
     }
-    const nextParams = query !== '' ? { query } : {};
-    setSearchParams(nextParams);
+    onQueryPageParams(query, page);
     setSearch(query);
     navigate(`/movies?query=${query}`, { replace: true });
   };
 
-  const checkSearchData = data => {
-    data.length === 0 && toast.error('Nothing found, try another one');
+  const onQueryPageParams = (query, page) => {
+    setSearchParams(query !== '' ? { query, page } : {});
   };
+
+  console.log(location);
 
   return (
     <>
@@ -85,10 +81,10 @@ const MoviesPage = () => {
                   <li key={item.id}>
                     <NavLink
                       to={`${item.id}-${item.name.toLocaleLowerCase()}`}
-                      onClick={() => {
-                        setData(null);
-                      }}
                       className={buildLinkClass}
+                      onClick={() => {
+                        dispatch(changeItems([]));
+                      }}
                     >
                       {item.name}
                     </NavLink>
@@ -98,25 +94,37 @@ const MoviesPage = () => {
             </ul>
           </div>
         </div>
-        {loading && <Loader />}
-        {loading === false && data.results && (
+        {loading.main && !error && <Loader />}
+        {data.results && (
           <>
             <MovieList
               link={'search-article'}
-              data={data.results}
+              results={data.results}
               state={location}
             />
             <div className="navePageWrap">
               {page > 1 && (
                 <div className="navPage">
-                  <button type="button" onClick={() => setPage(page - 1)}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setPage(page - 1);
+                      onQueryPageParams(search, page - 1);
+                    }}
+                  >
                     <GrFormPrevious />
                   </button>
                 </div>
               )}
               {page < data.total_pages && (
                 <div className="navPage">
-                  <button type="button" onClick={() => setPage(page + 1)}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setPage(page + 1);
+                      onQueryPageParams(search, page + 1);
+                    }}
+                  >
                     <GrFormNext />
                   </button>
                 </div>

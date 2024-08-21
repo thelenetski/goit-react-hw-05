@@ -1,36 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import css from './MovieVideos.module.css';
-import dataRequest from '../Services/Services';
 import Loader from '../Loader/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectError,
+  selectLoading,
+  selectOutlet,
+} from '../../redux/selectors';
+import { fetchOutlet } from '../../redux/moviesOps';
 
 const MovieVideos = () => {
   const { movieId } = useParams();
   const URL = `https://api.themoviedb.org/3/movie/${movieId}/videos`;
 
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const data = useSelector(selectOutlet);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
-    const requestData = async () => {
-      try {
-        setLoading(true);
-        const data = await dataRequest(URL);
-        setData(data);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    requestData();
-  }, []);
+    dispatch(fetchOutlet(URL));
+  }, [dispatch, URL]);
 
   return (
     <>
-      {loading && <Loader />}
-      {!loading && (
+      {loading.outlet && !error && <Loader />}
+      {data.results && (
         <div className={css.videosBox}>
           {data.results.length === 0 && <p>Немає жодних відео</p>}
           <ul>

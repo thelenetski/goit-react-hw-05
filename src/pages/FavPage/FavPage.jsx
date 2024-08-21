@@ -1,36 +1,29 @@
-import { useState, useEffect } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import css from './FavPage.module.css';
 import { useLocation } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
+import { selectError, selectLoading } from '../../redux/selectors';
+import { useSelector } from 'react-redux';
 
-const Home = () => {
+const FavPage = () => {
   const location = useLocation();
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    setLoading(true);
-    const results = JSON.parse(localStorage.getItem('favorite'));
-    setData(results);
-    setLoading(false);
-  }, []);
+  const loading = useSelector(selectLoading);
+  const error = useLocation(selectError);
+  const results = JSON.parse(localStorage.getItem('favorite'));
 
   return (
     <>
       <main className={css.main}>
         <h1>
-          {data !== null && data.length > 0
+          {results !== null && results.length > 0
             ? `Мої фільми`
             : `Немає обраних фільмів`}
         </h1>
-        {loading && <Loader />}
-        {!loading && data !== null && (
-          <MovieList data={data} state={location} />
-        )}
+        {loading.main && !error && <Loader />}
+        {!loading.main && <MovieList results={results} state={location} />}
       </main>
     </>
   );
 };
 
-export default Home;
+export default FavPage;

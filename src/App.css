@@ -32,6 +32,10 @@
   transition: 0.3s;
 }
 
+.navPage button:hover {
+  box-shadow: 3px 5px 15px #00000038;
+}
+
 /* Работает в Firefox */
 * {
   scrollbar-width: thin;
