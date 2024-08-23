@@ -30,7 +30,7 @@ const buildLinkClass = ({ isActive }) => {
 const buildRateClass = rate => {
   return clsx(
     rate < 59 && css.rateBad,
-    (rate < 69 && css.rateNorm) || (rate > 69 && css.rateNice)
+    (rate < 70 && css.rateNorm) || (rate > 69 && css.rateNice)
   );
 };
 
