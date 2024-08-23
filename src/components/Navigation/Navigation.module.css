@@ -61,9 +61,11 @@
 
 .active {
   color: var(--color-active);
+  outline: none;
 }
 
 .active:focus {
+  outline: none;
   color: var(--color-active);
 }
 

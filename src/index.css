@@ -24,6 +24,11 @@ a:hover {
 
 a:focus {
   color: brown;
+  outline: none;
+}
+
+a:active {
+  outline: none;
 }
 
 body {

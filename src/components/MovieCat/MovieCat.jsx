@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useSearchParams } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import MovieList from '../MovieList/MovieList';
 import { GrFormNext } from 'react-icons/gr';
@@ -15,19 +15,30 @@ import { fetchOutlet } from '../../redux/moviesOps';
 const MovieCat = () => {
   const location = useLocation();
   const { catName } = useParams();
-  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(searchParams.get('page') ?? 1);
   const dispatch = useDispatch();
   const data = useSelector(selectOutlet);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
-  const URL = `https://api.themoviedb.org/3/discover/movie?include_adult=true&language=uk-UA&page=${page}&sort_by=popularity.desc&with_genres=${catName.match(
-    /\d+/g
-  )}`;
+  const params = new URLSearchParams({
+    include_adult: 'true',
+    language: 'uk-UA',
+    page,
+    with_genres: catName.match(/\d+/g),
+  });
+
+  const URL = `https://api.themoviedb.org/3/discover/movie?${params}`;
 
   useEffect(() => {
     dispatch(fetchOutlet(URL));
-  }, [dispatch, URL]);
+    if (searchParams.get('page') === null) setPage(1);
+  }, [dispatch, URL, page]);
+
+  const onQueryPageParams = page => {
+    setSearchParams(page !== 1 ? { page } : {});
+  };
 
   return (
     <>
@@ -38,14 +49,26 @@ const MovieCat = () => {
           <div className="navePageWrap">
             {page > 1 && (
               <div className="navPage">
-                <button type="button" onClick={() => setPage(page - 1)}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPage(parseInt(page) - 1);
+                    onQueryPageParams(parseInt(page) - 1);
+                  }}
+                >
                   <GrFormPrevious />
                 </button>
               </div>
             )}
             {page < data.total_pages && (
               <div className="navPage">
-                <button type="button" onClick={() => setPage(page + 1)}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPage(parseInt(page) + 1);
+                    onQueryPageParams(parseInt(page) + 1);
+                  }}
+                >
                   <GrFormNext />
                 </button>
               </div>

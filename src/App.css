@@ -65,6 +65,12 @@
   border-radius: 20px;
 }
 
+/*свечение ссылок*/
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @media screen and (max-width: 450px) {
   .navHiddenBox {
     display: none;

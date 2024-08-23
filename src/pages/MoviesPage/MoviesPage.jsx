@@ -62,7 +62,7 @@ const MoviesPage = () => {
   };
 
   const onQueryPageParams = (query, page) => {
-    setSearchParams(query !== '' ? { query, page } : {});
+    setSearchParams(query !== '' ? { query, page } : { page });
   };
 
   return (
