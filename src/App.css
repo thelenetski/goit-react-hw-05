@@ -15,6 +15,12 @@
   --color-active: #aa4b41;
   --color-hover: #788c95;
 }
+
+.navHiddenBox {
+  height: 91px;
+  width: 100%;
+}
+
 .navePageWrap {
   display: flex;
   justify-content: center;
@@ -57,4 +63,10 @@
   height: 2px;
   background-color: var(--color-link);
   border-radius: 20px;
+}
+
+@media screen and (max-width: 450px) {
+  .navHiddenBox {
+    display: none;
+  }
 }

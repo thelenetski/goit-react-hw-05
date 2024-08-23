@@ -48,12 +48,13 @@ const MoviesPage = () => {
   const url = `https://api.themoviedb.org/3/search/movie?${params}`;
 
   useEffect(() => {
+    if (search === '') return;
     dispatch(fetchMovies(url));
   }, [dispatch, url, page]);
 
   const handleSearch = query => {
     if (query === search) {
-      return toast.error('This request already done, try another one');
+      return toast.error('Спробуйте інший запит');
     }
     onQueryPageParams(query, page);
     setSearch(query);
@@ -63,8 +64,6 @@ const MoviesPage = () => {
   const onQueryPageParams = (query, page) => {
     setSearchParams(query !== '' ? { query, page } : {});
   };
-
-  console.log(location);
 
   return (
     <>
@@ -97,6 +96,7 @@ const MoviesPage = () => {
         {loading.main && !error && <Loader />}
         {data.results && (
           <>
+            {data.results.length === 0 && <h4>Нічого не знайдено</h4>}
             <MovieList
               link={'search-article'}
               results={data.results}

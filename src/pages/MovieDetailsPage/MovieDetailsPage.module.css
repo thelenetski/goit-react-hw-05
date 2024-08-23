@@ -4,7 +4,6 @@
   flex-wrap: wrap;
   width: calc(100% - 40px);
   padding: 20px;
-  margin-top: 75px;
 }
 
 .controls {
@@ -67,13 +66,15 @@
 .mainMovie h2 {
   font-size: 40px;
   margin: 0;
+  margin-bottom: 10px;
   line-height: 1;
 }
 
 .mainMovie h4 {
   font-size: 30px;
   margin: 0;
-  margin-top: 40px;
+  margin-bottom: 20px;
+  line-height: 1;
 }
 
 .movieDescription {
@@ -84,11 +85,36 @@
 
 .movieDescription span {
   display: inline-block;
-  margin: 20px 20px 0 0;
+  margin: 10px 20px 0 0;
+}
+
+.rateNice,
+.rateNorm,
+.rateBad {
+  font-weight: bold;
+  margin: 0 !important;
+}
+
+.movieDescription .rateNice {
+  color: #0e8224;
+}
+.movieDescription .rateNorm {
+  color: #d5a53e;
+}
+.movieDescription .rateBad {
+  color: #bf0101;
+}
+
+.movieDescription .country {
+  margin-bottom: 40px;
+}
+
+.movieDescription .country span {
+  margin-right: 7px;
 }
 
 .movieDescription p {
-  margin: 20px 0;
+  margin-bottom: 40px;
 }
 
 .genresBox {
@@ -117,11 +143,13 @@
 
 .addInfo h4 {
   text-align: left;
+  margin: 40px 0 20px 0;
 }
 
 .addInfo ul {
   width: 360px;
   display: flex;
+  justify-content: space-between;
   list-style-type: none;
   margin: 20px 0;
   padding: 20px;
@@ -132,10 +160,6 @@
   box-sizing: border-box;
   border: 1px solid #e1e1e1;
   box-shadow: 5px 5px 10px #00000017;
-}
-
-.addInfo > ul li {
-  margin-right: 20px;
 }
 
 .addInfo ul li a {
@@ -166,8 +190,9 @@
     margin: 0 0 100px 0;
   }
   .mainMovie h2 {
-    margin: 20px 0 0 0;
+    margin: 20px 0 20px 0;
   }
+
   .movieDescription {
     max-width: 100%;
   }

@@ -35,6 +35,7 @@ function renderMovieSubRoutes() {
 function App() {
   return (
     <>
+      <div className="navHiddenBox"></div>
       <Navigation />
       <Suspense fallback={<Loader />}>
         <Routes>

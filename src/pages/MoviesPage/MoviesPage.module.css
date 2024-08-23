@@ -2,7 +2,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 100px;
 }
 
 .searchCatsBox {
@@ -10,7 +9,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .cats {
@@ -20,6 +18,7 @@
   background: #fff;
   border: 1px solid #e1e1e1;
   border-radius: 15px;
+  box-shadow: 5px 5px 10px #00000017;
 }
 
 .cats ul {
@@ -60,6 +59,9 @@
 @media screen and (max-width: 450px) {
   .main {
     margin: 0 0 100px 0;
+  }
+  .searchCatsBox {
+    margin-bottom: 20px;
   }
   .cats {
     width: 100%;

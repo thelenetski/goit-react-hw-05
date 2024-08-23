@@ -13,16 +13,31 @@ import {
   selectError,
   selectLoading,
   selectMovies,
+  selectFavMovies,
 } from '../../redux/selectors';
-import { fetchMovies } from '../../redux/moviesOps';
+import {
+  fetchMovies,
+  fetchFavMovies,
+  addFavMovie,
+  deleteFavMovie,
+} from '../../redux/moviesOps';
+import toast, { Toaster } from 'react-hot-toast';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
 };
 
+const buildRateClass = rate => {
+  return clsx(
+    rate < 59 && css.rateBad,
+    (rate < 68 && css.rateNorm) || (rate > 69 && css.rateNice)
+  );
+};
+
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const data = useSelector(selectMovies);
+  const favData = useSelector(selectFavMovies);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
@@ -32,48 +47,41 @@ const MovieDetailsPage = () => {
   const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchMovies(URL));
-
-    if (localStorage.getItem('favorite')) {
-      const favArray = JSON.parse(localStorage.getItem('favorite'));
-      Array.isArray(favArray) &&
-        favArray.some(item => item.id === movieId) &&
-        setIsFav(true);
+    dispatch(fetchFavMovies());
+    if (favData) {
+      favData.some(item => item.favId === movieId) && setIsFav(true);
     }
-  }, [dispatch, URL, movieId]);
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchMovies(URL));
+  }, [dispatch, URL]);
 
   const handlerAddFav = () => {
-    if (localStorage.getItem('favorite') !== null) {
-      const favArray = JSON.parse(localStorage.getItem('favorite'));
-      if (favArray.some(item => item.id === movieId)) {
-        const newFav = favArray.filter(
-          item => parseInt(item.id) !== parseInt(movieId)
-        );
-        localStorage.setItem('favorite', JSON.stringify(newFav));
+    if (favData.length > 98) {
+      toast.error('Список обраного переповнений');
+      return;
+    }
+    favData.forEach(item => {
+      if (item.favId === movieId) {
+        dispatch(deleteFavMovie(item.id));
         setIsFav(false);
         return;
       }
+      setIsFav(false);
+      return;
+    });
+    if (!favData.some(item => item.favId === movieId)) addFav();
+  };
 
-      favArray.push({
-        id: movieId,
+  const addFav = () => {
+    dispatch(
+      addFavMovie({
         poster_path: [data.poster_path],
         title: [data.title],
-      });
-
-      localStorage.setItem('favorite', JSON.stringify(favArray));
-      setIsFav(true);
-      return;
-    }
-
-    localStorage.setItem(
-      'favorite',
-      JSON.stringify([
-        {
-          id: movieId,
-          poster_path: [data.poster_path],
-          title: [data.title],
-        },
-      ])
+        status: true,
+        favId: movieId,
+      })
     );
     setIsFav(true);
   };
@@ -85,6 +93,9 @@ const MovieDetailsPage = () => {
         <>
           <div className={css.controls}>
             <BackLink to={backLinkHref.current}>Назад</BackLink>
+            <div>
+              <Toaster position="top-left" reverseOrder={true} />
+            </div>
             <FavButton onAdd={handlerAddFav}>
               {isFav ? `Прибрати` : `Додати`}
               <FaHeart className={clsx(isFav && css.favactive)} />
@@ -103,16 +114,28 @@ const MovieDetailsPage = () => {
 
             <div className={css.movieDescription}>
               <h2>{data.title}</h2>
-              <span>Рейтинг: {Math.round(data.vote_average * 10)}%</span>
+              <span>
+                Рейтинг:{' '}
+                <span
+                  className={buildRateClass(Math.round(data.vote_average * 10))}
+                >
+                  {Math.round(data.vote_average * 10)}%
+                </span>
+              </span>
               <span>Дата: {data.release_date}</span>
-              <div>
+              <div className={css.country}>
                 {data.production_countries.length > 0 && (
-                  <div>
+                  <>
                     <span>Країна: </span>
                     {data.production_countries.map((item, index) => {
-                      return <span key={index}>{item.name}</span>;
+                      return (
+                        <span key={index}>
+                          {item.name}
+                          {index + 1 < data.production_countries.length && `, `}
+                        </span>
+                      );
                     })}
-                  </div>
+                  </>
                 )}
               </div>
               {data.overview && (

@@ -42,33 +42,6 @@ const moviesSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchOutlet.rejected, handleRejected);
-    // .addCase(addTask.pending, handlePending)
-    // .addCase(addTask.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.error = null;
-    //   state.items.push(action.payload);
-    // })
-    // .addCase(addTask.rejected, handleRejected)
-    // .addCase(deleteTask.pending, handlePending)
-    // .addCase(deleteTask.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.error = null;
-    //   const index = state.items.findIndex(
-    //     (task) => task.id === action.payload.id
-    //   );
-    //   state.items.splice(index, 1);
-    // })
-    // .addCase(deleteTask.rejected, handleRejected)
-    // .addCase(toggleDone.pending, handlePending)
-    // .addCase(toggleDone.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.error = null;
-    //   const index = state.items.findIndex(
-    //     (task) => task.id === action.payload.id
-    //   );
-    //   state.items.splice(index, 1, action.payload);
-    // })
-    // .addCase(toggleDone.rejected, handleRejected);
   },
 });
 

@@ -1,5 +1,7 @@
 export const selectMovies = state => state.movies.items;
 
+export const selectFavMovies = state => state.favmovies.items;
+
 export const selectOutlet = state => state.movies.outlet;
 
 export const selectLoading = state => state.movies.loading;

@@ -20,41 +20,42 @@ export const fetchMovies = createAsyncThunk('movies/fetchAll', requestData);
 
 export const fetchOutlet = createAsyncThunk('movies/fetchOutlet', requestData);
 
-// export const addTask = createAsyncThunk(
-//   "tasks/addTask",
-//   async (task, thunkAPI) => {
-//     try {
-//       const response = await axios.post("/tasks", task);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
+/*------------Favorites-------------*/
 
-// export const deleteTask = createAsyncThunk(
-//   "tasks/deleteTask",
-//   async (taskId, thunkAPI) => {
-//     try {
-//       const response = await axios.delete(`/tasks/${taskId}`);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
+const FAV_URL = 'https://66c31a60d057009ee9bf1011.mockapi.io/movies';
 
-// export const toggleDone = createAsyncThunk(
-//   "tasks/toggleDone",
-//   async (task, thunkAPI) => {
-//     console.log(task);
-//     try {
-//       const response = await axios.put(`/tasks/${task.id}`, {
-//         done: !task.done,
-//       });
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
+export const fetchFavMovies = createAsyncThunk(
+  'favmovies/fetchFavMovies',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get(FAV_URL);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const addFavMovie = createAsyncThunk(
+  'favmovies/addFavMovie',
+  async (favMovie, thunkAPI) => {
+    try {
+      const response = await axios.post(FAV_URL, favMovie);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const deleteFavMovie = createAsyncThunk(
+  'favmovies/deleteFavMovie',
+  async (favMovieId, thunkAPI) => {
+    try {
+      const response = await axios.delete(`${FAV_URL}/${favMovieId}`);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
