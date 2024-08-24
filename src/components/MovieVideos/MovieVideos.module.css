@@ -6,7 +6,7 @@
 }
 
 .videosBox ul li {
-  width: 32%;
+  min-width: 32%;
 }
 
 .video {

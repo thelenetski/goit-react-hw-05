@@ -6,7 +6,7 @@
 }
 
 .imgBox ul li {
-  width: 24%;
+  min-width: 24%;
 }
 
 .imgBox > p {

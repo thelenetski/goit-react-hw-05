@@ -17,11 +17,36 @@ const moviesSlice = createSlice({
     outlet: [],
     loading: { main: false, outlet: false },
     error: null,
+    page: 1,
+    showPagesNav: false,
+    totalPages: 0,
+    search: '',
   },
   reducers: {
     changeItems(state, action) {
-      state.items = action.payload;
+      console.log('action - change');
+      if (action.payload === 'items') state.items = [];
+      if (action.payload === 'outlet') state.outlet = [];
+      if (action.payload !== 'items' && action.payload !== 'outlet')
+        state.items = action.payload;
       state.loading = { main: false, outlet: false };
+    },
+    setPage(state, action) {
+      state.page = action.payload;
+    },
+    nextPage(state) {
+      state.page = state.page + 1;
+    },
+    prevPage(state, action) {
+      action.payload
+        ? (state.page = action.payload)
+        : (state.page = state.page - 1);
+    },
+    setSearch(state, action) {
+      state.search = action.payload;
+    },
+    changePagesNav(state, action) {
+      state.showPagesNav = action.payload;
     },
   },
   extraReducers: builder => {
@@ -29,6 +54,7 @@ const moviesSlice = createSlice({
       .addCase(fetchMovies.pending, handlePending)
       .addCase(fetchMovies.fulfilled, (state, action) => {
         state.items = action.payload;
+        state.totalPages = action.payload.total_pages;
         state.loading = { main: false, outlet: false };
         state.error = null;
       })
@@ -38,6 +64,7 @@ const moviesSlice = createSlice({
       })
       .addCase(fetchOutlet.fulfilled, (state, action) => {
         state.outlet = action.payload;
+        state.totalPages = action.payload.total_pages;
         state.loading = { main: false, outlet: false };
         state.error = null;
       })
@@ -45,5 +72,12 @@ const moviesSlice = createSlice({
   },
 });
 
-export const { changeItems } = moviesSlice.actions;
+export const {
+  changeItems,
+  nextPage,
+  prevPage,
+  setPage,
+  changePagesNav,
+  setSearch,
+} = moviesSlice.actions;
 export const moviesReducer = moviesSlice.reducer;

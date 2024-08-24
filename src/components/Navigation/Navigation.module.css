@@ -59,6 +59,29 @@
   margin-left: 5px;
 }
 
+.navPage {
+  margin: 0;
+}
+
+.navPage button {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  padding: 10px;
+  border: none;
+  border-radius: 17px;
+  background: none;
+  transition: 0.3s;
+}
+
+.navPage button:first-child {
+  margin: 0 15px 0 0;
+}
+
+.navPage button:hover {
+  box-shadow: 3px 5px 15px #00000038;
+}
+
 .active {
   color: var(--color-active);
   outline: none;
@@ -82,7 +105,7 @@
   }
   .nav {
     justify-content: center;
-    width: calc(60% - 40px);
+    width: fit-content;
     padding: 15px 20px;
     margin-left: 0;
     border-radius: 20px;
@@ -90,10 +113,12 @@
   .title {
     display: none;
   }
-  .link {
+
+  .link,
+  .navPage button {
     border-radius: 17px;
     padding: 10px;
-    margin: 0;
+    margin: 0 7px !important;
     box-shadow: 3px 5px 15px #00000038;
   }
 

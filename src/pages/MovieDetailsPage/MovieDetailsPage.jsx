@@ -22,6 +22,7 @@ import {
   deleteFavMovie,
 } from '../../redux/moviesOps';
 import toast, { Toaster } from 'react-hot-toast';
+import { changeItems, changePagesNav } from '../../redux/moviesSlice';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -47,14 +48,16 @@ const MovieDetailsPage = () => {
   const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchFavMovies());
-    if (favData) {
-      favData.some(item => item.favId === movieId) && setIsFav(true);
+    dispatch(changePagesNav(false));
+    if (!favData || favData.length === 0) {
+      dispatch(fetchFavMovies());
     }
-  }, []);
+    favData.some(item => item.favId === movieId) && setIsFav(true);
+  }, [favData]);
 
   useEffect(() => {
     dispatch(fetchMovies(URL));
+    dispatch(changeItems('outlet'));
   }, [dispatch, URL]);
 
   const handlerAddFav = () => {

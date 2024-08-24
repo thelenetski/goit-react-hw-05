@@ -24,10 +24,12 @@ const MovieReviews = () => {
     dispatch(fetchOutlet(URL));
   }, [dispatch, URL]);
 
+  // console.log(data);
+
   return (
     <>
       {loading.outlet && !error && <Loader />}
-      {data.results && (
+      {!loading.outlet && data.results && (
         <div className={css.reviews}>
           {data['results'].length == 0 && <p>Поки немає жодних відгуків</p>}
           <ul>

@@ -21,27 +21,6 @@
   width: 100%;
 }
 
-.navePageWrap {
-  display: flex;
-  justify-content: center;
-}
-.navPage {
-  margin: 20px 10px;
-}
-
-.navPage button {
-  display: flex;
-  align-items: center;
-  font-size: 30px;
-  padding: 10px;
-  border: none;
-  transition: 0.3s;
-}
-
-.navPage button:hover {
-  box-shadow: 3px 5px 15px #00000038;
-}
-
 /* Работает в Firefox */
 * {
   scrollbar-width: thin;

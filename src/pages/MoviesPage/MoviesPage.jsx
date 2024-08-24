@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useEffect, Suspense } from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import MovieList from '../../components/MovieList/MovieList';
 import toast, { Toaster } from 'react-hot-toast';
@@ -13,16 +13,21 @@ import { genres } from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 import css from './MoviesPage.module.css';
 import clsx from 'clsx';
-import { GrFormNext } from 'react-icons/gr';
-import { GrFormPrevious } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectMovies,
   selectLoading,
   selectError,
+  selectPage,
+  selectSearch,
 } from '../../redux/selectors';
 import { fetchMovies } from '../../redux/moviesOps';
-import { changeItems } from '../../redux/moviesSlice';
+import {
+  changeItems,
+  changePagesNav,
+  setPage,
+  setSearch,
+} from '../../redux/moviesSlice';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -35,35 +40,43 @@ const MoviesPage = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const data = useSelector(selectMovies);
-  const [search, setSearch] = useState(movieName ?? '');
+  const search = useSelector(state => selectSearch(state, movieName));
   const location = useLocation();
   const navigate = useNavigate();
-  const [page, setPage] = useState(searchParams.get('page') ?? 1);
-
+  const page = useSelector(selectPage);
   const params = new URLSearchParams({
     query: search,
-    page: parseInt(page),
+    page,
   });
 
   const url = `https://api.themoviedb.org/3/search/movie?${params}`;
 
   useEffect(() => {
-    if (search === '') return;
-    dispatch(fetchMovies(url));
-  }, [dispatch, url, page]);
+    dispatch(changePagesNav(true));
+    dispatch(changeItems('items'));
+    if (search !== '') {
+      dispatch(fetchMovies(url));
+    }
+    onQueryPageParams(search, page);
+  }, [dispatch, page, search, url]);
 
   const handleSearch = query => {
     if (query === search) {
       return toast.error('Спробуйте інший запит');
     }
-    onQueryPageParams(query, page);
-    setSearch(query);
+    dispatch(setPage(1));
+    dispatch(setSearch(query));
     navigate(`/movies?query=${query}`, { replace: true });
   };
 
   const onQueryPageParams = (query, page) => {
-    setSearchParams(query !== '' ? { query, page } : { page });
+    console.log('onQueryPageParams', page);
+    page !== 1
+      ? setSearchParams(query !== '' ? { query, page } : { page })
+      : setSearchParams(query !== '' && { query });
   };
+
+  console.log(searchParams.get('page'));
 
   return (
     <>
@@ -82,7 +95,7 @@ const MoviesPage = () => {
                       to={`${item.id}-${item.name.toLocaleLowerCase()}`}
                       className={buildLinkClass}
                       onClick={() => {
-                        dispatch(changeItems([]));
+                        dispatch(setPage(1));
                       }}
                     >
                       {item.name}
@@ -94,7 +107,7 @@ const MoviesPage = () => {
           </div>
         </div>
         {loading.main && !error && <Loader />}
-        {data.results && (
+        {!loading.main && data.results && (
           <>
             {data.results.length === 0 && <h4>Нічого не знайдено</h4>}
             <MovieList
@@ -102,34 +115,6 @@ const MoviesPage = () => {
               results={data.results}
               state={location}
             />
-            <div className="navePageWrap">
-              {page > 1 && (
-                <div className="navPage">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setPage(page - 1);
-                      onQueryPageParams(search, page - 1);
-                    }}
-                  >
-                    <GrFormPrevious />
-                  </button>
-                </div>
-              )}
-              {page < data.total_pages && (
-                <div className="navPage">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setPage(page + 1);
-                      onQueryPageParams(search, page + 1);
-                    }}
-                  >
-                    <GrFormNext />
-                  </button>
-                </div>
-              )}
-            </div>
           </>
         )}
         <Suspense fallback={<Loader />}>
