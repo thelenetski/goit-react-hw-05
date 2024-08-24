@@ -3,20 +3,24 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  gap: 20px 40px;
   list-style-type: none;
 }
-
+.castBox {
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #00000017;
+}
 .cast > p {
   text-align: left;
   font-size: 20px;
 }
 
-.cast ul li {
-  margin-right: 40px;
-}
-
 .cast ul li svg {
   width: 100px;
+  margin-right: 30px;
   height: auto;
   color: #656cf630;
 }
@@ -25,36 +29,44 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border-radius: 50%;
+  margin-right: 30px;
+  border-radius: 10px;
+}
+
+.castNames {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.castNames p {
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
 }
 
 .castTitle {
-  width: 100px;
   text-align: center;
   line-height: 1.2;
   margin: 0;
-  margin-top: 5px;
+  font-weight: 400;
+  border-bottom: 1px solid #dfdfdf;
 }
 
 @media screen and (max-width: 450px) {
-  .cast ul {
-    justify-content: space-between;
-  }
-
   .cast ul li {
-    margin-bottom: 40px;
-    margin-right: 0;
+    width: 100%;
   }
 
   .cast ul li svg {
-    width: 90px;
+    width: 45%;
+  }
+  .castNames {
+    width: 55%;
   }
   .castPoster {
-    width: 90px;
-    height: 90px;
-  }
-
-  .castTitle {
-    width: 90px;
+    width: 45%;
+    height: 125px;
   }
 }

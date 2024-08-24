@@ -35,17 +35,21 @@ const MovieCast = () => {
               return (
                 index < 9 && (
                   <li key={item.id}>
-                    {item.profile_path ? (
-                      <img
-                        src={IMG_LINK + item.profile_path}
-                        alt={item.original_title}
-                        className={css.castPoster}
-                      />
-                    ) : (
-                      <FaRegUserCircle />
-                    )}
-
-                    <p className={css.castTitle}>{item.name}</p>
+                    <div className={css.castBox}>
+                      {item.profile_path ? (
+                        <img
+                          src={IMG_LINK + item.profile_path}
+                          alt={item.original_title}
+                          className={css.castPoster}
+                        />
+                      ) : (
+                        <FaRegUserCircle />
+                      )}
+                      <div className={css.castNames}>
+                        <p className={css.castTitle}>{item.name}</p>
+                        <p>{item.character}</p>
+                      </div>
+                    </div>
                   </li>
                 )
               );
