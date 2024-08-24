@@ -11,7 +11,7 @@ import {
   selectMovies,
 } from '../../redux/selectors';
 import { fetchMovies } from '../../redux/moviesOps';
-import { setPage } from '../../redux/moviesSlice';
+import { changePagesNav, setPage } from '../../redux/moviesSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ const Home = () => {
   const location = useLocation();
 
   useEffect(() => {
+    dispatch(changePagesNav(false));
     dispatch(setPage(1));
     dispatch(fetchMovies(TREND_URL));
   }, [dispatch]);
