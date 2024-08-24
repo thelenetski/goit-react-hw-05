@@ -43,6 +43,7 @@
 .castNames p {
   margin: 0;
   padding: 10px 0;
+  font-size: 18px;
   text-align: center;
 }
 
@@ -51,6 +52,7 @@
   line-height: 1.2;
   margin: 0;
   font-weight: 400;
+  font-size: 20px !important;
   border-bottom: 1px solid #dfdfdf;
 }
 
