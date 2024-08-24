@@ -10,7 +10,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchFavMovies } from '../../redux/moviesOps';
 import { useEffect } from 'react';
-import { setPage } from '../../redux/moviesSlice';
+import { changePagesNav, setPage } from '../../redux/moviesSlice';
 
 const FavPage = () => {
   const location = useLocation();
@@ -21,6 +21,7 @@ const FavPage = () => {
 
   useEffect(() => {
     dispatch(setPage(1));
+    dispatch(changePagesNav(false));
     dispatch(fetchFavMovies());
   }, [dispatch]);
 

@@ -52,6 +52,7 @@ const MoviesPage = () => {
   const url = `https://api.themoviedb.org/3/search/movie?${params}`;
 
   useEffect(() => {
+    dispatch(changePagesNav(true));
     dispatch(changeItems('items'));
     if (search !== '') {
       dispatch(fetchMovies(url));
@@ -64,7 +65,6 @@ const MoviesPage = () => {
       return toast.error('Спробуйте інший запит');
     }
     dispatch(setPage(1));
-    dispatch(changePagesNav(true));
     dispatch(setSearch(query));
     navigate(`/movies?query=${query}`, { replace: true });
   };
@@ -96,7 +96,6 @@ const MoviesPage = () => {
                       className={buildLinkClass}
                       onClick={() => {
                         dispatch(setPage(1));
-                        dispatch(changePagesNav(true));
                       }}
                     >
                       {item.name}

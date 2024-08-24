@@ -24,6 +24,8 @@ const Navigation = () => {
   const showPagesNav = useSelector(selectPagesNav);
   const totalPages = useSelector(selectTotalPages);
 
+  console.log(totalPages);
+
   return (
     <header className={css.header}>
       <nav className={css.nav}>
@@ -45,11 +47,7 @@ const Navigation = () => {
             <IoMdHome />
             <span>Головна</span>
           </NavLink>
-          <NavLink
-            to="/movies"
-            className={buildLinkClass}
-            // onClick={dispatch(changeItems([]))}
-          >
+          <NavLink to="/movies" className={buildLinkClass}>
             <RiMenuSearchFill />
             <span>Пошук</span>
           </NavLink>

@@ -24,7 +24,6 @@ const moviesSlice = createSlice({
   },
   reducers: {
     changeItems(state, action) {
-      console.log('action - change');
       if (action.payload === 'items') state.items = [];
       if (action.payload === 'outlet') state.outlet = [];
       if (action.payload !== 'items' && action.payload !== 'outlet')
