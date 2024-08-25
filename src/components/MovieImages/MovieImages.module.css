@@ -2,11 +2,16 @@
   width: fit-content;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 20px;
 }
 
+.img_alone {
+  width: auto !important;
+}
+
 .imgBox ul li {
-  min-width: 24%;
+  width: 24%;
 }
 
 .imgBox > p {

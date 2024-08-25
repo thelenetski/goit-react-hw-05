@@ -118,6 +118,9 @@ const MovieDetailsPage = () => {
 
             <div className={css.movieDescription}>
               <h2>{data.title}</h2>
+              <span className={css.original_title}>
+                Оригінальна назва: {data.original_title}
+              </span>
               <span>
                 Рейтинг:{' '}
                 <span

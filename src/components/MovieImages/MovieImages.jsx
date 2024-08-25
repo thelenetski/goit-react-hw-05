@@ -10,6 +10,7 @@ import {
   selectOutlet,
 } from '../../redux/selectors';
 import { fetchOutlet } from '../../redux/moviesOps';
+import clsx from 'clsx';
 
 const MovieImages = () => {
   const { movieId } = useParams();
@@ -34,7 +35,14 @@ const MovieImages = () => {
             {data.backdrops.map((item, index) => {
               return (
                 index < 8 && (
-                  <li key={index}>
+                  <li
+                    key={index}
+                    className={clsx(
+                      data.backdrops.length &&
+                        data.backdrops.length < 4 &&
+                        css.img_alone
+                    )}
+                  >
                     {
                       <img
                         src={IMG_LINK + item.file_path}
