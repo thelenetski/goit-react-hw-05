@@ -34,8 +34,8 @@ const MovieCat = () => {
   useEffect(() => {
     dispatch(setSearch(''));
     dispatch(changeItems('outlet'));
-    dispatch(fetchOutlet(URL));
     dispatch(changeItems('items'));
+    dispatch(fetchOutlet(URL));
   }, [dispatch, URL]);
 
   return (
@@ -43,6 +43,9 @@ const MovieCat = () => {
       {loading.outlet && !error && <Loader />}
       {!loading.outlet && data.results && (
         <>
+          {page > 1 && (
+            <h4 className="pageCounter">{`- Сторінка ${page} -`}</h4>
+          )}
           <MovieList results={data.results} state={location} />
         </>
       )}

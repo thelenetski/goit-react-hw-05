@@ -22,12 +22,7 @@ import {
   selectSearch,
 } from '../../redux/selectors';
 import { fetchMovies } from '../../redux/moviesOps';
-import {
-  changeItems,
-  changePagesNav,
-  setPage,
-  setSearch,
-} from '../../redux/moviesSlice';
+import { changeItems, setPage, setSearch } from '../../redux/moviesSlice';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -52,11 +47,10 @@ const MoviesPage = () => {
   const url = `https://api.themoviedb.org/3/search/movie?${params}`;
 
   useEffect(() => {
-    dispatch(changePagesNav(true));
     dispatch(changeItems('items'));
-    if (search !== '') {
+    search !== '' &&
+      location.pathname === '/movies' &&
       dispatch(fetchMovies(url));
-    }
     onQueryPageParams(search, page);
   }, [dispatch, page, search, url]);
 
@@ -75,8 +69,6 @@ const MoviesPage = () => {
       ? setSearchParams(query !== '' ? { query, page } : { page })
       : setSearchParams(query !== '' && { query });
   };
-
-  console.log(searchParams.get('page'));
 
   return (
     <>
@@ -110,6 +102,9 @@ const MoviesPage = () => {
         {!loading.main && data.results && (
           <>
             {data.results.length === 0 && <h4>Нічого не знайдено</h4>}
+            {page > 1 && (
+              <h4 className="pageCounter">{`- Сторінка ${page} -`}</h4>
+            )}
             <MovieList
               link={'search-article'}
               results={data.results}

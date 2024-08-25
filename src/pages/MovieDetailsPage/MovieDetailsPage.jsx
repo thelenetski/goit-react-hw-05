@@ -49,6 +49,7 @@ const MovieDetailsPage = () => {
 
   useEffect(() => {
     dispatch(changePagesNav(false));
+    dispatch(changeItems('outlet'));
     if (!favData || favData.length === 0) {
       dispatch(fetchFavMovies());
     }
@@ -56,8 +57,8 @@ const MovieDetailsPage = () => {
   }, [favData]);
 
   useEffect(() => {
+    dispatch(changeItems('items'));
     dispatch(fetchMovies(URL));
-    dispatch(changeItems('outlet'));
   }, [dispatch, URL]);
 
   const handlerAddFav = () => {

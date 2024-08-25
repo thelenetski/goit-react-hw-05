@@ -21,6 +21,10 @@
   width: 100%;
 }
 
+.pageCounter {
+  text-shadow: 1px 1px #fff;
+}
+
 /* Работает в Firefox */
 * {
   scrollbar-width: thin;

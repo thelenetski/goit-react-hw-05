@@ -2,11 +2,20 @@ import { Link } from 'react-router-dom';
 import css from './MovieList.module.css';
 import { FaRegFileImage } from 'react-icons/fa';
 import { IMG_LINK } from '../Services/Services';
-// import { useSelector } from 'react-redux';
-// import { selectMovies } from '../../redux/selectors';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { changePagesNav } from '../../redux/moviesSlice';
 
 const MovieList = ({ link, results, state }) => {
-  // const { results } = useSelector(selectMovies);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    results !== undefined &&
+      results.length > 0 &&
+      state.pathname !== '/home' &&
+      state.pathname !== '/favorites' &&
+      dispatch(changePagesNav(true));
+  });
+
   return (
     <>
       <ul className={css.moviesList}>

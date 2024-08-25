@@ -24,25 +24,11 @@ const Navigation = () => {
   const showPagesNav = useSelector(selectPagesNav);
   const totalPages = useSelector(selectTotalPages);
 
-  console.log(totalPages);
-
   return (
     <header className={css.header}>
       <nav className={css.nav}>
         <h1 className={css.title}>Movie DES</h1>
         <div className={css.linkBox}>
-          {showPagesNav && page > 1 && (
-            <div className={css.navPage}>
-              <button
-                type="button"
-                onClick={() => {
-                  dispatch(prevPage());
-                }}
-              >
-                <GrFormPrevious />
-              </button>
-            </div>
-          )}
           <NavLink to="/home" className={buildLinkClass}>
             <IoMdHome />
             <span>Головна</span>
@@ -55,6 +41,18 @@ const Navigation = () => {
             <MdFavorite />
             <span>Обране</span>
           </NavLink>
+          {showPagesNav && page > 1 && (
+            <div className={css.navPage}>
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch(prevPage());
+                }}
+              >
+                <GrFormPrevious />
+              </button>
+            </div>
+          )}
           {showPagesNav && page < totalPages && (
             <div className={css.navPage}>
               <button
