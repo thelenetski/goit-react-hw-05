@@ -14,7 +14,7 @@ import { fetchOutlet } from '../../redux/moviesOps';
 
 const MovieCast = () => {
   const { movieId } = useParams();
-  const URL = `https://api.themoviedb.org/3/movie/${movieId}/credits`;
+  const URL = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=uk-UA`;
   const dispatch = useDispatch();
   const data = useSelector(selectOutlet);
   const loading = useSelector(selectLoading);
