@@ -64,7 +64,6 @@ const MoviesPage = () => {
   };
 
   const onQueryPageParams = (query, page) => {
-    console.log('onQueryPageParams', page);
     page !== 1
       ? setSearchParams(query !== '' ? { query, page } : { page })
       : setSearchParams(query !== '' && { query });

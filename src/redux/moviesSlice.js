@@ -28,7 +28,7 @@ const moviesSlice = createSlice({
       if (action.payload === 'outlet') state.outlet = [];
       if (action.payload !== 'items' && action.payload !== 'outlet')
         state.items = action.payload;
-      state.loading = { main: false, outlet: false };
+      // state.loading = { main: false, outlet: false };
     },
     setPage(state, action) {
       state.page = action.payload;
@@ -59,7 +59,7 @@ const moviesSlice = createSlice({
       })
       .addCase(fetchMovies.rejected, handleRejected)
       .addCase(fetchOutlet.pending, state => {
-        state.loading = { main: false, outlet: true };
+        state.loading.outlet = true;
       })
       .addCase(fetchOutlet.fulfilled, (state, action) => {
         state.outlet = action.payload;

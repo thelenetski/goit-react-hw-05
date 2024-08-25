@@ -33,7 +33,6 @@ const MovieCat = () => {
 
   useEffect(() => {
     dispatch(setSearch(''));
-    dispatch(changeItems('outlet'));
     dispatch(changeItems('items'));
     dispatch(fetchOutlet(URL));
   }, [dispatch, URL]);
