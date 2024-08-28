@@ -22,7 +22,12 @@ import {
   selectSearch,
 } from '../../redux/selectors';
 import { fetchMovies } from '../../redux/moviesOps';
-import { changeItems, setPage, setSearch } from '../../redux/moviesSlice';
+import {
+  changeItems,
+  changePagesNav,
+  setPage,
+  setSearch,
+} from '../../redux/moviesSlice';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -48,6 +53,7 @@ const MoviesPage = () => {
 
   useEffect(() => {
     dispatch(changeItems('items'));
+    dispatch(changePagesNav(false));
     search !== '' &&
       location.pathname === '/movies' &&
       dispatch(fetchMovies(url));
