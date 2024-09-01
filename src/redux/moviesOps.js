@@ -60,3 +60,15 @@ export const deleteFavMovie = createAsyncThunk(
     }
   }
 );
+
+export const toggleWatch = createAsyncThunk(
+  'favmovies/toggleWatch',
+  async (movie, thunkAPI) => {
+    try {
+      const response = await axios.put(`${FAV_URL}/${movie.id}`, movie);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);

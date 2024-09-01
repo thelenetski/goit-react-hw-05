@@ -4,5 +4,8 @@
 }
 
 .watchbtn svg {
-  margin-left: 5px;
+  font-size: 20px;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #cfcfcf;
 }

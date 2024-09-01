@@ -35,6 +35,8 @@ const FavPage = () => {
     return newData;
   };
 
+  // console.log(results);
+
   return (
     <>
       <main className={css.main}>

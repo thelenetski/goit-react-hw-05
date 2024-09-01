@@ -23,8 +23,9 @@ import {
   fetchFavMovies,
   addFavMovie,
   deleteFavMovie,
+  toggleWatch,
 } from '../../redux/moviesOps';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { changeItems, changePagesNav } from '../../redux/moviesSlice';
 
 const buildLinkClass = ({ isActive }) => {
@@ -49,6 +50,7 @@ const MovieDetailsPage = () => {
   const location = useLocation();
   const backLinkHref = useRef(location.state ?? '/home');
   const [isFav, setIsFav] = useState(false);
+  const [isWatch, setIsWatch] = useState(false);
 
   useEffect(() => {
     dispatch(changePagesNav(false));
@@ -56,7 +58,9 @@ const MovieDetailsPage = () => {
     if (!favData || favData.length === 0) {
       dispatch(fetchFavMovies());
     }
-    favData.some(item => item.favId === movieId) && setIsFav(true);
+    favData.some(item => item.favId === movieId && item.status === true) &&
+      setIsFav(true);
+    favData.forEach(item => item.favId === movieId && setIsWatch(item.isWatch));
   }, [favData]);
 
   useEffect(() => {
@@ -65,13 +69,10 @@ const MovieDetailsPage = () => {
   }, [dispatch, URL]);
 
   const handlerAddFav = () => {
-    if (favData.length > 98) {
-      toast.error('Список обраного переповнений');
-      return;
-    }
     favData.forEach(item => {
       if (item.favId === movieId) {
-        dispatch(deleteFavMovie(item.id));
+        dispatch(toggleWatch({ ...item, status: !item.status }));
+        deleteMovie({ ...item, status: !item.status });
         setIsFav(false);
         return;
       }
@@ -82,16 +83,57 @@ const MovieDetailsPage = () => {
   };
 
   const addFav = () => {
+    console.log('addFav', isWatch);
     dispatch(
       addFavMovie({
         poster_path: [data.poster_path],
         title: [data.title],
         status: true,
         favId: movieId,
-        isWatch: false,
+        isWatch: isWatch,
       })
     );
     setIsFav(true);
+  };
+
+  const handlerAddWatched = () => {
+    console.log(favData);
+    favData.forEach(item => {
+      if (item.favId === movieId) {
+        console.log('change watched movie');
+        dispatch(toggleWatch({ ...item, isWatch: !item.isWatch }));
+        deleteMovie({ ...item, isWatch: !item.isWatch });
+        setIsWatch(!item.isWatch);
+        return;
+      }
+      return;
+    });
+    if (!favData.some(item => item.favId === movieId)) {
+      console.log('add new watched movie');
+      setIsWatch(true);
+      addWatched();
+    }
+  };
+
+  const addWatched = () => {
+    console.log('addwatched', isWatch);
+    dispatch(
+      addFavMovie({
+        poster_path: [data.poster_path],
+        title: [data.title],
+        status: false,
+        favId: movieId,
+        isWatch: true,
+      })
+    );
+    setIsWatch(true);
+  };
+
+  const deleteMovie = item => {
+    console.log('delete fav movie');
+    item.status === false &&
+      item.isWatch === false &&
+      dispatch(deleteFavMovie(item.id));
   };
 
   return (
@@ -108,15 +150,27 @@ const MovieDetailsPage = () => {
               {isFav ? `Прибрати` : `Додати`}
               <FaHeart className={clsx(isFav && css.favactive)} />
             </FavButton>
-            <WatchButton></WatchButton>
+            <WatchButton onAdd={handlerAddWatched}>
+              {isWatch ? <IoEye /> : <IoEyeOutline />}
+            </WatchButton>
           </div>
           <div className={css.detailsWrap}>
             {data.poster_path ? (
-              <img
-                src={IMG_LINK + data.poster_path}
-                alt={data.original_title}
-                className={css.moviePoster}
-              />
+              <div style={{ position: 'relative' }}>
+                <img
+                  src={IMG_LINK + data.poster_path}
+                  alt={data.original_title}
+                  className={clsx(
+                    css.moviePoster,
+                    isWatch && css.moviePosterWatched
+                  )}
+                />
+                {isWatch && (
+                  <span className={css.moviePosterWatchedText}>
+                    Переглянуто
+                  </span>
+                )}
+              </div>
             ) : (
               <FaRegFileImage className={css.posterSVG} />
             )}

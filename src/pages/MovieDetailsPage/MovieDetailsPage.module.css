@@ -63,6 +63,17 @@
   box-shadow: 5px 5px 10px #0000004f;
 }
 
+.moviePosterWatched {
+  filter: grayscale(1);
+}
+
+.moviePosterWatchedText {
+  position: absolute;
+  bottom: 20px;
+  left: 235px;
+  color: #ededed;
+}
+
 .mainMovie h2 {
   font-size: 40px;
   margin: 0;

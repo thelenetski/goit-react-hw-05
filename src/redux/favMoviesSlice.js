@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchFavMovies, addFavMovie, deleteFavMovie } from './moviesOps';
+import {
+  fetchFavMovies,
+  addFavMovie,
+  deleteFavMovie,
+  toggleWatch,
+} from './moviesOps';
 
 const handlePending = state => {
   state.loading = true;
@@ -43,7 +48,17 @@ const favMoviesSlice = createSlice({
         );
         state.favitems.splice(index, 1);
       })
-      .addCase(deleteFavMovie.rejected, handleRejected);
+      .addCase(deleteFavMovie.rejected, handleRejected)
+      .addCase(toggleWatch.pending, handlePending)
+      .addCase(toggleWatch.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        const index = state.favitems.findIndex(
+          item => item.id === action.payload.id
+        );
+        state.favitems.splice(index, 1, action.payload);
+      })
+      .addCase(toggleWatch.rejected, handleRejected);
   },
 });
 

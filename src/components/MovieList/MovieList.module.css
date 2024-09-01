@@ -43,6 +43,10 @@
   box-shadow: 5px 5px 10px #0000004f;
 }
 
+.moviePosterWatched {
+  filter: grayscale(1);
+}
+
 .movieTitle {
   font-size: 1.3rem;
   margin: 5px 0;
