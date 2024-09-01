@@ -1,0 +1,8 @@
+.watchbtn {
+  display: flex;
+  align-items: center;
+}
+
+.watchbtn svg {
+  margin-left: 5px;
+}

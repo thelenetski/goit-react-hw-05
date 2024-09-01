@@ -7,7 +7,10 @@ import Loader from '../../components/Loader/Loader';
 import { FaRegFileImage } from 'react-icons/fa';
 import clsx from 'clsx';
 import FavButton from '../../components/FavButton/FavButton';
+import WatchButton from '../../components/WatchButton/WatchButton';
 import { FaHeart } from 'react-icons/fa';
+import { IoEyeOutline } from 'react-icons/io5';
+import { IoEye } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectError,
@@ -85,6 +88,7 @@ const MovieDetailsPage = () => {
         title: [data.title],
         status: true,
         favId: movieId,
+        isWatch: false,
       })
     );
     setIsFav(true);
@@ -104,6 +108,7 @@ const MovieDetailsPage = () => {
               {isFav ? `Прибрати` : `Додати`}
               <FaHeart className={clsx(isFav && css.favactive)} />
             </FavButton>
+            <WatchButton></WatchButton>
           </div>
           <div className={css.detailsWrap}>
             {data.poster_path ? (
