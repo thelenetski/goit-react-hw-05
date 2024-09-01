@@ -35,6 +35,13 @@ const FavPage = () => {
     return newData;
   };
 
+  const sumFavMovies = res => {
+    const sum = res.reduce(
+      (accumulator, item) => (item.status ? accumulator + 1 : accumulator),
+      0
+    );
+    return sum;
+  };
   // console.log(results);
 
   return (
@@ -42,7 +49,7 @@ const FavPage = () => {
       <main className={css.main}>
         <h1>
           {results !== null && results.length > 0
-            ? `Мої фільми (${results.length})`
+            ? `Мої фільми (${sumFavMovies(results)})`
             : `Немає обраних фільмів`}
         </h1>
         {loading.main && !error && <Loader />}

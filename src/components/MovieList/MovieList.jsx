@@ -22,6 +22,15 @@ const MovieList = ({ link, results, state }) => {
       <ul className={css.moviesList}>
         {results !== undefined &&
           [...results]
+            .filter(item => {
+              if (state.pathname == '/favorites') {
+                if (item.status !== undefined && item.status === true)
+                  return item;
+                if (item.status === undefined) return item;
+              } else {
+                return item;
+              }
+            })
             .sort((a, b) => {
               if (a.isWatch === b.isWatch) return 0;
               if (a.isWatch === undefined) return 1;
