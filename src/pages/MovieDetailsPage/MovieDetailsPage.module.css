@@ -70,8 +70,12 @@
 .moviePosterWatchedText {
   position: absolute;
   bottom: 20px;
-  left: 235px;
+  left: 220px;
   color: #ededed;
+  text-shadow: 1px 1px 1px #000;
+  padding: 2px 8px;
+  background: #0000008a;
+  border-radius: 7px;
 }
 
 .mainMovie h2 {
