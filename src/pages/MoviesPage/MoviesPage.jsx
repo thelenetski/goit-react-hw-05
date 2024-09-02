@@ -15,13 +15,13 @@ import css from './MoviesPage.module.css';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectMovies,
   selectLoading,
   selectError,
   selectPage,
   selectSearch,
+  selectFilteredMovies,
 } from '../../redux/selectors';
-import { fetchMovies } from '../../redux/moviesOps';
+import { fetchFavMovies, fetchMovies } from '../../redux/moviesOps';
 import {
   changeItems,
   changePagesNav,
@@ -39,7 +39,7 @@ const MoviesPage = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-  const data = useSelector(selectMovies);
+  const filteredData = useSelector(selectFilteredMovies);
   const search = useSelector(state => selectSearch(state, movieName));
   const location = useLocation();
   const navigate = useNavigate();
@@ -57,6 +57,7 @@ const MoviesPage = () => {
     search !== '' &&
       location.pathname === '/movies' &&
       dispatch(fetchMovies(url));
+    dispatch(fetchFavMovies());
     onQueryPageParams(search, page);
   }, [dispatch, page, search, url]);
 
@@ -104,15 +105,17 @@ const MoviesPage = () => {
           </div>
         </div>
         {loading.main && !error && <Loader />}
-        {!loading.main && data.results && (
+        {!loading.main && filteredData && (
           <>
-            {data.results.length === 0 && <h4>Нічого не знайдено</h4>}
+            {search !== '' && filteredData.length === 0 && (
+              <h4>Нічого не знайдено</h4>
+            )}
             {page > 1 && (
               <h4 className="pageCounter">{`- Сторінка ${page} -`}</h4>
             )}
             <MovieList
               link={'search-article'}
-              results={data.results}
+              results={filteredData}
               state={location}
             />
           </>

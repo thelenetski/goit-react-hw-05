@@ -7,17 +7,17 @@ import Loader from '../../components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectError,
-  selectFavMovies,
+  selectFilteredMovies,
   selectLoading,
-  selectMovies,
 } from '../../redux/selectors';
 import { fetchFavMovies, fetchMovies } from '../../redux/moviesOps';
 import { changePagesNav, setPage } from '../../redux/moviesSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const data = useSelector(selectMovies);
-  const favData = useSelector(selectFavMovies);
+  // const data = useSelector(selectMovies);
+  // const favData = useSelector(selectFavMovies);
+  const filteredData = useSelector(selectFilteredMovies);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const location = useLocation();
@@ -29,30 +29,12 @@ const Home = () => {
     dispatch(fetchFavMovies());
   }, [dispatch]);
 
-  const newData = data => {
-    if (data === undefined) return [];
-    if (favData === undefined) return [];
-
-    const newRes = data.map(item => {
-      const favItem = favData.find(
-        favItem => Number(favItem.favId) === Number(item.id)
-      );
-      return favItem ? { ...favItem, id: favItem.favId } : item;
-    });
-
-    return newRes;
-  };
-
-  // console.log(newData(data.results));
-
   return (
     <>
       <main className={css.main}>
         <h1>Сьогодні у тренді</h1>
         {loading.main && !error && <Loader />}
-        {!loading.main && (
-          <MovieList results={newData(data.results)} state={location} />
-        )}
+        {!loading.main && <MovieList results={filteredData} state={location} />}
       </main>
     </>
   );

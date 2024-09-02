@@ -1,3 +1,5 @@
+import { createSelector } from '@reduxjs/toolkit';
+
 export const selectMovies = state => state.movies.items;
 
 export const selectOutlet = state => state.movies.outlet;
@@ -17,3 +19,35 @@ export const selectTotalPages = state => state.movies.totalPages;
 export const selectSearch = (state, initialSearch) => {
   return initialSearch || state.movies.search;
 };
+
+/*------------------------------------------------------*/
+
+export const selectFilteredMovies = createSelector(
+  [selectMovies, selectFavMovies],
+  (data, favData) => {
+    if (data.results === undefined) return [];
+    if (favData === undefined) return [];
+    const newRes = data.results.map(item => {
+      const favItem = favData.find(
+        favItem => Number(favItem.favId) === Number(item.id)
+      );
+      return favItem ? { ...favItem, id: favItem.favId } : item;
+    });
+    return newRes;
+  }
+);
+
+export const selectFilteredOutletMovies = createSelector(
+  [selectOutlet, selectFavMovies],
+  (data, favData) => {
+    if (data.results === undefined) return [];
+    if (favData === undefined) return [];
+    const newRes = data.results.map(item => {
+      const favItem = favData.find(
+        favItem => Number(favItem.favId) === Number(item.id)
+      );
+      return favItem ? { ...favItem, id: favItem.favId } : item;
+    });
+    return newRes;
+  }
+);

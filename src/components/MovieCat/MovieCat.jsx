@@ -5,11 +5,11 @@ import MovieList from '../MovieList/MovieList';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectError,
+  selectFilteredOutletMovies,
   selectLoading,
-  selectOutlet,
   selectPage,
 } from '../../redux/selectors';
-import { fetchOutlet } from '../../redux/moviesOps';
+import { fetchFavMovies, fetchOutlet } from '../../redux/moviesOps';
 import { changeItems, setSearch } from '../../redux/moviesSlice';
 
 const MovieCat = () => {
@@ -18,7 +18,7 @@ const MovieCat = () => {
   // const [searchParams, setSearchParams] = useSearchParams();
   const page = useSelector(selectPage);
   const dispatch = useDispatch();
-  const data = useSelector(selectOutlet);
+  const filteredData = useSelector(selectFilteredOutletMovies);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
@@ -35,17 +35,18 @@ const MovieCat = () => {
     dispatch(setSearch(''));
     dispatch(changeItems('items'));
     dispatch(fetchOutlet(URL));
+    dispatch(fetchFavMovies());
   }, [dispatch, URL]);
 
   return (
     <>
       {loading.outlet && !error && <Loader />}
-      {!loading.outlet && data.results && (
+      {!loading.outlet && filteredData && (
         <>
           {page > 1 && (
             <h4 className="pageCounter">{`- Сторінка ${page} -`}</h4>
           )}
-          <MovieList results={data.results} state={location} />
+          <MovieList results={filteredData} state={location} />
         </>
       )}
     </>
