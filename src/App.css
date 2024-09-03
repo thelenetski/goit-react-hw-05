@@ -57,9 +57,9 @@
 .backgroundWrap {
   width: 100%;
   height: 100%;
-  position: fixed;
+  /* position: fixed;
   top: 0;
-  left: 0;
+  left: 0; */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -67,11 +67,9 @@
 }
 
 .backgroundBlur {
-  position: fixed;
+  /* position: fixed;*/
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
   transition: 1s;
   /* background: #edededc7; */
   /* background: radial-gradient(#ededede3 50%, transparent); */
