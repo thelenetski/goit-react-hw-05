@@ -19,6 +19,7 @@ a {
   text-decoration: inherit;
 }
 a:hover {
+  color: var(--color-hover);
   text-decoration: underline;
 }
 
@@ -70,7 +71,7 @@ button {
   }
 
   a:hover {
-    color: #747bff;
+    color: var(--color-hover);
   }
   button {
     background-color: #f9f9f9;
