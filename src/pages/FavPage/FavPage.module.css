@@ -1,6 +1,8 @@
 .main {
   display: flex;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 999;
 }
 
 .main h1 {

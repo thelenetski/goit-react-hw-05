@@ -20,6 +20,8 @@ export const selectSearch = (state, initialSearch) => {
   return initialSearch || state.movies.search;
 };
 
+export const selectBG = state => state.movies.bg;
+
 /*------------------------------------------------------*/
 
 export const selectFilteredMovies = createSelector(

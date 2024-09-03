@@ -54,7 +54,32 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+.backgroundWrap {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.backgroundBlur {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  /* background: #edededc7; */
+  /* background: radial-gradient(#ededede3 50%, transparent); */
+  background: linear-gradient(125deg, #edededde 65%, transparent);
+}
+
 @media screen and (max-width: 450px) {
+  /* .backgroundBlur {
+    background: radial-gradient(#ededede3 70%, transparent);
+  } */
   .navHiddenBox {
     display: none;
   }

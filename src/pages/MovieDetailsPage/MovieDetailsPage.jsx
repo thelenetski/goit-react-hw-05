@@ -2,7 +2,10 @@ import { useParams, useLocation, NavLink, Outlet } from 'react-router-dom';
 import { useState, useEffect, Suspense, useRef } from 'react';
 import css from './MovieDetailsPage.module.css';
 import BackLink from '../../components/BackLink/BackLink';
-import { IMG_LINK } from '../../components/Services/Services';
+import {
+  IMG_LINK,
+  IMG_LINK_ORIGINAL,
+} from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 import { FaRegFileImage } from 'react-icons/fa';
 import clsx from 'clsx';
@@ -26,7 +29,7 @@ import {
   toggleWatch,
 } from '../../redux/moviesOps';
 import { Toaster } from 'react-hot-toast';
-import { changeItems, changePagesNav } from '../../redux/moviesSlice';
+import { changeBG, changeItems, changePagesNav } from '../../redux/moviesSlice';
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -67,6 +70,11 @@ const MovieDetailsPage = () => {
     dispatch(changeItems('items'));
     dispatch(fetchMovies(URL));
   }, [dispatch, URL]);
+
+  useEffect(() => {
+    data.backdrop_path !== undefined &&
+      dispatch(changeBG(IMG_LINK_ORIGINAL + data.backdrop_path));
+  }, [dispatch, data.backdrop_path]);
 
   const handlerAddFav = () => {
     favData.forEach(item => {
@@ -174,7 +182,6 @@ const MovieDetailsPage = () => {
             ) : (
               <FaRegFileImage className={css.posterSVG} />
             )}
-
             <div className={css.movieDescription}>
               <h2>{data.title}</h2>
               <span className={css.original_title}>
@@ -217,35 +224,35 @@ const MovieDetailsPage = () => {
                 })}
               </div>
             </div>
-            <div className={css.addInfo}>
-              <h4>Додаткова інформація</h4>
-              <ul>
-                <li>
-                  <NavLink to="cast" className={buildLinkClass}>
-                    Актори
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="reviews" className={buildLinkClass}>
-                    Відгуки
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="images" className={buildLinkClass}>
-                    Кадри
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="videos" className={buildLinkClass}>
-                    Відео
-                  </NavLink>
-                </li>
-              </ul>
+          </div>
+          <div className={css.addInfo}>
+            <h4>Додаткова інформація</h4>
+            <ul>
+              <li>
+                <NavLink to="cast" className={buildLinkClass}>
+                  Актори
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="reviews" className={buildLinkClass}>
+                  Відгуки
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="images" className={buildLinkClass}>
+                  Кадри
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="videos" className={buildLinkClass}>
+                  Відео
+                </NavLink>
+              </li>
+            </ul>
 
-              <Suspense fallback={<Loader />}>
-                <Outlet />
-              </Suspense>
-            </div>
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </div>
         </>
       )}

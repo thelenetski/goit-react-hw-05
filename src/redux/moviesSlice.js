@@ -21,6 +21,7 @@ const moviesSlice = createSlice({
     showPagesNav: false,
     totalPages: 0,
     search: '',
+    bg: '',
   },
   reducers: {
     changeItems(state, action) {
@@ -46,6 +47,9 @@ const moviesSlice = createSlice({
     },
     changePagesNav(state, action) {
       state.showPagesNav = action.payload;
+    },
+    changeBG(state, action) {
+      state.bg = action.payload;
     },
   },
   extraReducers: builder => {
@@ -78,5 +82,6 @@ export const {
   setPage,
   changePagesNav,
   setSearch,
+  changeBG,
 } = moviesSlice.actions;
 export const moviesReducer = moviesSlice.reducer;
