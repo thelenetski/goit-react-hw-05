@@ -63,6 +63,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
+  background-attachment: fixed;
   transition: 1s;
 }
 
@@ -73,6 +74,7 @@
   transition: 1s;
   /* background: #edededc7; */
   /* background: radial-gradient(#ededede3 50%, transparent); */
+  background-attachment: fixed;
   background: linear-gradient(125deg, #edededde 65%, transparent);
 }
 
