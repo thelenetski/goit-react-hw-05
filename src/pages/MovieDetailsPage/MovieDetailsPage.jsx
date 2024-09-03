@@ -226,7 +226,7 @@ const MovieDetailsPage = () => {
             </div>
           </div>
           <div className={css.addInfo}>
-            <h4>Додаткова інформація</h4>
+            {/* <h4>Додаткова інформація</h4> */}
             <ul>
               <li>
                 <NavLink to="cast" className={buildLinkClass}>
