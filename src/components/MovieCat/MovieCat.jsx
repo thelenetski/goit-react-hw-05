@@ -42,12 +42,7 @@ const MovieCat = () => {
     <>
       {loading.outlet && !error && <Loader />}
       {!loading.outlet && filteredData && (
-        <>
-          {page > 1 && (
-            <h4 className="pageCounter">{`- Сторінка ${page} -`}</h4>
-          )}
-          <MovieList results={filteredData} state={location} />
-        </>
+        <MovieList results={filteredData} state={location} />
       )}
     </>
   );
