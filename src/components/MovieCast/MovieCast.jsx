@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import css from './MovieCast.module.css';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { BiSolidUserRectangle } from 'react-icons/bi';
 import { IMG_LINK } from '../Services/Services';
 import Loader from '../Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,7 +43,7 @@ const MovieCast = () => {
                           className={css.castPoster}
                         />
                       ) : (
-                        <FaRegUserCircle />
+                        <BiSolidUserRectangle />
                       )}
                       <div className={css.castNames}>
                         <p className={css.castTitle}>{item.name}</p>

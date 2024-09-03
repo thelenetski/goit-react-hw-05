@@ -22,7 +22,7 @@
   width: 100px;
   margin-right: 30px;
   height: auto;
-  color: #656cf630;
+  color: var(--color-hover);
 }
 
 .castPoster {
