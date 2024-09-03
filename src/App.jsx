@@ -1,5 +1,5 @@
 import './App.css';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import Loader from './components/Loader/Loader';
@@ -37,48 +37,69 @@ function renderMovieSubRoutes() {
 function App() {
   const BG = useSelector(selectBG);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const parallaxElement = document.querySelector('.backgroundWrap');
+      if (parallaxElement) {
+        parallaxElement.style.transform = `translateY(${
+          (scrollY / 2) * 0.1
+        }px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Удаляем обработчик при размонтировании компонента
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <div className="navHiddenBox"></div>
+      <div className="parallaxBG">
+        <div
+          style={{ backgroundImage: `url(${BG})` }}
+          className="backgroundWrap"
+        ></div>
+        <div className="backgroundBlur"></div>
+        <div className="navHiddenBox"></div>
 
-      <Navigation />
-      <div
-        style={{ backgroundImage: `url(${BG})` }}
-        className="backgroundWrap"
-      ></div>
-      <div className="backgroundBlur"></div>
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" replace />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/favorites" element={<FavMovies />} />
-          <Route path="/movies" element={<Movies />}>
-            <Route path=":catName" element={<MovieCat />} />
-          </Route>
-          <Route
-            path="/movies/:catName/:movieId"
-            element={<MoviesDetailsPage />}
-          >
-            {renderMovieSubRoutes()}
-          </Route>
-          <Route
-            path="/movies/search-article/:movieId"
-            element={<MoviesDetailsPage />}
-          >
-            {renderMovieSubRoutes()}
-          </Route>
-          {basePaths.map((basePath, index) => (
+        <Navigation />
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/favorites" element={<FavMovies />} />
+            <Route path="/movies" element={<Movies />}>
+              <Route path=":catName" element={<MovieCat />} />
+            </Route>
             <Route
-              path={`${basePath}/:movieId`}
+              path="/movies/:catName/:movieId"
               element={<MoviesDetailsPage />}
-              key={index}
             >
               {renderMovieSubRoutes()}
             </Route>
-          ))}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
+            <Route
+              path="/movies/search-article/:movieId"
+              element={<MoviesDetailsPage />}
+            >
+              {renderMovieSubRoutes()}
+            </Route>
+            {basePaths.map((basePath, index) => (
+              <Route
+                path={`${basePath}/:movieId`}
+                element={<MoviesDetailsPage />}
+                key={index}
+              >
+                {renderMovieSubRoutes()}
+              </Route>
+            ))}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </div>
     </>
   );
 }
