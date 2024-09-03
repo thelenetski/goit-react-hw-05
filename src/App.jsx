@@ -39,46 +39,46 @@ function App() {
 
   return (
     <>
-      <div style={{ backgroundImage: `url(${BG})` }} className="backgroundWrap">
-        <div className="backgroundBlur">
-          <div className="navHiddenBox"></div>
+      <div className="navHiddenBox"></div>
 
-          <Navigation />
-
-          <Suspense fallback={<Loader />}>
-            <Routes>
-              <Route path="/" element={<Navigate to="/home" replace />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/favorites" element={<FavMovies />} />
-              <Route path="/movies" element={<Movies />}>
-                <Route path=":catName" element={<MovieCat />} />
-              </Route>
-              <Route
-                path="/movies/:catName/:movieId"
-                element={<MoviesDetailsPage />}
-              >
-                {renderMovieSubRoutes()}
-              </Route>
-              <Route
-                path="/movies/search-article/:movieId"
-                element={<MoviesDetailsPage />}
-              >
-                {renderMovieSubRoutes()}
-              </Route>
-              {basePaths.map((basePath, index) => (
-                <Route
-                  path={`${basePath}/:movieId`}
-                  element={<MoviesDetailsPage />}
-                  key={index}
-                >
-                  {renderMovieSubRoutes()}
-                </Route>
-              ))}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </div>
-      </div>
+      <Navigation />
+      <div
+        style={{ backgroundImage: `url(${BG})` }}
+        className="backgroundWrap"
+      ></div>
+      <div className="backgroundBlur"></div>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/favorites" element={<FavMovies />} />
+          <Route path="/movies" element={<Movies />}>
+            <Route path=":catName" element={<MovieCat />} />
+          </Route>
+          <Route
+            path="/movies/:catName/:movieId"
+            element={<MoviesDetailsPage />}
+          >
+            {renderMovieSubRoutes()}
+          </Route>
+          <Route
+            path="/movies/search-article/:movieId"
+            element={<MoviesDetailsPage />}
+          >
+            {renderMovieSubRoutes()}
+          </Route>
+          {basePaths.map((basePath, index) => (
+            <Route
+              path={`${basePath}/:movieId`}
+              element={<MoviesDetailsPage />}
+              key={index}
+            >
+              {renderMovieSubRoutes()}
+            </Route>
+          ))}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }

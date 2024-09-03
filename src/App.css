@@ -57,9 +57,9 @@
 .backgroundWrap {
   width: 100%;
   height: 100%;
-  /* position: fixed;
-  top: 0;
-  left: 0; */
+  position: fixed;
+  bottom: 0;
+  left: 0;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -67,19 +67,18 @@
 }
 
 .backgroundBlur {
-  /* position: fixed;*/
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   transition: 1s;
   /* background: #edededc7; */
   /* background: radial-gradient(#ededede3 50%, transparent); */
-  background: linear-gradient(125deg, #edededde 65%, transparent);
+  background: linear-gradient(125deg, #edededde 50%, transparent 125%);
 }
 
 @media screen and (max-width: 450px) {
-  /* .backgroundBlur {
-    background: radial-gradient(#ededede3 70%, transparent);
-  } */
   .navHiddenBox {
     display: none;
   }
