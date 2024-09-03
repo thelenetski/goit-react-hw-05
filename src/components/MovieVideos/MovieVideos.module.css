@@ -1,5 +1,5 @@
 .videosBox ul {
-  width: 100%;
+  width: fit-content;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
