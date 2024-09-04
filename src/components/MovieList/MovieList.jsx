@@ -32,10 +32,11 @@ const MovieList = ({ link, results, state }) => {
               }
             })
             .sort((a, b) => {
-              if (a.isWatch === b.isWatch) return 0;
-              if (a.isWatch === undefined) return 1;
-              if (b.isWatch === undefined) return -1;
               if (state.pathname == '/favorites') {
+                if (a.isWatch === b.isWatch) return 0;
+                if (a.isWatch === undefined) return 1;
+                if (b.isWatch === undefined) return -1;
+
                 return a.isWatch ? 1 : -1;
               }
             })
