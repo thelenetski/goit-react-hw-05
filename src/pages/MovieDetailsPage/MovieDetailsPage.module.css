@@ -21,6 +21,10 @@
   box-shadow: 5px 5px 10px #00000017;
 }
 
+.controls a:hover {
+  color: var(--color-hover);
+}
+
 .controls button {
   padding: 0;
   text-transform: uppercase;
@@ -30,6 +34,7 @@
 .controls button:hover {
   text-decoration: underline;
   border: none;
+  color: var(--color-hover);
 }
 
 .controls button + svg {

@@ -17,6 +17,7 @@ a {
   font-weight: 500;
   color: var(--color-link);
   text-decoration: inherit;
+  transition: 0.3s;
 }
 a:hover {
   color: var(--color-hover);
@@ -62,6 +63,7 @@ button {
   cursor: pointer;
   outline: none;
   color: var(--color-link);
+  transition: 0.3s;
 }
 
 @media (prefers-color-scheme: light) {
