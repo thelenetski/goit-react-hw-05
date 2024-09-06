@@ -21,10 +21,11 @@ const MovieList = ({ link, results, state }) => {
   useEffect(() => {
     if (results !== undefined) {
       const savedScrollPosition = sessionStorage.getItem(location.pathname);
-      window.scrollTo({
-        top: parseInt(savedScrollPosition),
-        behavior: 'smooth',
-      });
+      savedScrollPosition &&
+        window.scrollTo({
+          top: parseInt(savedScrollPosition),
+          behavior: 'smooth',
+        });
     }
 
     const handleScroll = () => {
