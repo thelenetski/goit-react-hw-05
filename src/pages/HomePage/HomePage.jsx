@@ -15,8 +15,6 @@ import { changePagesNav, setPage } from '../../redux/moviesSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
-  // const data = useSelector(selectMovies);
-  // const favData = useSelector(selectFavMovies);
   const filteredData = useSelector(selectFilteredMovies);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);

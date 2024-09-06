@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import css from './MovieList.module.css';
 import { FaRegFileImage } from 'react-icons/fa';
 import { IMG_LINK } from '../Services/Services';
@@ -8,6 +8,7 @@ import { changePagesNav } from '../../redux/moviesSlice';
 import clsx from 'clsx';
 
 const MovieList = ({ link, results, state }) => {
+  const location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
     results !== undefined &&
@@ -16,6 +17,27 @@ const MovieList = ({ link, results, state }) => {
       state.pathname !== '/favorites' &&
       dispatch(changePagesNav(true));
   });
+
+  useEffect(() => {
+    if (results !== undefined) {
+      const savedScrollPosition = sessionStorage.getItem(location.pathname);
+      window.scrollTo({
+        top: parseInt(savedScrollPosition),
+        behavior: 'smooth',
+      });
+    }
+
+    const handleScroll = () => {
+      window.scrollY > 300 &&
+        sessionStorage.setItem(location.pathname, Math.round(window.scrollY));
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [results, location.pathname]);
 
   return (
     <>

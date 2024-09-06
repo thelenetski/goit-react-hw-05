@@ -90,7 +90,7 @@ const MoviesPage = () => {
                 return (
                   <li key={item.id}>
                     <NavLink
-                      to={`${item.id}-${item.name.toLocaleLowerCase()}`}
+                      to={`${item.id}-${item.originalName.toLocaleLowerCase()}`}
                       className={buildLinkClass}
                       onClick={() => {
                         dispatch(setPage(1));
