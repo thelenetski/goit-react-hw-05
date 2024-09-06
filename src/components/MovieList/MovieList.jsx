@@ -28,7 +28,8 @@ const MovieList = ({ link, results, state }) => {
     }
 
     const handleScroll = () => {
-      sessionStorage.setItem(location.pathname, Math.round(window.scrollY));
+      window.scrollY > 1 &&
+        sessionStorage.setItem(location.pathname, Math.round(window.scrollY));
     };
 
     window.addEventListener('scroll', handleScroll);
