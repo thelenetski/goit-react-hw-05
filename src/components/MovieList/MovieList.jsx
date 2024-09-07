@@ -21,6 +21,10 @@ const MovieList = ({ link, results, state }) => {
   });
 
   useEffect(() => {
+    setTimeout(() => {
+      setWaitScroll(true);
+    }, 1500);
+    
     if (results !== undefined) {
       // console.log('load');
       const savedScrollPosition = sessionStorage.getItem(pagePath);
@@ -30,10 +34,6 @@ const MovieList = ({ link, results, state }) => {
           behavior: 'smooth',
         });
     }
-
-    setTimeout(() => {
-      setWaitScroll(true);
-    }, 1500);
   }, [results, pagePath]);
 
   useEffect(() => {
