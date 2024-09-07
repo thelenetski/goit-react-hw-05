@@ -3,12 +3,14 @@ import css from './MovieList.module.css';
 import { FaRegFileImage } from 'react-icons/fa';
 import { IMG_LINK } from '../Services/Services';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { changePagesNav } from '../../redux/moviesSlice';
 import clsx from 'clsx';
 
 const MovieList = ({ link, results, state }) => {
   const location = useLocation();
+  const pagePath = location.pathname + location.search;
+  const [waitScroll, setWaitScroll] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     results !== undefined &&
@@ -20,7 +22,8 @@ const MovieList = ({ link, results, state }) => {
 
   useEffect(() => {
     if (results !== undefined) {
-      const savedScrollPosition = sessionStorage.getItem(location.pathname);
+      // console.log('load');
+      const savedScrollPosition = sessionStorage.getItem(pagePath);
       savedScrollPosition &&
         window.scrollTo({
           top: parseInt(savedScrollPosition),
@@ -28,17 +31,47 @@ const MovieList = ({ link, results, state }) => {
         });
     }
 
-    const handleScroll = () => {
-      window.scrollY > 10 &&
-        sessionStorage.setItem(location.pathname, Math.round(window.scrollY));
-    };
+    setTimeout(() => {
+      setWaitScroll(true);
+    }, 1500);
+  }, [results, pagePath]);
 
-    window.addEventListener('scroll', handleScroll);
+  useEffect(() => {
+    const handleScroll = throttle(() => {
+      console.log('rec');
+      sessionStorage.setItem(pagePath, Math.round(window.scrollY));
+    }, 300);
+
+    if (waitScroll) {
+      // console.log('load scroll');
+      window.addEventListener('scroll', handleScroll);
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [results, location.pathname]);
+  }, [waitScroll, pagePath]);
+
+  const throttle = (func, limit) => {
+    let lastFunc;
+    let lastRan;
+    return function () {
+      const context = this;
+      const args = arguments;
+      if (!lastRan) {
+        func.apply(context, args);
+        lastRan = Date.now();
+      } else {
+        clearTimeout(lastFunc);
+        lastFunc = setTimeout(function () {
+          if (Date.now() - lastRan >= limit) {
+            func.apply(context, args);
+            lastRan = Date.now();
+          }
+        }, limit - (Date.now() - lastRan));
+      }
+    };
+  };
 
   return (
     <>
