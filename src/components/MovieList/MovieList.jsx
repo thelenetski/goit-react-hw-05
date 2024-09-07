@@ -21,12 +21,7 @@ const MovieList = ({ link, results, state }) => {
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      setWaitScroll(true);
-    }, 1500);
-    
     if (results !== undefined) {
-      // console.log('load');
       const savedScrollPosition = sessionStorage.getItem(pagePath);
       savedScrollPosition &&
         window.scrollTo({
@@ -34,12 +29,17 @@ const MovieList = ({ link, results, state }) => {
           behavior: 'smooth',
         });
     }
+
+    setTimeout(() => {
+      setWaitScroll(true);
+    }, 1500);
   }, [results, pagePath]);
 
   useEffect(() => {
     const handleScroll = throttle(() => {
-      console.log('rec');
-      sessionStorage.setItem(pagePath, Math.round(window.scrollY));
+      // console.log('rec');
+      window.scrollY > 1 &&
+        sessionStorage.setItem(pagePath, Math.round(window.scrollY));
     }, 300);
 
     if (waitScroll) {

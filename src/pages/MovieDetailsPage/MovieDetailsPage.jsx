@@ -68,7 +68,9 @@ const MovieDetailsPage = () => {
 
   useEffect(() => {
     dispatch(changeItems('items'));
-    dispatch(fetchMovies(URL));
+    dispatch(fetchMovies(URL)).then(() => {
+      window.scrollTo(0, 0);
+    });
   }, [dispatch, URL]);
 
   useEffect(() => {
