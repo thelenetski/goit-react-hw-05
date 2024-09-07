@@ -71,7 +71,7 @@
   background-size: cover;
   background-position: center;
   transform: translateY(0);
-  transition: transform 0.8s ease-out;
+  transition: 1s;
   z-index: 0;
 }
 
