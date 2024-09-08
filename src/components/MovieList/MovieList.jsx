@@ -87,7 +87,6 @@ const MovieList = ({ link, results, state }) => {
                 return item;
               }
             })
-            .reverse((a, b) => (state.pathname == '/favorites' ? -1 : 1))
             .sort((a, b) => {
               if (state.pathname == '/favorites') {
                 if (a.isWatch === b.isWatch) return 0;
