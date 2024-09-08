@@ -49,6 +49,7 @@ const MovieList = ({ link, results, state }) => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      setTimeout(() => sessionStorage.removeItem(pagePath), 1000 * 300);
     };
   }, [waitScroll, pagePath]);
 
