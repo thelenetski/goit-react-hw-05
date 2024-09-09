@@ -38,8 +38,8 @@ const MovieList = ({ link, results, state }) => {
   useEffect(() => {
     const handleScroll = throttle(() => {
       // console.log('rec');
-      window.scrollY > 1 &&
-        sessionStorage.setItem(pagePath, Math.round(window.scrollY));
+      // window.scrollY > 1 &&
+      sessionStorage.setItem(pagePath, Math.round(window.scrollY));
     }, 300);
 
     if (waitScroll) {
