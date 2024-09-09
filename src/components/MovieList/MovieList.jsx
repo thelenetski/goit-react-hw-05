@@ -5,10 +5,7 @@ import { IMG_LINK } from '../Services/Services';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { changePagesNav } from '../../redux/moviesSlice';
-import { FaHeart } from 'react-icons/fa';
-import { IoEye } from 'react-icons/io5';
-import { Tooltip } from 'react-tooltip';
-import clsx from 'clsx';
+import Poster from './Poster/Poster';
 
 const MovieList = ({ link, results, state }) => {
   const location = useLocation();
@@ -112,40 +109,7 @@ const MovieList = ({ link, results, state }) => {
                     state={state}
                   >
                     {item.poster_path ? (
-                      <div style={{ position: 'relative' }}>
-                        <img
-                          src={IMG_LINK + item.poster_path}
-                          alt={item.original_title}
-                          className={clsx(
-                            css.moviePoster,
-                            item.isWatch && css.moviePosterWatched
-                          )}
-                        />
-                        <div className={css.iconsBox}>
-                          {item.status && (
-                            <FaHeart
-                              className={css.favHeart}
-                              data-tooltip-id="iconstooltip"
-                              data-tooltip-content="Обране"
-                            />
-                          )}
-                          {item.isWatch && (
-                            <IoEye
-                              className={css.watch}
-                              data-tooltip-id="iconstooltip"
-                              data-tooltip-content="Переглянуто"
-                            />
-                          )}
-                        </div>
-                        <Tooltip
-                          id="iconstooltip"
-                          place="bottom"
-                          style={{
-                            backgroundColor: 'var(--color-link)',
-                            borderRadius: '10px',
-                          }}
-                        />
-                      </div>
+                      <Poster IMG_LINK={IMG_LINK} item={item} />
                     ) : (
                       <FaRegFileImage />
                     )}

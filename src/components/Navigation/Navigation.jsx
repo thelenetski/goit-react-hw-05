@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import css from './Navigation.module.css';
 import { IoMdHome } from 'react-icons/io';
@@ -23,6 +23,7 @@ const Navigation = () => {
   const page = useSelector(selectPage);
   const showPagesNav = useSelector(selectPagesNav);
   const totalPages = useSelector(selectTotalPages);
+  const location = useLocation();
 
   return (
     <header className={css.header}>
@@ -33,7 +34,14 @@ const Navigation = () => {
             <IoMdHome />
             <span>Головна</span>
           </NavLink>
-          <NavLink to="/movies" className={buildLinkClass}>
+          <NavLink
+            to={
+              location.pathname.includes('movies')
+                ? location.pathname + location.search
+                : '/movies'
+            }
+            className={buildLinkClass}
+          >
             <RiMenuSearchFill />
             <span>Пошук</span>
           </NavLink>

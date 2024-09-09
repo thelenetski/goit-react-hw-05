@@ -1,0 +1,49 @@
+.moviePoster {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #0000004f;
+}
+
+.moviePosterWatched {
+  filter: grayscale(1);
+}
+
+.iconsBox {
+  display: flex;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-radius: 0 10px 0 10px;
+  overflow: hidden;
+}
+
+.favHeart,
+.watch {
+  width: 20px !important;
+  height: 20px !important;
+  background: #ffffffe5;
+  padding: 10px;
+}
+
+.favHeart {
+  color: red !important;
+}
+
+.watch {
+  color: black !important;
+}
+
+@media screen and (max-width: 450px) {
+  .moviePoster {
+    height: auto;
+  }
+
+  .favHeart,
+  .watch {
+    width: 15px !important;
+    height: 15px !important;
+    padding: 7px;
+  }
+}
