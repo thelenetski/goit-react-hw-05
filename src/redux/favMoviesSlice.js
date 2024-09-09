@@ -27,7 +27,7 @@ const favMoviesSlice = createSlice({
       /*Favorites redusers*/
       .addCase(fetchFavMovies.pending, handlePending)
       .addCase(fetchFavMovies.fulfilled, (state, action) => {
-        state.favitems = action.payload;
+        state.favitems = action.payload.reverse();
         state.loading = false;
         state.error = null;
       })
