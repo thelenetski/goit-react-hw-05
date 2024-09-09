@@ -52,6 +52,31 @@
   margin: 5px 0;
 }
 
+.iconsBox {
+  display: flex;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-radius: 0 10px 0 10px;
+  overflow: hidden;
+}
+
+.favHeart,
+.watch {
+  width: 20px !important;
+  height: 20px !important;
+  background: #ffffffe5;
+  padding: 10px;
+}
+
+.favHeart {
+  color: red !important;
+}
+
+.watch {
+  color: black !important;
+}
+
 @media screen and (max-width: 450px) {
   .moviesList {
     justify-content: space-between;
@@ -69,5 +94,12 @@
   .movieTitle {
     font-size: 20px;
     margin: 5px 0;
+  }
+
+  .favHeart,
+  .watch {
+    width: 15px !important;
+    height: 15px !important;
+    padding: 7px;
   }
 }
