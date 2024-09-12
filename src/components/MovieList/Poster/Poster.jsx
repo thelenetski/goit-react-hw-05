@@ -3,8 +3,16 @@ import css from './Poster.module.css';
 import clsx from 'clsx';
 import { FaHeart } from 'react-icons/fa';
 import { IoEye } from 'react-icons/io5';
+import { FaStar } from 'react-icons/fa6';
 import { useState } from 'react';
 import LoaderPoster from '../../Loader/LoaderPoster';
+
+const buildRateClass = rate => {
+  return clsx(
+    rate < 59 && css.rateBad,
+    (rate < 70 && css.rateNorm) || (rate > 69 && css.rateNice)
+  );
+};
 
 const Poster = ({ IMG_LINK, item }) => {
   const [loading, setLoading] = useState(true);
@@ -30,6 +38,18 @@ const Poster = ({ IMG_LINK, item }) => {
         {!loading && (
           <>
             <div className={css.iconsBox}>
+              {item.vote_average !== 0 && item.vote_average && (
+                <div className={css.rateBox}>
+                  <FaStar
+                    className={buildRateClass(
+                      Math.round(item.vote_average * 10)
+                    )}
+                    data-tooltip-id="iconstooltip"
+                    data-tooltip-content="Рейтинг"
+                  />
+                  <span>{parseFloat(item.vote_average.toFixed(1))}</span>
+                </div>
+              )}
               {item.status && (
                 <FaHeart
                   className={css.favHeart}

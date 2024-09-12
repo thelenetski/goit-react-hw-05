@@ -96,8 +96,9 @@ const MovieDetailsPage = () => {
     console.log('addFav', isWatch);
     dispatch(
       addFavMovie({
-        poster_path: [data.poster_path],
-        title: [data.title],
+        poster_path: data.poster_path,
+        title: data.title,
+        vote_average: data.vote_average,
         status: true,
         favId: movieId,
         isWatch: isWatch,
@@ -129,8 +130,9 @@ const MovieDetailsPage = () => {
     console.log('addwatched', isWatch);
     dispatch(
       addFavMovie({
-        poster_path: [data.poster_path],
-        title: [data.title],
+        poster_path: data.poster_path,
+        title: data.title,
+        vote_average: data.vote_average,
         status: false,
         favId: movieId,
         isWatch: true,
@@ -194,7 +196,7 @@ const MovieDetailsPage = () => {
                 <span
                   className={buildRateClass(Math.round(data.vote_average * 10))}
                 >
-                  {Math.round(data.vote_average * 10)}%
+                  {parseFloat(data.vote_average.toFixed(1))}
                 </span>
               </span>
               <span>Дата: {data.release_date}</span>

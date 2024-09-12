@@ -111,7 +111,7 @@ const MovieList = ({ link, results, state }) => {
                     {item.poster_path ? (
                       <Poster IMG_LINK={IMG_LINK} item={item} />
                     ) : (
-                      <FaRegFileImage />
+                      <FaRegFileImage className={css.skeleton} />
                     )}
                     <p className={css.movieTitle}>{item.title}</p>
                   </Link>
