@@ -36,8 +36,14 @@
 }
 
 .movieTitle {
+  line-height: 1;
   font-size: 1.3rem;
-  margin: 5px 0;
+  margin: 5px 0 0 0;
+}
+
+.movieTitleYear {
+  font-size: 1.1em;
+  color: #0f1f44b3;
 }
 
 .iconsBox {
@@ -81,13 +87,9 @@
 
   .movieTitle {
     font-size: 20px;
-    margin: 5px 0;
   }
 
-  /* .favHeart,
-  .watch {
-    width: 15px !important;
-    height: 15px !important;
-    padding: 7px;
-  } */
+  .movieTitleYear {
+    font-size: 0.9em;
+  }
 }

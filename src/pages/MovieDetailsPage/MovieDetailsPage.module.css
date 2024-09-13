@@ -123,22 +123,8 @@
   margin: 0 !important;
 }
 
-/* .movieDescription .rateNice {
-  color: #0e8224;
-}
-.movieDescription .rateNorm {
-  color: #d5a53e;
-}
-.movieDescription .rateBad {
-  color: #bf0101;
-} */
-
 .movieDescription .infoBox {
   margin-bottom: 40px;
-}
-
-.movieDescription .infoBox td:first-child {
-  width: 45%;
 }
 
 .movieDescription .infoBox td {
@@ -207,10 +193,6 @@
   box-shadow: 5px 5px 10px #00000017;
 }
 
-/* .addInfo ul li a {
-  color: var(--color-link);
-} */
-
 .addInfo ul a:hover {
   text-decoration: underline;
 }
@@ -236,12 +218,21 @@
     margin: 0 0 100px 0;
   }
   .mainMovie h2 {
+    word-wrap: break-word;
     margin: 20px 0 20px 0;
   }
 
   .movieDescription {
     width: 100%;
     max-width: 100%;
+  }
+
+  .movieDescription .infoBox {
+    min-width: 340px;
+  }
+
+  .movieDescription .infoBox td:first-child {
+    width: 45%;
   }
 
   .addInfo ul {

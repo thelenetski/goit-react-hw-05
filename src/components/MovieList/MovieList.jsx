@@ -24,10 +24,14 @@ const MovieList = ({ link, results, state }) => {
     if (results !== undefined) {
       const savedScrollPosition = sessionStorage.getItem(pagePath);
       savedScrollPosition &&
-        window.scrollTo({
-          top: parseInt(savedScrollPosition),
-          behavior: savedScrollPosition < 1000 ? 'smooth' : 'instant',
-        });
+        (parseInt(savedScrollPosition) < 1300
+          ? window.scrollTo({
+              top: parseInt(savedScrollPosition),
+              behavior: 'smooth',
+            })
+          : window.scrollTo({
+              top: parseInt(savedScrollPosition),
+            }));
     }
 
     setTimeout(() => {
@@ -114,6 +118,11 @@ const MovieList = ({ link, results, state }) => {
                       <FaRegFileImage className={css.skeleton} />
                     )}
                     <p className={css.movieTitle}>{item.title}</p>
+                    {item.release_date && (
+                      <span className={css.movieTitleYear}>
+                        {item.release_date.substring(0, 4)}
+                      </span>
+                    )}
                   </Link>
                 </li>
               );
