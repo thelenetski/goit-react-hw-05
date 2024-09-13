@@ -255,7 +255,7 @@ const MovieDetailsPage = () => {
               </table>
               {data.overview && (
                 <>
-                  <h4>Огляд</h4>
+                  <h4>Опис</h4>
                   <p>{data.overview}</p>
                 </>
               )}
