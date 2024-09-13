@@ -111,6 +111,7 @@
 }
 
 .movieDescription span {
+  margin-right: 5px;
   display: inline-block;
   font-weight: 400;
 }
@@ -122,7 +123,7 @@
   margin: 0 !important;
 }
 
-.movieDescription .rateNice {
+/* .movieDescription .rateNice {
   color: #0e8224;
 }
 .movieDescription .rateNorm {
@@ -130,7 +131,7 @@
 }
 .movieDescription .rateBad {
   color: #bf0101;
-}
+} */
 
 .movieDescription .infoBox {
   margin-bottom: 40px;
@@ -138,6 +139,10 @@
 
 .movieDescription .infoBox td:first-child {
   width: 45%;
+}
+
+.movieDescription .infoBox td {
+  vertical-align: top;
 }
 
 .movieDescription table ul {
@@ -235,6 +240,7 @@
   }
 
   .movieDescription {
+    width: 100%;
     max-width: 100%;
   }
 

@@ -26,7 +26,7 @@ const MovieList = ({ link, results, state }) => {
       savedScrollPosition &&
         window.scrollTo({
           top: parseInt(savedScrollPosition),
-          behavior: 'smooth',
+          behavior: savedScrollPosition < 1000 ? 'smooth' : 'instant',
         });
     }
 

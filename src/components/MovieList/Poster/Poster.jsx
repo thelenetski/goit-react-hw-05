@@ -9,8 +9,8 @@ import LoaderPoster from '../../Loader/LoaderPoster';
 
 const buildRateClass = rate => {
   return clsx(
-    rate < 59 && css.rateBad,
-    (rate < 70 && css.rateNorm) || (rate > 69 && css.rateNice)
+    rate < 59 && 'rateBad',
+    (rate < 70 && 'rateNorm') || (rate > 69 && 'rateNice')
   );
 };
 

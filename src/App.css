@@ -16,6 +16,22 @@
   --color-hover: #788c95;
 }
 
+.rateNice,
+.rateNorm,
+.rateBad {
+  font-weight: bold !important;
+}
+
+.rateNice {
+  color: #0e8224;
+}
+.rateNorm {
+  color: #d5a53e;
+}
+.rateBad {
+  color: #bf0101;
+}
+
 .navHiddenBox {
   height: 91px;
   width: 100%;
