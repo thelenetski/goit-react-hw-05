@@ -20,7 +20,12 @@ const MovieVideos = () => {
   const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchOutlet(URL));
+    dispatch(fetchOutlet(URL)).then(() => {
+      window.scrollTo({
+        top: window.scrollY + 300,
+        behavior: 'smooth',
+      });
+    });
   }, [dispatch, URL]);
 
   return (

@@ -38,7 +38,8 @@ const MovieReviews = () => {
                 index < 6 && (
                   <li key={item.id}>
                     <div className={css.reviewsAuthorBox}>
-                      {item['author_details'].avatar_path ? (
+                      {item['author_details'].avatar_path &&
+                      item['author_details'].avatar_path ? (
                         <img
                           src={IMG_LINK + item['author_details'].avatar_path}
                           alt={item.original_title}
