@@ -57,7 +57,7 @@ const MovieCast = () => {
                         )}
                         <div className={css.castNames}>
                           <p className={css.castTitle}>{item.name}</p>
-                          <p>{item.character}</p>
+                          <p className={css.castCharacter}>{item.character}</p>
                         </div>
                       </div>
                     </Link>

@@ -180,7 +180,7 @@
 .addInfo ul {
   width: 360px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   list-style-type: none;
   margin: 20px 0;
   padding: 20px;
@@ -191,6 +191,10 @@
   box-sizing: border-box;
   border: 1px solid #e1e1e1;
   box-shadow: 5px 5px 10px #00000017;
+}
+
+.addInfo > ul li {
+  margin-right: 20px;
 }
 
 .addInfo ul a:hover {

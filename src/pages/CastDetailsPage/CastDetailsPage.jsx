@@ -2,10 +2,7 @@ import { useParams, useLocation, NavLink, Outlet } from 'react-router-dom';
 import { useState, useEffect, Suspense, useRef } from 'react';
 import css from './CastDetailsPage.module.css';
 import BackLink from '../../components/BackLink/BackLink';
-import {
-  IMG_LINK,
-  IMG_LINK_ORIGINAL,
-} from '../../components/Services/Services';
+import { IMG_LINK } from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 import { FaRegFileImage } from 'react-icons/fa';
 import clsx from 'clsx';
@@ -14,11 +11,16 @@ import {
   selectError,
   selectLoading,
   selectMovies,
-  selectFavMovies,
+  // selectFavMovies,
 } from '../../redux/selectors';
 import { fetchMovies } from '../../redux/moviesOps';
 import { Toaster } from 'react-hot-toast';
-import { changeBG, changeItems, changePagesNav } from '../../redux/moviesSlice';
+import { changeItems, changePagesNav } from '../../redux/moviesSlice';
+import LoaderPoster from '../../components/Loader/LoaderPoster';
+
+const buildLinkClass = ({ isActive }) => {
+  return clsx(css.link, isActive && css.active);
+};
 
 const buildRateClass = rate => {
   return clsx(
@@ -30,13 +32,18 @@ const buildRateClass = rate => {
 const CastDetailsPage = () => {
   const { castId } = useParams();
   const data = useSelector(selectMovies);
-  const favData = useSelector(selectFavMovies);
+  // const favData = useSelector(selectFavMovies);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
   const location = useLocation();
   const URL = `https://api.themoviedb.org/3/person/${castId}?language=uk-UA`;
   const backLinkHref = useRef(location.state ?? '/home');
+  const [loadingImg, setLoadingImg] = useState(true);
+
+  const handleImageLoaded = () => {
+    setLoadingImg(false);
+  };
 
   useEffect(() => {
     dispatch(changePagesNav(false));
@@ -60,10 +67,12 @@ const CastDetailsPage = () => {
           <div className={css.detailsWrap}>
             {data && data.profile_path ? (
               <div style={{ position: 'relative' }}>
+                {loadingImg && <LoaderPoster />}
                 <img
                   src={IMG_LINK + data.profile_path}
                   alt={data.name}
                   className={clsx(css.moviePoster)}
+                  onLoad={handleImageLoaded}
                 />
               </div>
             ) : (
@@ -97,7 +106,7 @@ const CastDetailsPage = () => {
                             Math.round(data.popularity * 10)
                           )}
                         >
-                          {parseFloat((data.popularity / 10).toFixed(1))}
+                          {parseFloat(data.popularity.toFixed(1))}
                         </span>
                       )}
                     </td>
@@ -137,6 +146,25 @@ const CastDetailsPage = () => {
                 })}
               </div>  */}
             </div>
+          </div>
+          <div className={css.addInfo}>
+            {/* <h4>Додаткова інформація</h4> */}
+            <ul>
+              <li>
+                <NavLink to="castmovies" className={buildLinkClass}>
+                  Фільми
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="castphotos" className={buildLinkClass}>
+                  Фото
+                </NavLink>
+              </li>
+            </ul>
+
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </div>
         </>
       )}

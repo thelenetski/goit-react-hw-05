@@ -1,4 +1,5 @@
 .moviePoster {
+  display: block;
   width: 100%;
   height: 450px;
   object-fit: cover;
@@ -13,6 +14,10 @@
 
 .moviePosterWatched {
   filter: grayscale(1);
+}
+
+.imageHide {
+  display: none;
 }
 
 .iconsBox {
