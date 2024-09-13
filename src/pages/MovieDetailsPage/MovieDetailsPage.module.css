@@ -137,7 +137,7 @@
 }
 
 .movieDescription .infoBox td:first-child {
-  width: 40%;
+  width: 45%;
 }
 
 .movieDescription table ul {
@@ -232,10 +232,6 @@
   }
   .mainMovie h2 {
     margin: 20px 0 20px 0;
-  }
-
-  .movieDescription .infoBox td:first-child {
-    width: 45%;
   }
 
   .movieDescription {
