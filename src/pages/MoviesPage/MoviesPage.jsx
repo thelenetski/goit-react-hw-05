@@ -45,6 +45,7 @@ const MoviesPage = () => {
   const navigate = useNavigate();
   const page = useSelector(selectPage);
   const params = new URLSearchParams({
+    language: 'uk-UA',
     query: search,
     page,
   });
