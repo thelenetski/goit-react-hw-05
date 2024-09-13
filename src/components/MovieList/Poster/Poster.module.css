@@ -4,6 +4,11 @@
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 5px 5px 10px #0000004f;
+  transition: 0.3s;
+}
+
+.moviePoster:hover {
+  box-shadow: 0 5px 30px #00000080;
 }
 
 .moviePosterWatched {
