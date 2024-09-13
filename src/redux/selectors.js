@@ -26,30 +26,24 @@ export const selectBG = state => state.movies.bg;
 
 export const selectFilteredMovies = createSelector(
   [selectMovies, selectFavMovies],
-  (data, favData) => {
-    if (data.results === undefined) return [];
-    if (favData === undefined) return [];
-    const newRes = data.results.map(item => {
-      const favItem = favData.find(
-        favItem => Number(favItem.favId) === Number(item.id)
-      );
-      return favItem ? { ...favItem, id: favItem.favId } : item;
-    });
-    return newRes;
-  }
+  (data, favData) => filterData(data, favData)
 );
 
 export const selectFilteredOutletMovies = createSelector(
   [selectOutlet, selectFavMovies],
-  (data, favData) => {
-    if (data.results === undefined) return [];
-    if (favData === undefined) return [];
-    const newRes = data.results.map(item => {
-      const favItem = favData.find(
-        favItem => Number(favItem.favId) === Number(item.id)
-      );
-      return favItem ? { ...favItem, id: favItem.favId } : item;
-    });
-    return newRes;
-  }
+  (data, favData) => filterData(data, favData)
 );
+
+const filterData = (data, favData) => {
+  if (data.results === undefined) return [];
+  if (favData === undefined) return [];
+  const newRes = data.results.map(item => {
+    const favItem = favData.find(
+      favItem => Number(favItem.favId) === Number(item.id)
+    );
+    return favItem
+      ? { ...item, status: favItem.status, isWatch: favItem.isWatch }
+      : item;
+  });
+  return newRes;
+};

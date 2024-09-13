@@ -188,7 +188,67 @@ const MovieDetailsPage = () => {
             )}
             <div className={css.movieDescription}>
               <h2>{data.title}</h2>
-              <span className={css.original_title}>
+              <table className={css.infoBox}>
+                <tr>
+                  <td>
+                    <span className={css.original_title}>
+                      Оригінальна назва:
+                    </span>
+                  </td>
+                  <td>{data.original_title}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span>Рейтинг: </span>
+                  </td>
+                  <td>
+                    <span
+                      className={buildRateClass(
+                        Math.round(data.vote_average * 10)
+                      )}
+                    >
+                      {parseFloat(data.vote_average.toFixed(1))}
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span>Дата:</span>
+                  </td>
+                  <td>{data.release_date}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span>Тривалість: </span>
+                  </td>
+                  <td>
+                    {`${Math.floor(data.runtime / 60)} год. ${
+                      data.runtime % 60
+                    } хв.`}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div className={css.country}>{<span>Країна: </span>}</div>
+                  </td>
+                  <td>
+                    {data.production_countries.length > 0 && (
+                      <ul>
+                        {data.production_countries.map((item, index) => {
+                          return (
+                            <li key={index}>
+                              {item.name}
+                              {index + 1 < data.production_countries.length &&
+                                `, `}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </td>
+                </tr>
+              </table>
+              {/* <span className={css.original_title}>
                 Оригінальна назва: {data.original_title}
               </span>
               <span>
@@ -200,6 +260,12 @@ const MovieDetailsPage = () => {
                 </span>
               </span>
               <span>Дата: {data.release_date}</span>
+              <span>
+                Тривалість:{' '}
+                {`${Math.floor(data.runtime / 60)} год. ${
+                  data.runtime % 60
+                } хв.`}
+              </span>
               <div className={css.country}>
                 {data.production_countries.length > 0 && (
                   <>
@@ -214,7 +280,7 @@ const MovieDetailsPage = () => {
                     })}
                   </>
                 )}
-              </div>
+              </div> */}
               {data.overview && (
                 <>
                   <h4>Огляд</h4>

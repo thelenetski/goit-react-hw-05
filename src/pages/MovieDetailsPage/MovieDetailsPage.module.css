@@ -112,7 +112,6 @@
 
 .movieDescription span {
   display: inline-block;
-  margin: 10px 20px 0 0;
   font-weight: 400;
 }
 
@@ -133,12 +132,24 @@
   color: #bf0101;
 }
 
-.movieDescription .country {
+.movieDescription .infoBox {
   margin-bottom: 40px;
 }
 
-.movieDescription .country span {
-  margin-right: 7px;
+.movieDescription .infoBox td:first-child {
+  width: 40%;
+}
+
+.movieDescription table ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.movieDescription table ul li {
+  margin-right: 5px;
 }
 
 .movieDescription p {
@@ -221,6 +232,10 @@
   }
   .mainMovie h2 {
     margin: 20px 0 20px 0;
+  }
+
+  .movieDescription .infoBox td:first-child {
+    width: 45%;
   }
 
   .movieDescription {
