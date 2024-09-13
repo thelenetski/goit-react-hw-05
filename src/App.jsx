@@ -19,6 +19,7 @@ const MovieReviews = lazy(() =>
 const MovieImages = lazy(() => import('./components/MovieImages/MovieImages'));
 const MovieVideos = lazy(() => import('./components/MovieVideos/MovieVideos'));
 const FavMovies = lazy(() => import('./pages/FavPage/FavPage'));
+const Cast = lazy(() => import('./pages/CastDetailsPage/CastDetailsPage'));
 const NotFound = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 const basePaths = ['home', 'favorites'];
@@ -96,6 +97,7 @@ function App() {
                 {renderMovieSubRoutes()}
               </Route>
             ))}
+            <Route path="/cast/:castId" element={<Cast />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

@@ -1,0 +1,244 @@
+.mainMovie {
+  display: flex;
+  /* justify-content: center; */
+  flex-wrap: wrap;
+  width: calc(100% - 40px);
+  padding: 20px;
+  position: relative;
+  z-index: 999;
+}
+
+.controls {
+  width: 360px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid #e1e1e1;
+  box-shadow: 5px 5px 10px #00000017;
+}
+
+.controls a:hover {
+  color: var(--color-hover);
+}
+
+.controls button {
+  padding: 0;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+}
+.controls button:hover {
+  text-decoration: underline;
+  border: none;
+  color: var(--color-hover);
+}
+
+.controls button + svg {
+  width: 25px;
+  height: 40px;
+  color: #a3a3a38c;
+}
+
+.favactive {
+  color: red !important;
+}
+
+.detailsWrap {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.posterSVG {
+  width: 360px;
+  height: auto;
+  margin-right: 30px;
+  border-radius: 10px;
+  color: #98342f17;
+}
+
+.moviePoster {
+  width: 360px;
+  height: auto;
+  object-fit: cover;
+  margin-right: 30px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #0000004f;
+}
+
+.moviePosterWatched {
+  filter: grayscale(1);
+}
+
+.moviePosterWatchedText {
+  position: absolute;
+  bottom: 20px;
+  left: 220px;
+  color: #ededed;
+  text-shadow: 1px 1px 1px #000;
+  padding: 2px 8px;
+  background: #0000008a;
+  border-radius: 7px;
+}
+
+.mainMovie h2 {
+  font-size: 40px;
+  margin: 0;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.original_title {
+  width: 100%;
+}
+
+.mainMovie h4 {
+  font-size: 30px;
+  margin: 0;
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+.movieDescription {
+  max-width: 60%;
+  text-align: left;
+  border-bottom: 1px solid #999;
+  z-index: 999;
+}
+
+.movieDescription span {
+  margin-right: 5px;
+  display: inline-block;
+  font-weight: 400;
+}
+
+.rateNice,
+.rateNorm,
+.rateBad {
+  font-weight: bold !important;
+  margin: 0 !important;
+}
+
+.movieDescription .infoBox {
+  margin-bottom: 40px;
+}
+
+.movieDescription .infoBox td {
+  vertical-align: top;
+}
+
+.movieDescription table ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.movieDescription table ul li {
+  margin-right: 5px;
+}
+
+.movieDescription p {
+  margin-bottom: 40px;
+  font-weight: 400;
+}
+
+.genresBox {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.genresBox p {
+  font-size: 15px;
+  padding-right: 10px;
+  margin: 5px 0;
+  margin-right: 10px;
+  line-height: 1.2;
+  border-right: 1px solid #999;
+}
+
+.genresBox p:last-child {
+  padding-right: 0;
+  border-right: none;
+}
+
+.addInfo {
+  width: 100%;
+}
+
+.addInfo h4 {
+  text-align: left;
+  margin: 40px 0 20px 0;
+}
+
+.addInfo ul {
+  width: 360px;
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  margin: 20px 0;
+  padding: 20px;
+  text-align: left;
+  font-size: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid #e1e1e1;
+  box-shadow: 5px 5px 10px #00000017;
+}
+
+.addInfo ul a:hover {
+  text-decoration: underline;
+}
+
+.active {
+  color: var(--color-active);
+}
+
+.active:focus {
+  color: var(--color-active);
+}
+
+@media screen and (max-width: 450px) {
+  .controls {
+    width: 100%;
+  }
+  .moviePoster {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .mainMovie {
+    margin: 0 0 100px 0;
+  }
+  .mainMovie h2 {
+    word-wrap: break-word;
+    margin: 20px 0 20px 0;
+  }
+
+  .movieDescription {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .movieDescription .infoBox {
+    min-width: 340px;
+  }
+
+  .movieDescription .infoBox td:first-child {
+    width: 45%;
+  }
+
+  .addInfo ul {
+    width: 100%;
+  }
+  .addInfo ul li a {
+    font-size: 18px;
+  }
+}

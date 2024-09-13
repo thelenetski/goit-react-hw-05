@@ -29,7 +29,7 @@ const moviesSlice = createSlice({
       action.payload === 'outlet' && (state.outlet = []);
       if (action.payload !== 'items' && action.payload !== 'outlet')
         state.items = action.payload;
-      // state.loading = { main: false, outlet: false };
+      // state.loading = { main: true, outlet: true };
     },
     setPage(state, action) {
       state.page = action.payload;

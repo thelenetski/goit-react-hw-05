@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import css from './MovieCast.module.css';
 import { BiSolidUserRectangle } from 'react-icons/bi';
 import { IMG_LINK } from '../Services/Services';
@@ -14,6 +14,7 @@ import { fetchOutlet } from '../../redux/moviesOps';
 
 const MovieCast = () => {
   const { movieId } = useParams();
+  const location = useLocation();
   const URL = `https://api.themoviedb.org/3/movie/${movieId}/credits?language=uk-UA`;
   const dispatch = useDispatch();
   const data = useSelector(selectOutlet);
@@ -40,21 +41,26 @@ const MovieCast = () => {
               return (
                 index < 9 && (
                   <li key={item.id}>
-                    <div className={css.castBox}>
-                      {item.profile_path ? (
-                        <img
-                          src={IMG_LINK + item.profile_path}
-                          alt={item.original_title}
-                          className={css.castPoster}
-                        />
-                      ) : (
-                        <BiSolidUserRectangle />
-                      )}
-                      <div className={css.castNames}>
-                        <p className={css.castTitle}>{item.name}</p>
-                        <p>{item.character}</p>
+                    <Link
+                      to={`/cast/${item.id.toString()}`}
+                      state={location.pathname}
+                    >
+                      <div className={css.castBox}>
+                        {item.profile_path ? (
+                          <img
+                            src={IMG_LINK + item.profile_path}
+                            alt={item.original_title}
+                            className={css.castPoster}
+                          />
+                        ) : (
+                          <BiSolidUserRectangle />
+                        )}
+                        <div className={css.castNames}>
+                          <p className={css.castTitle}>{item.name}</p>
+                          <p>{item.character}</p>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </li>
                 )
               );

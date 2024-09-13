@@ -203,13 +203,15 @@ const MovieDetailsPage = () => {
                       <span>Рейтинг: </span>
                     </td>
                     <td>
-                      <span
-                        className={buildRateClass(
-                          Math.round(data.vote_average * 10)
-                        )}
-                      >
-                        {parseFloat(data.vote_average.toFixed(1))}
-                      </span>
+                      {data.vote_average && (
+                        <span
+                          className={buildRateClass(
+                            Math.round(data.vote_average * 10)
+                          )}
+                        >
+                          {parseFloat(data.vote_average.toFixed(1))}
+                        </span>
+                      )}
                     </td>
                   </tr>
                   <tr>
@@ -233,56 +235,24 @@ const MovieDetailsPage = () => {
                       <div className={css.country}>{<span>Країна: </span>}</div>
                     </td>
                     <td>
-                      {data.production_countries.length > 0 && (
-                        <ul>
-                          {data.production_countries.map((item, index) => {
-                            return (
-                              <li key={index}>
-                                {item.name}
-                                {index + 1 < data.production_countries.length &&
-                                  `, `}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      )}
+                      {data.production_countries &&
+                        data.production_countries.length > 0 && (
+                          <ul>
+                            {data.production_countries.map((item, index) => {
+                              return (
+                                <li key={index}>
+                                  {item.name}
+                                  {index + 1 <
+                                    data.production_countries.length && `, `}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        )}
                     </td>
                   </tr>
                 </tbody>
               </table>
-              {/* <span className={css.original_title}>
-                Оригінальна назва: {data.original_title}
-              </span>
-              <span>
-                Рейтинг:{' '}
-                <span
-                  className={buildRateClass(Math.round(data.vote_average * 10))}
-                >
-                  {parseFloat(data.vote_average.toFixed(1))}
-                </span>
-              </span>
-              <span>Дата: {data.release_date}</span>
-              <span>
-                Тривалість:{' '}
-                {`${Math.floor(data.runtime / 60)} год. ${
-                  data.runtime % 60
-                } хв.`}
-              </span>
-              <div className={css.country}>
-                {data.production_countries.length > 0 && (
-                  <>
-                    <span>Країна: </span>
-                    {data.production_countries.map((item, index) => {
-                      return (
-                        <span key={index}>
-                          {item.name}
-                          {index + 1 < data.production_countries.length && `, `}
-                        </span>
-                      );
-                    })}
-                  </>
-                )}
-              </div> */}
               {data.overview && (
                 <>
                   <h4>Огляд</h4>
@@ -291,9 +261,10 @@ const MovieDetailsPage = () => {
               )}
               <h4>Жанри</h4>
               <div className={css.genresBox}>
-                {data.genres.map(item => {
-                  return <p key={item.id}>{item.name}</p>;
-                })}
+                {data.genres &&
+                  data.genres.map(item => {
+                    return <p key={item.id}>{item.name}</p>;
+                  })}
               </div>
             </div>
           </div>

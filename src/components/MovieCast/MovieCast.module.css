@@ -1,8 +1,8 @@
 .cast ul {
-  width: fit-content;
-  display: flex;
+  width: fit-content !important;
+  display: flex !important;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: flex-start !important;
   gap: 20px;
   list-style-type: none;
 }
