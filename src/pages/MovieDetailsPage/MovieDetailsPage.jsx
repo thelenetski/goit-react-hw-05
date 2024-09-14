@@ -64,7 +64,7 @@ const MovieDetailsPage = () => {
     favData.some(item => item.favId === movieId && item.status === true) &&
       setIsFav(true);
     favData.forEach(item => item.favId === movieId && setIsWatch(item.isWatch));
-  }, [favData]);
+  }, [favData, dispatch, movieId]);
 
   useEffect(() => {
     dispatch(changeItems('items'));
