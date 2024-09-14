@@ -12,7 +12,7 @@ import { fetchOutlet } from '../../redux/moviesOps';
 
 const MovieVideos = () => {
   const { movieId } = useParams();
-  const URL = `https://api.themoviedb.org/3/movie/${movieId}/videos`;
+  const URL = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=uk-UA`;
 
   const dispatch = useDispatch();
   const data = useSelector(selectOutlet);
