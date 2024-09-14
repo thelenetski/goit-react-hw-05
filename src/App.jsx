@@ -24,7 +24,7 @@ const FavMovies = lazy(() => import('./pages/FavPage/FavPage'));
 const Cast = lazy(() => import('./pages/CastDetailsPage/CastDetailsPage'));
 const NotFound = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
-const basePaths = ['home', 'favorites'];
+const basePaths = ['home', 'favorites', 'castmv'];
 
 function renderMovieSubRoutes() {
   return (
@@ -44,9 +44,12 @@ function App() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const parallaxElement = document.querySelector('.backgroundWrap');
+      const pageHeight = document.documentElement.scrollHeight;
+      const scrollFactor = 1 / (pageHeight / 1000);
+      console.log('111', scrollFactor.toFixed(1));
       if (parallaxElement) {
         parallaxElement.style.transform = `translateY(${
-          (scrollY / 2) * 0.1
+          (scrollY / 6) * parseFloat(scrollFactor.toFixed(1))
         }px)`;
       }
     };
@@ -100,8 +103,8 @@ function App() {
               </Route>
             ))}
             <Route path="/cast/:castId" element={<Cast />}>
-              <Route path="castmovies" element={<CastMovies />} />
-              <Route path="castphotos" element={<CastPhotos />} />
+              <Route path="filmography" element={<CastMovies />} />
+              <Route path="photos" element={<CastPhotos />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

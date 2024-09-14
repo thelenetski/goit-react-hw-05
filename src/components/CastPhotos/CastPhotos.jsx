@@ -49,11 +49,6 @@ const CastPhotos = () => {
                         css.img_alone
                     )}
                   >
-                    {/* <img
-                      src={IMG_LINK + item.file_path}
-                      className={css.image}
-                      loading="lazy"
-                    /> */}
                     <Image
                       className={css.image}
                       src={IMG_LINK + item.file_path}

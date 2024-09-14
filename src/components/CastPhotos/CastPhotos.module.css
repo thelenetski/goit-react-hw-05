@@ -1,8 +1,17 @@
+.imgBox {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
 .imgBox ul {
-  width: fit-content !important;
-  display: flex !important;
+  width: fit-content;
+  display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start !important;
+  justify-content: flex-start;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   gap: 20px;
 }
 

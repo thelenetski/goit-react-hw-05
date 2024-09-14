@@ -1,26 +1,24 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import css from './CastMovies.module.css';
-import { IMG_LINK } from '../Services/Services';
 import Loader from '../Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectError,
+  selectFilteredOutletMovies,
   selectLoading,
-  selectOutlet,
 } from '../../redux/selectors';
-import { fetchOutlet } from '../../redux/moviesOps';
-import clsx from 'clsx';
-import Image from '../Image/Image';
+import { fetchFavMovies, fetchOutlet } from '../../redux/moviesOps';
+import MovieList from '../MovieList/MovieList';
 
 const CastMovies = () => {
   const { castId } = useParams();
   const URL = `https://api.themoviedb.org/3/person/${castId}/movie_credits?language=uk-UA`;
-
+  const filteredData = useSelector(selectFilteredOutletMovies);
   const dispatch = useDispatch();
-  const data = useSelector(selectOutlet);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchOutlet(URL)).then(() => {
@@ -29,45 +27,15 @@ const CastMovies = () => {
         behavior: 'smooth',
       });
     });
+    dispatch(fetchFavMovies());
   }, [dispatch, URL]);
 
   return (
     <>
       {loading.outlet && !error && <Loader />}
-      {!loading.outlet && data.cast && (
-        <div className={css.imgBox}>
-          {data.cast.length === 0 && <p>Немає фільмів</p>}
-          <ul>
-            {data.cast.map((item, index) => {
-              return (
-                index < 16 && (
-                  <li
-                    key={index}
-                    className={clsx(
-                      data.cast.length && data.cast.length < 4 && css.img_alone
-                    )}
-                  >
-                    {/* <img
-                      src={IMG_LINK + item.poster_path}
-                      className={css.image}
-                      loading="lazy"
-                    /> */}
-                    <Image
-                      className={css.image}
-                      src={IMG_LINK + item.poster_path}
-                      alt={item.title}
-                    />
-                    <p className={css.title}>{item.title}</p>
-                    {item.release_date && (
-                      <span className={css.movieTitleYear}>
-                        {item.release_date.substring(0, 4)}
-                      </span>
-                    )}
-                  </li>
-                )
-              );
-            })}
-          </ul>
+      {!loading.outlet && (
+        <div className={css.castMoviesBox}>
+          <MovieList link={'/castmv'} results={filteredData} state={location} />
         </div>
       )}
     </>

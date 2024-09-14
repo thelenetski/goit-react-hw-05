@@ -177,7 +177,7 @@
   margin: 40px 0 20px 0;
 }
 
-.addInfo ul {
+.addInfo {
   width: 360px;
   display: flex;
   justify-content: flex-start;
@@ -193,11 +193,11 @@
   box-shadow: 5px 5px 10px #00000017;
 }
 
-.addInfo > ul li {
+.addInfo li {
   margin-right: 20px;
 }
 
-.addInfo ul a:hover {
+.addInfo a:hover {
   text-decoration: underline;
 }
 
@@ -239,10 +239,10 @@
     width: 45%;
   }
 
-  .addInfo ul {
+  .addInfo {
     width: 100%;
   }
-  .addInfo ul li a {
+  .addInfo li a {
     font-size: 18px;
   }
 }

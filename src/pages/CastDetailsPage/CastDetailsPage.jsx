@@ -32,7 +32,6 @@ const buildRateClass = rate => {
 const CastDetailsPage = () => {
   const { castId } = useParams();
   const data = useSelector(selectMovies);
-  // const favData = useSelector(selectFavMovies);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
@@ -79,12 +78,7 @@ const CastDetailsPage = () => {
               <FaRegFileImage className={css.posterSVG} />
             )}
             <div className={css.movieDescription}>
-              <h2>
-                {data &&
-                  `${data.name} (${
-                    data.birthday && 2024 - data.birthday.substring(0, 4)
-                  }р.)`}
-              </h2>
+              <h2>{data && data.name}</h2>
               <table className={css.infoBox}>
                 <tbody>
                   <tr>
@@ -94,6 +88,14 @@ const CastDetailsPage = () => {
                       </span>
                     </td>
                     <td>{data && data.birthday}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span className={css.original_title}>Вік:</span>
+                    </td>
+                    <td>{`${
+                      data.birthday && 2024 - data.birthday.substring(0, 4)
+                    } р.`}</td>
                   </tr>
                   <tr>
                     <td>
@@ -111,22 +113,6 @@ const CastDetailsPage = () => {
                       )}
                     </td>
                   </tr>
-                  {/* <tr>
-                    <td>
-                      <span>Дата:</span>
-                    </td>
-                    <td>{data.release_date}</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span>Тривалість: </span>
-                    </td>
-                    <td>
-                      {`${Math.floor(data.runtime / 60)} год. ${
-                        data.runtime % 60
-                      } хв.`}
-                    </td>
-                  </tr> */}
                 </tbody>
               </table>
               {data && (
@@ -139,24 +125,17 @@ const CastDetailsPage = () => {
                   )}
                 </>
               )}
-              {/* <h4>Жанри</h4>
-              <div className={css.genresBox}>
-                {data.genres.map(item => {
-                  return <p key={item.id}>{item.name}</p>;
-                })}
-              </div>  */}
             </div>
           </div>
-          <div className={css.addInfo}>
-            {/* <h4>Додаткова інформація</h4> */}
-            <ul>
+          <div>
+            <ul className={css.addInfo}>
               <li>
-                <NavLink to="castmovies" className={buildLinkClass}>
+                <NavLink to="filmography" className={buildLinkClass}>
                   Фільми
                 </NavLink>
               </li>
               <li>
-                <NavLink to="castphotos" className={buildLinkClass}>
+                <NavLink to="photos" className={buildLinkClass}>
                   Фото
                 </NavLink>
               </li>

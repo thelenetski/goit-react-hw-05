@@ -35,9 +35,11 @@ export const selectFilteredOutletMovies = createSelector(
 );
 
 const filterData = (data, favData) => {
-  if (data.results === undefined) return [];
+  const dataArray = data.results ?? data.cast;
+  if (dataArray === undefined) return [];
   if (favData === undefined) return [];
-  const newRes = data.results.map(item => {
+
+  const newRes = dataArray.map(item => {
     const favItem = favData.find(
       favItem => Number(favItem.favId) === Number(item.id)
     );
