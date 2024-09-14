@@ -1,5 +1,6 @@
 .cast ul {
   width: fit-content !important;
+  min-width: 360px;
   display: flex !important;
   flex-wrap: wrap;
   justify-content: flex-start !important;
@@ -59,6 +60,10 @@
 }
 
 @media screen and (max-width: 450px) {
+  .cast ul {
+    width: auto !important;
+    min-width: auto;
+  }
   .cast ul li {
     width: 100%;
   }
