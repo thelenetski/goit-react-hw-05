@@ -132,7 +132,7 @@ const CastDetailsPage = () => {
               )}
             </div>
           </div>
-          <div>
+          <>
             <ul className={css.addInfo}>
               <li>
                 <NavLink to="filmography" className={buildLinkClass}>
@@ -149,7 +149,7 @@ const CastDetailsPage = () => {
             <Suspense fallback={<Loader />}>
               <Outlet />
             </Suspense>
-          </div>
+          </>
         </>
       )}
     </main>
