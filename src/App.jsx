@@ -46,7 +46,7 @@ function App() {
       const parallaxElement = document.querySelector('.backgroundWrap');
       const pageHeight = document.documentElement.scrollHeight;
       const scrollFactor = 1 / (pageHeight / 1000);
-      console.log('111', scrollFactor.toFixed(1));
+
       if (parallaxElement) {
         parallaxElement.style.transform = `translateY(${
           (scrollY / 6) * parseFloat(scrollFactor.toFixed(1))

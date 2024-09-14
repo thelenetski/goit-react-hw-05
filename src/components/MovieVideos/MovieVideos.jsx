@@ -13,6 +13,8 @@ import { fetchOutlet } from '../../redux/moviesOps';
 const MovieVideos = () => {
   const { movieId } = useParams();
   const URL = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=uk-UA`;
+  const URL_RU = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=ru-RU`;
+  const URL_EN = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`;
 
   const dispatch = useDispatch();
   const data = useSelector(selectOutlet);
@@ -20,13 +22,22 @@ const MovieVideos = () => {
   const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchOutlet(URL)).then(() => {
-      window.scrollTo({
-        top: window.scrollY + 300,
-        behavior: 'smooth',
+    dispatch(fetchOutlet(URL))
+      .unwrap()
+      .then(videos => {
+        window.scrollTo({
+          top: window.scrollY + 400,
+          behavior: 'smooth',
+        });
+
+        videos.results.length === 0 &&
+          dispatch(fetchOutlet(URL_RU))
+            .unwrap()
+            .then(videosRU => {
+              videosRU.results.length === 0 && dispatch(fetchOutlet(URL_EN));
+            });
       });
-    });
-  }, [dispatch, URL]);
+  }, [dispatch, URL, URL_EN]);
 
   return (
     <>
@@ -44,7 +55,7 @@ const MovieVideos = () => {
                         width="560"
                         // height="315"
                         src={`https://www.youtube.com/embed/${item.key}`}
-                        title="YouTube video player"
+                        title="Trailer"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
                         className={css.video}
