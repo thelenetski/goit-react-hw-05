@@ -44,8 +44,8 @@ const MovieVideos = () => {
       {loading.outlet && !error && <Loader />}
       {data.results && (
         <div className={css.videosBox}>
-          {data.results.length === 0 && <p>Немає жодних відео</p>}
           <ul>
+            {data.results.length === 0 && <p>Немає жодних відео</p>}
             {data.results.map((item, index) => {
               return (
                 index < 6 && (

@@ -17,6 +17,7 @@
   border: 1px solid #999;
   border-radius: 10px;
   position: relative;
+  box-shadow: 5px 5px 10px #0000004f;
 }
 
 .reviews ul li p {
@@ -43,29 +44,41 @@
 }
 
 .reviewsAuthorBox {
+  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: 20px;
   border: 1px solid #999;
-  border-radius: 20px;
-  margin-top: -31px;
+  border-radius: 10px;
+  margin-top: -40px;
   background: #fff;
+  overflow: hidden;
 }
 
 .authorAvatar {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 5px;
+}
+
+.reviewsAuthorBox svg {
+  width: 40px;
+  height: 40px;
 }
 
 .reviewsAuthorBox h6 {
   font-size: 20px;
+  font-weight: 400;
   margin: 0 0 0 10px;
 }
 
 @media screen and (max-width: 450px) {
   .reviews ul li {
     width: calc(100% - 30px);
+  }
+  .reviewsAuthorBox h6 {
+    font-size: 18px;
   }
 }

@@ -190,14 +190,16 @@ const MovieDetailsPage = () => {
               <h2>{data.title}</h2>
               <table className={css.infoBox}>
                 <tbody>
-                  <tr>
-                    <td>
-                      <span className={css.original_title}>
-                        Оригінальна назва:
-                      </span>
-                    </td>
-                    <td>{data.original_title}</td>
-                  </tr>
+                  {data.original_title && (
+                    <tr>
+                      <td>
+                        <span className={css.original_title}>
+                          Оригінальна назва:
+                        </span>
+                      </td>
+                      <td>{data.original_title}</td>
+                    </tr>
+                  )}
                   {data.vote_average !== 0 && (
                     <tr>
                       <td>
@@ -216,13 +218,15 @@ const MovieDetailsPage = () => {
                       </td>
                     </tr>
                   )}
+                  {data.release_date && (
+                    <tr>
+                      <td>
+                        <span>Дата:</span>
+                      </td>
+                      <td>{data.release_date}</td>
+                    </tr>
+                  )}
 
-                  <tr>
-                    <td>
-                      <span>Дата:</span>
-                    </td>
-                    <td>{data.release_date}</td>
-                  </tr>
                   {data.runtime !== 0 && (
                     <tr>
                       <td>

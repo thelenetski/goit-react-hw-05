@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import css from './MovieReviews.module.css';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { BiSolidUserRectangle } from 'react-icons/bi';
 import { IMG_LINK } from '../Services/Services';
 import Loader from '../Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,7 +46,7 @@ const MovieReviews = () => {
                           className={css.authorAvatar}
                         />
                       ) : (
-                        <FaRegUserCircle />
+                        <BiSolidUserRectangle />
                       )}
                       <h6>{item.author}</h6>
                     </div>
