@@ -91,12 +91,21 @@ const CastDetailsPage = () => {
                   </tr>
                   <tr>
                     <td>
+                      <span className={css.original_title}>
+                        Місце народження:
+                      </span>
+                    </td>
+                    <td>{data && data.place_of_birth}</td>
+                  </tr>
+                  <tr>
+                    <td>
                       <span className={css.original_title}>Вік:</span>
                     </td>
                     <td>{`${
                       data.birthday && 2024 - data.birthday.substring(0, 4)
                     } р.`}</td>
                   </tr>
+
                   <tr>
                     <td>
                       <span>Рейтинг: </span>

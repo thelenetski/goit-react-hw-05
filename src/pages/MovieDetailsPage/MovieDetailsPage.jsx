@@ -204,13 +204,15 @@ const MovieDetailsPage = () => {
                         <span>Рейтинг: </span>
                       </td>
                       <td>
-                        <span
-                          className={buildRateClass(
-                            Math.round(data.vote_average * 10)
-                          )}
-                        >
-                          {parseFloat(data.vote_average.toFixed(1))}
-                        </span>
+                        {data.vote_average && (
+                          <span
+                            className={buildRateClass(
+                              Math.round(data.vote_average * 10)
+                            )}
+                          >
+                            {parseFloat(data.vote_average.toFixed(1))}
+                          </span>
+                        )}
                       </td>
                     </tr>
                   )}
