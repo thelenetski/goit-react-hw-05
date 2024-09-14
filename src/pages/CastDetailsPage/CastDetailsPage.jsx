@@ -14,7 +14,6 @@ import {
   // selectFavMovies,
 } from '../../redux/selectors';
 import { fetchMovies } from '../../redux/moviesOps';
-import { Toaster } from 'react-hot-toast';
 import { changeItems, changePagesNav } from '../../redux/moviesSlice';
 import LoaderPoster from '../../components/Loader/LoaderPoster';
 
@@ -59,9 +58,6 @@ const CastDetailsPage = () => {
         <>
           <div className={css.controls}>
             <BackLink to={backLinkHref.current}>Назад</BackLink>
-            <div>
-              <Toaster position="top-left" reverseOrder={true} />
-            </div>
           </div>
           <div className={css.detailsWrap}>
             {data && data.profile_path ? (

@@ -35,6 +35,9 @@ const CastMovies = () => {
       {loading.outlet && !error && <Loader />}
       {!loading.outlet && (
         <div className={css.castMoviesBox}>
+          <h4
+            style={{ fontSize: 16 }}
+          >{`- Знайдено ${filteredData.length} -`}</h4>
           <MovieList link={'/castmv'} results={filteredData} state={location} />
         </div>
       )}
