@@ -198,12 +198,12 @@ const MovieDetailsPage = () => {
                     </td>
                     <td>{data.original_title}</td>
                   </tr>
-                  <tr>
-                    <td>
-                      <span>Рейтинг: </span>
-                    </td>
-                    <td>
-                      {data.vote_average && (
+                  {data.vote_average !== 0 && (
+                    <tr>
+                      <td>
+                        <span>Рейтинг: </span>
+                      </td>
+                      <td>
                         <span
                           className={buildRateClass(
                             Math.round(data.vote_average * 10)
@@ -211,46 +211,53 @@ const MovieDetailsPage = () => {
                         >
                           {parseFloat(data.vote_average.toFixed(1))}
                         </span>
-                      )}
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  )}
+
                   <tr>
                     <td>
                       <span>Дата:</span>
                     </td>
                     <td>{data.release_date}</td>
                   </tr>
-                  <tr>
-                    <td>
-                      <span>Тривалість: </span>
-                    </td>
-                    <td>
-                      {`${Math.floor(data.runtime / 60)} год. ${
-                        data.runtime % 60
-                      } хв.`}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className={css.country}>{<span>Країна: </span>}</div>
-                    </td>
-                    <td>
-                      {data.production_countries &&
-                        data.production_countries.length > 0 && (
-                          <ul>
-                            {data.production_countries.map((item, index) => {
-                              return (
-                                <li key={index}>
-                                  {item.name}
-                                  {index + 1 <
-                                    data.production_countries.length && `, `}
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        )}
-                    </td>
-                  </tr>
+                  {data.runtime !== 0 && (
+                    <tr>
+                      <td>
+                        <span>Тривалість: </span>
+                      </td>
+                      <td>
+                        {data.runtime > 59 &&
+                          `${Math.floor(data.runtime / 60)} год.`}
+                        {data.runtime % 60 !== 0 && `${data.runtime % 60} хв.`}
+                      </td>
+                    </tr>
+                  )}
+                  {data.production_countries &&
+                    data.production_countries.length > 0 && (
+                      <tr>
+                        <td>
+                          <div className={css.country}>
+                            {<span>Країна: </span>}
+                          </div>
+                        </td>
+                        <td>
+                          {data.production_countries.length > 0 && (
+                            <ul>
+                              {data.production_countries.map((item, index) => {
+                                return (
+                                  <li key={index}>
+                                    {item.name}
+                                    {index + 1 <
+                                      data.production_countries.length && `, `}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          )}
+                        </td>
+                      </tr>
+                    )}
                 </tbody>
               </table>
               {data.overview && (
