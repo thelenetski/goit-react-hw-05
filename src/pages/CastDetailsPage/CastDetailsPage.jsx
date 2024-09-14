@@ -77,47 +77,54 @@ const CastDetailsPage = () => {
               <h2>{data && data.name}</h2>
               <table className={css.infoBox}>
                 <tbody>
-                  <tr>
-                    <td>
-                      <span className={css.original_title}>
-                        Дата народження:
-                      </span>
-                    </td>
-                    <td>{data && data.birthday}</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span className={css.original_title}>
-                        Місце народження:
-                      </span>
-                    </td>
-                    <td>{data && data.place_of_birth}</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span className={css.original_title}>Вік:</span>
-                    </td>
-                    <td>{`${
-                      data.birthday && 2024 - data.birthday.substring(0, 4)
-                    } р.`}</td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <span>Рейтинг: </span>
-                    </td>
-                    <td>
-                      {data && (
-                        <span
-                          className={buildRateClass(
-                            Math.round(data.popularity * 10)
-                          )}
-                        >
-                          {parseFloat(data.popularity.toFixed(1))}
+                  {data.birthday && (
+                    <tr>
+                      <td>
+                        <span className={css.original_title}>
+                          Дата народження:
                         </span>
-                      )}
-                    </td>
-                  </tr>
+                      </td>
+                      <td>{data && data.birthday}</td>
+                    </tr>
+                  )}
+                  {data.place_of_birth && (
+                    <tr>
+                      <td>
+                        <span className={css.original_title}>
+                          Місце народження:
+                        </span>
+                      </td>
+                      <td>{data && data.place_of_birth}</td>
+                    </tr>
+                  )}
+                  {data.birthday && (
+                    <tr>
+                      <td>
+                        <span className={css.original_title}>Вік:</span>
+                      </td>
+                      <td>{`${
+                        data.birthday && 2024 - data.birthday.substring(0, 4)
+                      } р.`}</td>
+                    </tr>
+                  )}
+                  {data.popularity !== 0 && (
+                    <tr>
+                      <td>
+                        <span>Рейтинг: </span>
+                      </td>
+                      <td>
+                        {data && (
+                          <span
+                            className={buildRateClass(
+                              Math.round(data.popularity * 10)
+                            )}
+                          >
+                            {parseFloat(data.popularity.toFixed(1))}
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
               {data && (
