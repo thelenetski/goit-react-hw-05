@@ -10,6 +10,7 @@ import {
 } from '../../redux/selectors';
 import { fetchFavMovies, fetchOutlet } from '../../redux/moviesOps';
 import MovieList from '../MovieList/MovieList';
+import { changePagesNav, setPage } from '../../redux/moviesSlice';
 
 const CastMovies = () => {
   const { castId } = useParams();
@@ -21,6 +22,8 @@ const CastMovies = () => {
   const location = useLocation();
 
   useEffect(() => {
+    dispatch(changePagesNav(false));
+    dispatch(setPage(1));
     dispatch(fetchOutlet(URL)).then(() => {
       window.scrollTo({
         top: window.scrollY + 300,
