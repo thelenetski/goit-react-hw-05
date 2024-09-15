@@ -22,7 +22,7 @@ const Poster = ({ IMG_LINK, item }) => {
   };
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className={css.posterWrap}>
       {loading && <LoaderPoster />}
       <>
         <img
