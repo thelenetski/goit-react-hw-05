@@ -22,6 +22,12 @@
   filter: grayscale(1);
 }
 
+.moviePosterLoading {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .imageHide {
   display: none;
 }

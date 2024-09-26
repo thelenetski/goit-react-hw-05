@@ -30,11 +30,13 @@ const Poster = ({ IMG_LINK, item }) => {
           alt={item.original_title}
           className={clsx(
             css.moviePoster,
-            item.isWatch && css.moviePosterWatched
+            item.isWatch && css.moviePosterWatched,
+            loading && css.moviePosterLoading
           )}
           onLoad={handleImageLoaded}
           loading="lazy"
         />
+
         {!loading && (
           <>
             <div className={css.iconsBox}>
