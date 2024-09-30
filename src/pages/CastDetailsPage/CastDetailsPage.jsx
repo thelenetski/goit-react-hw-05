@@ -132,7 +132,7 @@ const CastDetailsPage = () => {
                   {data.biography && (
                     <>
                       <h4>Біографія</h4>
-                      <p>{data.biography}</p>
+                      <p className={css.biography}>{data.biography}</p>
                     </>
                   )}
                 </>

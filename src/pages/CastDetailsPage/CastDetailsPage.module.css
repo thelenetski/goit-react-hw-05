@@ -238,7 +238,10 @@
   .movieDescription .infoBox td:first-child {
     width: 45%;
   }
-
+  .biography {
+    height: 355px;
+    overflow-y: scroll;
+  }
   .addInfo {
     width: 100%;
   }
