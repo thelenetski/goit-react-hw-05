@@ -4,15 +4,19 @@
 }
 
 .reviews ul {
-  width: fit-content;
+  width: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   flex-wrap: wrap;
   gap: 20px;
-  padding-top: 50px;
+}
+
+.reviewsBox {
+  width: 360px !important;
+  grid-template-columns: 1fr !important;
 }
 
 .reviews ul li {
-  width: 28%;
-  margin-bottom: 50px;
   padding: 20px;
   border: 1px solid #999;
   border-radius: 10px;
@@ -49,9 +53,8 @@
   justify-content: center;
   align-items: center;
   padding-right: 20px;
-  border: 1px solid #999;
-  border-radius: 10px;
-  margin-top: -40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d8d8d8;
   background: #fff;
   overflow: hidden;
 }
@@ -74,9 +77,24 @@
   margin: 0 0 0 10px;
 }
 
+@media screen and (max-width: 1024px) {
+  .reviews ul {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .reviews ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media screen and (max-width: 450px) {
-  .reviews ul li {
-    width: calc(100% - 30px);
+  .reviews ul {
+    grid-template-columns: 1fr;
+  }
+  .reviewsBox {
+    width: auto !important;
   }
   .reviewsAuthorBox h6 {
     font-size: 18px;

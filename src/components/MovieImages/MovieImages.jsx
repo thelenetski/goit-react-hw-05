@@ -15,7 +15,6 @@ import clsx from 'clsx';
 const MovieImages = () => {
   const { movieId } = useParams();
   const URL = `https://api.themoviedb.org/3/movie/${movieId}/images`;
-
   const dispatch = useDispatch();
   const data = useSelector(selectOutlet);
   const loading = useSelector(selectLoading);

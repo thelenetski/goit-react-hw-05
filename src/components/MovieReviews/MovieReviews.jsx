@@ -11,6 +11,7 @@ import {
   selectOutlet,
 } from '../../redux/selectors';
 import { fetchOutlet } from '../../redux/moviesOps';
+import clsx from 'clsx';
 
 const MovieReviews = () => {
   const { movieId } = useParams();
@@ -21,7 +22,12 @@ const MovieReviews = () => {
   const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchOutlet(URL));
+    dispatch(fetchOutlet(URL)).then(() => {
+      window.scrollTo({
+        top: window.scrollY + 300,
+        behavior: 'smooth',
+      });
+    });
   }, [dispatch, URL]);
 
   // console.log(data);
@@ -31,12 +37,12 @@ const MovieReviews = () => {
       {loading.outlet && !error && <Loader />}
       {!loading.outlet && data.results && (
         <div className={css.reviews}>
-          {data['results'].length == 0 && <p>Поки немає жодних відгуків</p>}
-          <ul>
+          <ul className={clsx(data.results.length == 0 && css.reviewsBox)}>
+            {data.results.length == 0 && <p>Поки немає жодних відгуків</p>}
             {data.results.map((item, index) => {
               return (
-                index < 6 && (
-                  <li key={item.id}>
+                index < 8 && (
+                  <li key={index}>
                     <div className={css.reviewsAuthorBox}>
                       {item['author_details'].avatar_path &&
                       item['author_details'].avatar_path ? (
