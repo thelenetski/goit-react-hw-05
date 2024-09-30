@@ -239,7 +239,7 @@
     width: 45%;
   }
   .biography {
-    height: 355px;
+    max-height: 355px;
     overflow-y: scroll;
   }
   .addInfo {
