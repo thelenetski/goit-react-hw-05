@@ -64,7 +64,7 @@ const MovieDetailsPage = () => {
     favData.some(item => item.favId === movieId && item.status === true) &&
       setIsFav(true);
     favData.forEach(item => item.favId === movieId && setIsWatch(item.isWatch));
-    console.log(favData);
+    // console.log(favData);
   }, [favData, dispatch, movieId]);
 
   useEffect(() => {
@@ -80,22 +80,36 @@ const MovieDetailsPage = () => {
   }, [dispatch, data.backdrop_path]);
 
   const handlerAddFav = () => {
-    favData.map(item => {
-      if (item.favId === movieId) {
-        console.log(item, movieId);
-        dispatch(toggleWatch({ ...item, status: !item.status }));
-        deleteMovie({ ...item, status: !item.status });
-        setIsFav(false);
-        return;
-      }
+    const movieInFav = favData.find(item => item.favId === movieId);
+
+    if (
+      movieInFav &&
+      movieInFav.isWatch === false &&
+      movieInFav.status === true
+    ) {
+      console.log('Удаление фильма из избранного', movieInFav, movieId);
+      deleteMovie({ ...movieInFav, status: false });
       setIsFav(false);
       return;
-    });
-    if (!favData.some(item => item.favId === movieId)) addFav();
+    }
+
+    // Если фильм просмотрен - обновляем статус избранного
+    if (movieInFav && movieInFav.isWatch === true) {
+      dispatch(toggleWatch({ ...movieInFav, status: !movieInFav.status }))
+        .unwrap()
+        .then(updatedMovie => {
+          setIsFav(updatedMovie.status); // Используем обновленное значение
+        });
+      return;
+    }
+
+    if (!movieInFav) addFav();
+
+    // if (!favData.some(item => item.favId === movieId)) addFav();
   };
 
   const addFav = () => {
-    console.log('addFav', isWatch);
+    console.log('Додано до обраного');
     dispatch(
       addFavMovie({
         poster_path: data.poster_path,
@@ -105,27 +119,31 @@ const MovieDetailsPage = () => {
         favId: movieId,
         isWatch: isWatch,
       })
-    );
-    setIsFav(true);
+    ).then(() => {
+      setIsFav(true);
+    });
   };
 
   const handlerAddWatched = () => {
     // console.log(favData);
-    favData.map(item => {
-      if (item.favId === movieId) {
-        console.log('change watched movie');
-        dispatch(toggleWatch({ ...item, isWatch: !item.isWatch }));
-        deleteMovie({ ...item, isWatch: !item.isWatch });
-        setIsWatch(!item.isWatch);
-        return;
-      }
-      return;
-    });
-    if (!favData.some(item => item.favId === movieId)) {
-      console.log('add new watched movie');
-      setIsWatch(true);
+    const movieInFav = favData.find(item => item.favId === movieId);
+
+    if (movieInFav) {
+      console.log('change watched movie');
+      dispatch(
+        toggleWatch({ ...movieInFav, isWatch: !movieInFav.isWatch })
+      ).then(() => {
+        setIsWatch(!movieInFav.isWatch);
+        deleteMovie({ ...movieInFav, isWatch: !movieInFav.isWatch });
+      });
+    } else {
       addWatched();
     }
+    // if (!favData.some(item => item.favId === movieId)) {
+    //   console.log('add new watched movie');
+    //   setIsWatch(true);
+    //   addWatched();
+    // }
   };
 
   const addWatched = () => {
@@ -139,16 +157,19 @@ const MovieDetailsPage = () => {
         favId: movieId,
         isWatch: true,
       })
-    );
-    setIsWatch(true);
+    ).then(() => {
+      setIsWatch(true);
+    });
   };
 
   const deleteMovie = item => {
     console.log('delete fav movie');
     console.log(item.id, item.status, item.isWatch);
-    if (item.status === false && item.isWatch === false) {
-      console.log('видалено');
-      dispatch(deleteFavMovie(item.id));
+    if (!item.status && !item.isWatch) {
+      console.log('видалено', item.id);
+      dispatch(deleteFavMovie(item.id)).then(() => {
+        dispatch(fetchFavMovies());
+      });
     }
   };
 

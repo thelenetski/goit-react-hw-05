@@ -46,7 +46,10 @@ const favMoviesSlice = createSlice({
         const index = state.favitems.findIndex(
           item => item.id === action.payload.id
         );
-        state.favitems.splice(index, 1);
+
+        if (index !== -1) {
+          state.favitems.splice(index, 1); // Удаление элемента по индексу
+        }
       })
       .addCase(deleteFavMovie.rejected, handleRejected)
       .addCase(toggleWatch.pending, handlePending)
@@ -56,7 +59,10 @@ const favMoviesSlice = createSlice({
         const index = state.favitems.findIndex(
           item => item.id === action.payload.id
         );
-        state.favitems.splice(index, 1, action.payload);
+
+        if (index !== -1) {
+          state.favitems[index] = action.payload;
+        }
       })
       .addCase(toggleWatch.rejected, handleRejected);
   },
