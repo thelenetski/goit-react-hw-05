@@ -16,6 +16,8 @@ export const IMG_LINK = 'https://image.tmdb.org/t/p/w500';
 export const IMG_LINK_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 export const TREND_URL =
   'https://api.themoviedb.org/3/trending/movie/day?language=uk-UA';
+export const NOW_PLAYING =
+  'https://api.themoviedb.org/3/movie/now_playing?language=uk-UA';
 
 // export default dataRequest;
 

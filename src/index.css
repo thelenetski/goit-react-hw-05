@@ -42,11 +42,11 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 25px;
+  text-transform: uppercase;
   line-height: 1.1;
   padding: 15px 20px;
   margin: 20px;
-  font-size: 40px;
   background: #fff;
   border-radius: 10px;
   box-sizing: border-box;

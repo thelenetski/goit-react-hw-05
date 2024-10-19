@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import css from './HomePage.module.css';
 import { useLocation } from 'react-router-dom';
-import { TREND_URL } from '../../components/Services/Services';
+import { NOW_PLAYING } from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -23,7 +23,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(changePagesNav(false));
     dispatch(setPage(1));
-    dispatch(fetchMovies(TREND_URL));
+    dispatch(fetchMovies(NOW_PLAYING));
     dispatch(fetchFavMovies());
   }, [dispatch]);
 
