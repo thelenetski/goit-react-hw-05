@@ -118,6 +118,7 @@ const MovieDetailsPage = () => {
         status: true,
         favId: movieId,
         isWatch: isWatch,
+        release_date: data.release_date,
       })
     ).then(() => {
       setIsFav(true);
@@ -156,6 +157,7 @@ const MovieDetailsPage = () => {
         status: false,
         favId: movieId,
         isWatch: true,
+        release_date: data.release_date,
       })
     ).then(() => {
       setIsWatch(true);
