@@ -44,7 +44,7 @@ const MovieReviews = () => {
                 index < 8 && (
                   <li key={index}>
                     <div className={css.reviewsAuthorBox}>
-                      {item['author_details'].avatar_path &&
+                      {item['author_details'].avatar_path !== undefined &&
                       item['author_details'].avatar_path ? (
                         <img
                           src={IMG_LINK + item['author_details'].avatar_path}
