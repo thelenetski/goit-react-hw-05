@@ -26,9 +26,13 @@
   border-radius: 10px;
 }
 
-.videosBox > p {
+.videosBox ul p {
   text-align: left;
   font-size: 20px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  margin: 0;
 }
 
 @media screen and (max-width: 450px) {

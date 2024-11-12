@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import css from './MovieVideos.module.css';
 import Loader from '../Loader/Loader';
@@ -20,6 +20,7 @@ const MovieVideos = () => {
   const data = useSelector(selectOutlet);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const [videosStatus, setVideosStatus] = useState(false);
 
   useEffect(() => {
     dispatch(fetchOutlet(URL))
@@ -34,7 +35,12 @@ const MovieVideos = () => {
           dispatch(fetchOutlet(URL_RU))
             .unwrap()
             .then(videosRU => {
-              videosRU.results.length === 0 && dispatch(fetchOutlet(URL_EN));
+              videosRU.results.length === 0 &&
+                dispatch(fetchOutlet(URL_EN))
+                  .unwrap()
+                  .then(videosEN => {
+                    videosEN.results.length === 0 && setVideosStatus(true);
+                  });
             });
       });
   }, [dispatch, URL, URL_EN]);
@@ -45,7 +51,7 @@ const MovieVideos = () => {
       {data.results && (
         <div className={css.videosBox}>
           <ul>
-            {data.results.length === 0 && <p>Немає жодних відео</p>}
+            {videosStatus && <p>Немає жодних відео</p>}
             {data.results.map((item, index) => {
               return (
                 index < 6 && (
