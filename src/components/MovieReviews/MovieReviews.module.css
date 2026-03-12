@@ -9,6 +9,10 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   flex-wrap: wrap;
   gap: 20px;
+  padding: 0;
+  background: 0;
+  border: none;
+  box-shadow: none;
 }
 
 .reviewsBox {
@@ -21,7 +25,8 @@
   border: 1px solid #999;
   border-radius: 10px;
   position: relative;
-  box-shadow: 5px 5px 10px #0000004f;
+  box-shadow: 5px 5px 10px #00000017;
+  background: #fff;
 }
 
 .reviews ul li p {

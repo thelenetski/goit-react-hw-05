@@ -23,13 +23,17 @@ export const fetchOutlet = createAsyncThunk('movies/fetchOutlet', requestData);
 /*------------Favorites-------------*/
 
 // const FAV_URL = 'https://66c31a60d057009ee9bf1011.mockapi.io/movies';
-const FAV_URL = 'https://serva4ok.ddns.net:8040/movies';
+const FAV_URL = 'https://serva4ok.keenetic.name:8040/movies';
 
 export const fetchFavMovies = createAsyncThunk(
   'favmovies/fetchFavMovies',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(FAV_URL);
+      const response = await axios.get(FAV_URL, {
+        headers: {
+          accept: 'application/json',
+        },
+      });
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

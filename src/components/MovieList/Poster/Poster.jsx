@@ -29,6 +29,7 @@ const Poster = ({ IMG_LINK, item }) => {
           src={IMG_LINK + item.poster_path}
           alt={item.original_title}
           className={clsx(
+            'fadeIn',
             css.moviePoster,
             item.isWatch && css.moviePosterWatched,
             loading && css.moviePosterLoading

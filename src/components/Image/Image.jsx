@@ -14,7 +14,7 @@ const Image = ({ className, src, alt }) => {
     <>
       {loading && <LoaderPoster />}
       <img
-        className={clsx(className, loading && css.imageHide)}
+        className={clsx(className, 'fadeIn', loading && css.imageHide)}
         src={src}
         alt={alt}
         onLoad={handleImageLoaded}
