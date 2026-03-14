@@ -23,7 +23,7 @@ export const fetchOutlet = createAsyncThunk('movies/fetchOutlet', requestData);
 /*------------Favorites-------------*/
 
 // const FAV_URL = 'https://66c31a60d057009ee9bf1011.mockapi.io/movies';
-const FAV_URL = 'https://web.serva4ok.keenetic.name:8040/movies';
+const FAV_URL = 'https://web.serva4ok.keenetic.name/movies';
 
 export const fetchFavMovies = createAsyncThunk(
   'favmovies/fetchFavMovies',
