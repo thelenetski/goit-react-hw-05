@@ -24,7 +24,6 @@ const Home = () => {
     dispatch(changePagesNav(false));
     dispatch(setPage(1));
     dispatch(fetchMovies(NOW_PLAYING));
-    // dispatch(fetchFavMovies());
   }, [dispatch]);
 
   return (

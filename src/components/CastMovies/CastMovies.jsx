@@ -8,7 +8,7 @@ import {
   selectFilteredOutletMovies,
   selectLoading,
 } from '../../redux/selectors';
-import { fetchFavMovies, fetchOutlet } from '../../redux/moviesOps';
+import { fetchOutlet } from '../../redux/moviesOps';
 import MovieList from '../MovieList/MovieList';
 import { changePagesNav, setPage } from '../../redux/moviesSlice';
 
@@ -30,7 +30,6 @@ const CastMovies = () => {
         behavior: 'smooth',
       });
     });
-    dispatch(fetchFavMovies());
   }, [dispatch, URL]);
 
   return (

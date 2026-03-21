@@ -15,4 +15,7 @@
   .main {
     margin: 0 0 100px 0;
   }
+  .main h1 {
+    font-size: 24px;
+  }
 }

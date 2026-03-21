@@ -9,7 +9,7 @@ import {
   selectLoading,
   selectPage,
 } from '../../redux/selectors';
-import { fetchFavMovies, fetchOutlet } from '../../redux/moviesOps';
+import { fetchOutlet } from '../../redux/moviesOps';
 import { changeItems, setSearch } from '../../redux/moviesSlice';
 
 const MovieCat = () => {
@@ -35,7 +35,6 @@ const MovieCat = () => {
     dispatch(setSearch(''));
     dispatch(changeItems('items'));
     dispatch(fetchOutlet(URL));
-    dispatch(fetchFavMovies());
   }, [dispatch, URL]);
 
   return (

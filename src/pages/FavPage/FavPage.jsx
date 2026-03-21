@@ -8,7 +8,6 @@ import {
   selectLoading,
 } from '../../redux/selectors';
 import { useSelector, useDispatch } from 'react-redux';
-// import { fetchFavMovies } from '../../redux/moviesOps';
 import { useEffect } from 'react';
 import { changePagesNav, setPage } from '../../redux/moviesSlice';
 
@@ -22,7 +21,6 @@ const FavPage = () => {
   useEffect(() => {
     dispatch(setPage(1));
     dispatch(changePagesNav(false));
-    // dispatch(fetchFavMovies());
   }, [dispatch]);
 
   const onChangeData = data => {
@@ -42,7 +40,7 @@ const FavPage = () => {
     );
     return sum;
   };
-  console.log(results);
+  // console.log(results);
 
   return (
     <>

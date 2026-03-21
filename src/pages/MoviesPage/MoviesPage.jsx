@@ -21,7 +21,7 @@ import {
   selectSearch,
   selectFilteredMovies,
 } from '../../redux/selectors';
-import { fetchFavMovies, fetchMovies } from '../../redux/moviesOps';
+import { fetchMovies } from '../../redux/moviesOps';
 import {
   changeItems,
   changePagesNav,
@@ -58,7 +58,6 @@ const MoviesPage = () => {
     search !== '' &&
       location.pathname === '/movies' &&
       dispatch(fetchMovies(url));
-    dispatch(fetchFavMovies());
     onQueryPageParams(search, page);
   }, [dispatch, page, search, url]);
 
