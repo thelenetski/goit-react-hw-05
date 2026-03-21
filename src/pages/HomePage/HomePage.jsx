@@ -10,7 +10,7 @@ import {
   selectFilteredMovies,
   selectLoading,
 } from '../../redux/selectors';
-import { fetchFavMovies, fetchMovies } from '../../redux/moviesOps';
+import { fetchMovies } from '../../redux/moviesOps';
 import { changePagesNav, setPage } from '../../redux/moviesSlice';
 
 const Home = () => {
@@ -24,7 +24,7 @@ const Home = () => {
     dispatch(changePagesNav(false));
     dispatch(setPage(1));
     dispatch(fetchMovies(NOW_PLAYING));
-    dispatch(fetchFavMovies());
+    // dispatch(fetchFavMovies());
   }, [dispatch]);
 
   return (

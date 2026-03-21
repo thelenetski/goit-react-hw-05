@@ -21,13 +21,9 @@ import {
   selectMovies,
   selectFavMovies,
 } from '../../redux/selectors';
-import {
-  fetchMovies,
-  fetchFavMovies,
-  addFavMovie,
-  deleteFavMovie,
-  toggleWatch,
-} from '../../redux/moviesOps';
+import { fetchMovies } from '../../redux/moviesOps';
+import { deleteFavMovie, toggleWatch } from '../../redux/favMoviesSlice';
+import { addFavMovie } from '../../redux/favMoviesSlice';
 import { Toaster } from 'react-hot-toast';
 import { changeBG, changeItems, changePagesNav } from '../../redux/moviesSlice';
 
@@ -58,9 +54,6 @@ const MovieDetailsPage = () => {
   useEffect(() => {
     dispatch(changePagesNav(false));
     dispatch(changeItems('outlet'));
-    if (!favData || favData.length === 0) {
-      dispatch(fetchFavMovies());
-    }
     favData.some(item => item.favId === movieId && item.status === true) &&
       setIsFav(true);
     favData.forEach(item => item.favId === movieId && setIsWatch(item.isWatch));
@@ -87,7 +80,6 @@ const MovieDetailsPage = () => {
       movieInFav.isWatch === false &&
       movieInFav.status === true
     ) {
-      console.log('Удаление фильма из избранного', movieInFav, movieId);
       deleteMovie({ ...movieInFav, status: false });
       setIsFav(false);
       return;
@@ -112,6 +104,7 @@ const MovieDetailsPage = () => {
     console.log('Додано до обраного');
     dispatch(
       addFavMovie({
+        id: Date.now(),
         poster_path: data.poster_path,
         title: data.title,
         vote_average: data.vote_average,
@@ -120,9 +113,8 @@ const MovieDetailsPage = () => {
         isWatch: isWatch,
         release_date: data.release_date,
       })
-    ).then(() => {
-      setIsFav(true);
-    });
+    );
+    setIsFav(true);
   };
 
   const handlerAddWatched = () => {
@@ -131,12 +123,9 @@ const MovieDetailsPage = () => {
 
     if (movieInFav) {
       console.log('change watched movie');
-      dispatch(
-        toggleWatch({ ...movieInFav, isWatch: !movieInFav.isWatch })
-      ).then(() => {
-        setIsWatch(!movieInFav.isWatch);
-        deleteMovie({ ...movieInFav, isWatch: !movieInFav.isWatch });
-      });
+      dispatch(toggleWatch({ ...movieInFav, isWatch: !movieInFav.isWatch }));
+      setIsWatch(!movieInFav.isWatch);
+      deleteMovie({ ...movieInFav, isWatch: !movieInFav.isWatch });
     } else {
       addWatched();
     }
@@ -159,19 +148,14 @@ const MovieDetailsPage = () => {
         isWatch: true,
         release_date: data.release_date,
       })
-    ).then(() => {
-      setIsWatch(true);
-    });
+    );
+    setIsWatch(true);
   };
 
   const deleteMovie = item => {
-    console.log('delete fav movie');
     console.log(item.id, item.status, item.isWatch);
     if (!item.status && !item.isWatch) {
-      console.log('видалено', item.id);
-      dispatch(deleteFavMovie(item.id)).then(() => {
-        dispatch(fetchFavMovies());
-      });
+      dispatch(deleteFavMovie(item.id));
     }
   };
 

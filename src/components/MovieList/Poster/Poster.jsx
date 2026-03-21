@@ -21,8 +21,6 @@ const Poster = ({ IMG_LINK, item }) => {
     setLoading(false);
   };
 
-  console.log(loading);
-
   return (
     <div className={css.posterWrap}>
       {loading && <LoaderPoster />}
