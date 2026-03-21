@@ -8,6 +8,7 @@
 .main h1 {
   text-align: left;
   padding: 20px;
+  margin-left: 0;
 }
 
 @media screen and (max-width: 450px) {

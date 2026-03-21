@@ -1,5 +1,15 @@
-.imageHide {
-  display: none;
+.imageWrap {
+  position: relative;
+}
+
+.image {
+  transition: 0.3s;
+}
+
+.hide {
   opacity: 0;
-  transition: 1s;
+}
+
+.show {
+  opacity: 1;
 }

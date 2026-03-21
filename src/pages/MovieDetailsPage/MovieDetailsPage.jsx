@@ -179,7 +179,7 @@ const MovieDetailsPage = () => {
     <main className={css.mainMovie}>
       {loading.main && !error && <Loader />}
       {!loading.main && data.id && (
-        <>
+        <div className="fadeIn">
           <div className={css.controls}>
             <BackLink to={backLinkHref.current}>Назад</BackLink>
             <div>
@@ -337,7 +337,7 @@ const MovieDetailsPage = () => {
               <Outlet />
             </Suspense>
           </div>
-        </>
+        </div>
       )}
     </main>
   );

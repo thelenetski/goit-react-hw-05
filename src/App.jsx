@@ -9,12 +9,12 @@ import { selectBG } from './redux/selectors';
 const Home = lazy(() => import('./pages/HomePage/HomePage'));
 const Movies = lazy(() => import('./pages/MoviesPage/MoviesPage'));
 const MovieCat = lazy(() => import('./components/MovieCat/MovieCat'));
-const MoviesDetailsPage = lazy(() =>
-  import('./pages/MovieDetailsPage/MovieDetailsPage')
+const MoviesDetailsPage = lazy(
+  () => import('./pages/MovieDetailsPage/MovieDetailsPage')
 );
 const MovieCast = lazy(() => import('./components/MovieCast/MovieCast'));
-const MovieReviews = lazy(() =>
-  import('./components/MovieReviews/MovieReviews')
+const MovieReviews = lazy(
+  () => import('./components/MovieReviews/MovieReviews')
 );
 const MovieImages = lazy(() => import('./components/MovieImages/MovieImages'));
 const CastPhotos = lazy(() => import('./components/CastPhotos/CastPhotos'));
@@ -56,7 +56,6 @@ function App() {
 
     window.addEventListener('scroll', handleScroll);
 
-    // Удаляем обработчик при размонтировании компонента
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -71,44 +70,45 @@ function App() {
         ></div>
         <div className="backgroundBlur"></div>
         <div className="navHiddenBox"></div>
-
-        <Navigation />
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/favorites" element={<FavMovies />} />
-            <Route path="/movies" element={<Movies />}>
-              <Route path=":catName" element={<MovieCat />} />
-            </Route>
-            <Route
-              path="/movies/:catName/:movieId"
-              element={<MoviesDetailsPage />}
-            >
-              {renderMovieSubRoutes()}
-            </Route>
-            <Route
-              path="/movies/search-article/:movieId"
-              element={<MoviesDetailsPage />}
-            >
-              {renderMovieSubRoutes()}
-            </Route>
-            {basePaths.map((basePath, index) => (
+        <div className="mainWrapper">
+          <Navigation />
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/favorites" element={<FavMovies />} />
+              <Route path="/movies" element={<Movies />}>
+                <Route path=":catName" element={<MovieCat />} />
+              </Route>
               <Route
-                path={`${basePath}/:movieId`}
+                path="/movies/:catName/:movieId"
                 element={<MoviesDetailsPage />}
-                key={index}
               >
                 {renderMovieSubRoutes()}
               </Route>
-            ))}
-            <Route path="/cast/:castId" element={<Cast />}>
-              <Route path="filmography" element={<CastMovies />} />
-              <Route path="photos" element={<CastPhotos />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+              <Route
+                path="/movies/search-article/:movieId"
+                element={<MoviesDetailsPage />}
+              >
+                {renderMovieSubRoutes()}
+              </Route>
+              {basePaths.map((basePath, index) => (
+                <Route
+                  path={`${basePath}/:movieId`}
+                  element={<MoviesDetailsPage />}
+                  key={index}
+                >
+                  {renderMovieSubRoutes()}
+                </Route>
+              ))}
+              <Route path="/cast/:castId" element={<Cast />}>
+                <Route path="filmography" element={<CastMovies />} />
+                <Route path="photos" element={<CastPhotos />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </div>
       </div>
     </>
   );

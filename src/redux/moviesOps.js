@@ -29,11 +29,7 @@ export const fetchFavMovies = createAsyncThunk(
   'favmovies/fetchFavMovies',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(FAV_URL, {
-        headers: {
-          accept: 'application/json',
-        },
-      });
+      const response = await axios.get(FAV_URL);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

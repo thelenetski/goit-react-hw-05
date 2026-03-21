@@ -21,15 +21,16 @@ const Poster = ({ IMG_LINK, item }) => {
     setLoading(false);
   };
 
+  console.log(loading);
+
   return (
     <div className={css.posterWrap}>
       {loading && <LoaderPoster />}
-      <>
+      <div className={loading ? css.hide : css.show}>
         <img
           src={IMG_LINK + item.poster_path}
           alt={item.original_title}
           className={clsx(
-            'fadeIn',
             css.moviePoster,
             item.isWatch && css.moviePosterWatched,
             loading && css.moviePosterLoading
@@ -78,7 +79,7 @@ const Poster = ({ IMG_LINK, item }) => {
             />
           </>
         )}
-      </>
+      </div>
     </div>
   );
 };

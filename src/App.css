@@ -105,6 +105,10 @@
   background: linear-gradient(125deg, #edededeb 50%, #00000000 100%);
 }
 
+.mainWrapper {
+  padding: 0 20px;
+}
+
 .fadeIn {
   animation: fade 0.3s;
 }

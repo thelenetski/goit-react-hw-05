@@ -1,18 +1,15 @@
 .moviesList {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  /* justify-content: space-between; */
-  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 0;
   margin: 0;
-  gap: 30px;
   list-style-type: none;
 }
 
 .moviesItem {
-  width: 300px;
-  display: flex;
-  margin-bottom: 30px;
+  width: 100%;
   box-sizing: border-box;
   transition: 0.3s;
 }
@@ -25,7 +22,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   color: rgb(15, 31, 68);
 }
@@ -78,16 +75,7 @@
 
 @media screen and (max-width: 450px) {
   .moviesList {
-    justify-content: space-between;
-    gap: 15px;
-  }
-  /* .moviePoster {
-    height: auto;
-  } */
-
-  .moviesItem {
-    width: 47%;
-    /* margin-bottom: 30px; */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 
   .movieTitle {

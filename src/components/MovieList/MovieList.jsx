@@ -121,12 +121,14 @@ const MovieList = ({ link, results, state }) => {
                     ) : (
                       <FaRegFileImage className={css.skeleton} />
                     )}
-                    <p className={css.movieTitle}>{item.title}</p>
-                    {item.release_date && (
-                      <span className={css.movieTitleYear}>
-                        {item.release_date.substring(0, 4)}
-                      </span>
-                    )}
+                    <div>
+                      <p className={css.movieTitle}>{item.title}</p>
+                      {item.release_date && (
+                        <span className={css.movieTitleYear}>
+                          {item.release_date.substring(0, 4)}
+                        </span>
+                      )}
+                    </div>
                   </Link>
                 </li>
               );

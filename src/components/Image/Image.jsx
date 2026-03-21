@@ -11,15 +11,20 @@ const Image = ({ className, src, alt }) => {
   };
 
   return (
-    <>
+    <div className={css.imageWrap}>
       {loading && <LoaderPoster />}
       <img
-        className={clsx(className, 'fadeIn', loading && css.imageHide)}
+        className={clsx(
+          className,
+          css.image,
+          'fadeIn',
+          loading ? 'hide' : 'show'
+        )}
         src={src}
         alt={alt}
         onLoad={handleImageLoaded}
       />
-    </>
+    </div>
   );
 };
 

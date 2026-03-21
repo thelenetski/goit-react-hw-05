@@ -9,13 +9,15 @@
 .searchCatsBox {
   width: 100%;
   display: flex;
+  gap: 20px;
   flex-wrap: wrap;
   align-items: center;
+  margin: 20px 0;
 }
 
 .cats {
   width: 70%;
-  margin: 0 20px;
+  margin: 0;
   padding: 10px 20px;
   background: #fff;
   border: 1px solid #e1e1e1;
