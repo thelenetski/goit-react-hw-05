@@ -1,5 +1,6 @@
 .mainMovie {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
   padding: 20px 0;
