@@ -20,6 +20,11 @@ const MovieReviews = () => {
   const data = useSelector(selectOutlet);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const sortedReviews =
+    data.results &&
+    [...data.results].sort(
+      (a, b) => +new Date(b.updated_at) - +new Date(a.updated_at)
+    );
 
   useEffect(() => {
     dispatch(fetchOutlet(URL)).then(() => {
@@ -30,16 +35,14 @@ const MovieReviews = () => {
     });
   }, [dispatch, URL]);
 
-  // console.log(data);
-
   return (
     <>
       {loading.outlet && !error && <Loader />}
-      {!loading.outlet && data.results && (
+      {!loading.outlet && sortedReviews && (
         <div className={css.reviews}>
-          <ul className={clsx(data.results.length == 0 && css.reviewsBox)}>
-            {data.results.length == 0 && <p>Поки немає жодних відгуків</p>}
-            {data.results.map((item, index) => {
+          <ul className={clsx(sortedReviews.length == 0 && css.reviewsBox)}>
+            {sortedReviews.length == 0 && <p>Поки немає жодних відгуків</p>}
+            {sortedReviews.map((item, index) => {
               return (
                 index < 8 && (
                   <li key={index} className="fadeIn">
@@ -57,7 +60,7 @@ const MovieReviews = () => {
                       <h6>{item.author}</h6>
                     </div>
                     <p>{item.content}</p>
-                    <span>{item.created_at?.slice(0, 10)}</span>
+                    <span>{item.updated_at?.slice(0, 10)}</span>
                   </li>
                 )
               );
