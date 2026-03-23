@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import css from './MovieImages.module.css';
 import { IMG_LINK } from '../Services/Services';
@@ -19,6 +19,11 @@ const MovieImages = () => {
   const data = useSelector(selectOutlet);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const sortedBackdrops = useMemo(() => {
+    if (!data.backdrops) return [];
+
+    return [...data.backdrops].sort(() => Math.random() - 0.5);
+  }, [data.backdrops]);
 
   useEffect(() => {
     dispatch(fetchOutlet(URL)).then(() => {
@@ -35,15 +40,15 @@ const MovieImages = () => {
       {!loading.outlet && data.backdrops && (
         <div className={css.imgBox}>
           <ul className="fadeIn">
-            {data.backdrops.length === 0 && <p>Немає жодних кадрів</p>}
-            {data.backdrops.map((item, index) => {
+            {sortedBackdrops.length === 0 && <p>Немає жодних кадрів</p>}
+            {sortedBackdrops.map((item, index) => {
               return (
                 index < 8 && (
                   <li
                     key={index}
                     className={clsx(
-                      data.backdrops.length &&
-                        data.backdrops.length < 4 &&
+                      sortedBackdrops.length &&
+                        sortedBackdrops.length < 4 &&
                         css.img_alone
                     )}
                   >
