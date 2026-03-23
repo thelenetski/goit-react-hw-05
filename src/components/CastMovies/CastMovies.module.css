@@ -1,4 +1,5 @@
 .castMoviesBox {
+  width: calc(100% - 40px);
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
