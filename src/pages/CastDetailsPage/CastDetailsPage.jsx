@@ -59,7 +59,7 @@ const CastDetailsPage = () => {
           <div className={css.controls}>
             <BackLink to={backLinkHref.current}>Назад</BackLink>
           </div>
-          <div className={css.detailsWrap}>
+          <div className={clsx(css.detailsWrap, 'fadeIn')}>
             {data && data.profile_path ? (
               <div style={{ position: 'relative' }}>
                 {loadingImg && <LoaderPoster />}

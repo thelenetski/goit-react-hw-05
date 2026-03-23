@@ -42,12 +42,12 @@ const MovieReviews = () => {
             {data.results.map((item, index) => {
               return (
                 index < 8 && (
-                  <li key={index}>
+                  <li key={index} className="fadeIn">
                     <div className={css.reviewsAuthorBox}>
-                      {item['author_details'].avatar_path !== undefined &&
-                      item['author_details'].avatar_path ? (
+                      {item['author_details']?.avatar_path !== undefined &&
+                      item['author_details']?.avatar_path ? (
                         <img
-                          src={IMG_LINK + item['author_details'].avatar_path}
+                          src={IMG_LINK + item['author_details']?.avatar_path}
                           alt={item.original_title}
                           className={css.authorAvatar}
                         />
@@ -57,7 +57,7 @@ const MovieReviews = () => {
                       <h6>{item.author}</h6>
                     </div>
                     <p>{item.content}</p>
-                    <span>{item.created_at.slice(0, 10)}</span>
+                    <span>{item.created_at?.slice(0, 10)}</span>
                   </li>
                 )
               );

@@ -37,7 +37,7 @@ const CastPhotos = () => {
       {!loading.outlet && data.profiles && (
         <div className={css.imgBox}>
           {data.profiles.length === 0 && <p>Немає фотографій</p>}
-          <ul>
+          <ul className="fadeIn">
             {data.profiles.map((item, index) => {
               return (
                 index < 8 && (

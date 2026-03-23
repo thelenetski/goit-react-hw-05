@@ -12,6 +12,7 @@ import {
 } from '../../redux/selectors';
 import { fetchMovies } from '../../redux/moviesOps';
 import { changePagesNav, setPage } from '../../redux/moviesSlice';
+import { MdWhatshot } from 'react-icons/md';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -29,9 +30,14 @@ const Home = () => {
   return (
     <>
       <main className={css.main}>
-        <h1>Сьогодні у тренді</h1>
-        {loading.main && !error && <Loader />}
-        {!loading.main && <MovieList results={filteredData} state={location} />}
+        <h1>
+          Сьогодні у тренді <MdWhatshot size={26} color="orange" />
+        </h1>
+        {loading.main && !error ? (
+          <Loader />
+        ) : (
+          <MovieList results={filteredData} state={location} />
+        )}
       </main>
     </>
   );

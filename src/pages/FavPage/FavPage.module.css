@@ -1,14 +1,25 @@
 .main {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   position: relative;
   z-index: 999;
 }
 
 .main h1 {
+  width: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
   text-align: left;
   padding: 20px;
   margin-left: 0;
+}
+
+.main h1 svg {
+  flex-shrink: 0;
 }
 
 @media screen and (max-width: 450px) {
@@ -16,6 +27,7 @@
     margin: 0 0 100px 0;
   }
   .main h1 {
+    width: 100%;
     font-size: 24px;
   }
 }

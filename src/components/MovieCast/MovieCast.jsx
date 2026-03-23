@@ -36,7 +36,7 @@ const MovieCast = () => {
       {data.cast && (
         <div className={css.cast}>
           {data.cast.length === 0 && <p>Немає списку акторів</p>}
-          <ul>
+          <ul className="fadeIn">
             {data.cast.map((item, index) => {
               return (
                 index < 9 && (

@@ -50,7 +50,7 @@ const MovieVideos = () => {
       {loading.outlet && !error && <Loader />}
       {data.results && (
         <div className={css.videosBox}>
-          <ul>
+          <ul className="fadeIn">
             {videosStatus && <p>Немає жодних відео</p>}
             {data.results.map((item, index) => {
               return (

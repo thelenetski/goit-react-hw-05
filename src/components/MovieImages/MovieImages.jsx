@@ -34,7 +34,7 @@ const MovieImages = () => {
       {loading.outlet && !error && <Loader />}
       {!loading.outlet && data.backdrops && (
         <div className={css.imgBox}>
-          <ul>
+          <ul className="fadeIn">
             {data.backdrops.length === 0 && <p>Немає жодних кадрів</p>}
             {data.backdrops.map((item, index) => {
               return (

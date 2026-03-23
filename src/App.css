@@ -1,5 +1,6 @@
 #root {
   width: 100%;
+  min-height: 100dvh;
   margin: 0 auto;
   text-align: center;
   background: #ededed;
@@ -73,7 +74,7 @@
 .parallaxBG {
   position: relative;
   overflow: hidden;
-  /* height: 100vh; */
+  min-height: 100%;
   width: 100%;
 }
 
@@ -106,6 +107,8 @@
 }
 
 .mainWrapper {
+  min-height: 100dvh;
+  display: flex;
   padding: 0 20px;
 }
 

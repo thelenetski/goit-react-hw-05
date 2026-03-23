@@ -10,6 +10,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { changePagesNav, setPage } from '../../redux/moviesSlice';
+import { BsBookmarkHeartFill } from 'react-icons/bs';
 
 const FavPage = () => {
   const location = useLocation();
@@ -46,9 +47,10 @@ const FavPage = () => {
     <>
       <main className={css.main}>
         <h1>
-          {results !== null && results.length > 0
+          {results !== null && sumFavMovies(results) > 0
             ? `Мої фільми (${sumFavMovies(results)})`
             : `Немає обраних фільмів`}
+          <BsBookmarkHeartFill size={26} color="var(--color-active)" />
         </h1>
         {loading.main && !error && <Loader />}
         {!loading.main && results.length > 0 && (

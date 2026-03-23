@@ -1,6 +1,5 @@
 .mainMovie {
   display: flex;
-  /* justify-content: center; */
   flex-wrap: wrap;
   width: 100%;
   padding: 20px 0;

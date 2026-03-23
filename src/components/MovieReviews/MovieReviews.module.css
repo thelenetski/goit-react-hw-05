@@ -33,9 +33,9 @@
   max-height: 290px;
   font-size: 18px;
   padding-bottom: 15px;
-  overflow: scroll;
-  scrollbar-width: none;
-  scrollbar-color: transparent transparent;
+  overflow-y: auto;
+  /* scrollbar-width: none;
+  scrollbar-color: transparent transparent; */
 }
 
 .reviews ul li p::-webkit-scrollbar {
