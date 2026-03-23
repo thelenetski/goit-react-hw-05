@@ -98,6 +98,9 @@
   .reviews ul {
     grid-template-columns: 1fr;
   }
+  .reviews ul li {
+    max-width: 300px;
+  }
   .reviewsBox {
     width: auto !important;
   }
