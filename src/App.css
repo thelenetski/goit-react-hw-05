@@ -110,6 +110,7 @@
   min-height: 100dvh;
   display: flex;
   padding: 0 20px;
+  margin-bottom: 40px;
 }
 
 .fadeIn {
@@ -129,5 +130,8 @@
 @media screen and (max-width: 450px) {
   .navHiddenBox {
     display: none;
+  }
+  .mainWrapper {
+    margin-bottom: 20px;
   }
 }

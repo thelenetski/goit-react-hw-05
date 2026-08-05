@@ -1,5 +1,5 @@
 import { useParams, useLocation, NavLink, Outlet } from 'react-router-dom';
-import { useState, useEffect, Suspense, useRef } from 'react';
+import { useEffect, Suspense, useRef } from 'react';
 import css from './MovieDetailsPage.module.css';
 import BackLink from '../../components/BackLink/BackLink';
 import {
@@ -7,13 +7,11 @@ import {
   IMG_LINK_ORIGINAL,
 } from '../../components/Services/Services';
 import Loader from '../../components/Loader/Loader';
-import { FaRegFileImage } from 'react-icons/fa';
+import { FaRegFileImage, FaHeart } from 'react-icons/fa';
+import { IoEyeOutline, IoEye } from 'react-icons/io5';
 import clsx from 'clsx';
 import FavButton from '../../components/FavButton/FavButton';
 import WatchButton from '../../components/WatchButton/WatchButton';
-import { FaHeart } from 'react-icons/fa';
-import { IoEyeOutline } from 'react-icons/io5';
-import { IoEye } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectError,
@@ -22,21 +20,21 @@ import {
   selectFavMovies,
 } from '../../redux/selectors';
 import { fetchMovies } from '../../redux/moviesOps';
-import { deleteFavMovie, toggleWatch } from '../../redux/favMoviesSlice';
-import { addFavMovie } from '../../redux/favMoviesSlice';
+import {
+  deleteFavMovie,
+  toggleWatch,
+  addFavMovie,
+} from '../../redux/favMoviesSlice';
 import { Toaster } from 'react-hot-toast';
 import { changeBG, changeItems, changePagesNav } from '../../redux/moviesSlice';
 
-const buildLinkClass = ({ isActive }) => {
-  return clsx(css.link, isActive && css.active);
-};
+const buildLinkClass = ({ isActive }) => clsx(css.link, isActive && css.active);
 
-const buildRateClass = rate => {
-  return clsx(
+const buildRateClass = rate =>
+  clsx(
     rate < 59 && 'rateBad',
     (rate < 70 && 'rateNorm') || (rate > 69 && 'rateNice')
   );
-};
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -45,20 +43,20 @@ const MovieDetailsPage = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
+
   const URL = `https://api.themoviedb.org/3/movie/${movieId}?language=uk-UA`;
   const location = useLocation();
   const backLinkHref = useRef(location.state ?? '/home');
-  const [isFav, setIsFav] = useState(false);
-  const [isWatch, setIsWatch] = useState(false);
+
+  // Находим объект фильма в Redux-сторе
+  const movieInStore = favData.find(item => item.favId === movieId);
+  const isFav = Boolean(movieInStore?.status);
+  const isWatch = Boolean(movieInStore?.isWatch);
 
   useEffect(() => {
     dispatch(changePagesNav(false));
     dispatch(changeItems('outlet'));
-    favData.some(item => item.favId === movieId && item.status === true) &&
-      setIsFav(true);
-    favData.forEach(item => item.favId === movieId && setIsWatch(item.isWatch));
-    // console.log(favData);
-  }, [favData, dispatch, movieId]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(changeItems('items'));
@@ -68,94 +66,78 @@ const MovieDetailsPage = () => {
   }, [dispatch, URL]);
 
   useEffect(() => {
-    data.backdrop_path !== undefined &&
+    if (data.backdrop_path) {
       dispatch(changeBG(IMG_LINK_ORIGINAL + data.backdrop_path));
+    }
   }, [dispatch, data.backdrop_path]);
 
-  const handlerAddFav = () => {
-    const movieInFav = favData.find(item => item.favId === movieId);
+  // Обработчик удаления/обновления фильма, если он больше не нужен в сторе
+  const handleUpdateOrDelete = updatedFields => {
+    if (!movieInStore) return;
 
-    if (
-      movieInFav &&
-      movieInFav.isWatch === false &&
-      movieInFav.status === true
-    ) {
-      deleteMovie({ ...movieInFav, status: false });
-      setIsFav(false);
-      return;
-    }
+    const newStatus =
+      updatedFields.status !== undefined
+        ? updatedFields.status
+        : movieInStore.status;
 
-    // Если фильм просмотрен - обновляем статус избранного
-    if (movieInFav && movieInFav.isWatch === true) {
-      dispatch(toggleWatch({ ...movieInFav, status: !movieInFav.status }))
-        .unwrap()
-        .then(updatedMovie => {
-          setIsFav(updatedMovie.status); // Используем обновленное значение
-        });
-      return;
-    }
+    const newIsWatch =
+      updatedFields.isWatch !== undefined
+        ? updatedFields.isWatch
+        : movieInStore.isWatch;
 
-    if (!movieInFav) addFav();
-
-    // if (!favData.some(item => item.favId === movieId)) addFav();
-  };
-
-  const addFav = () => {
-    console.log('Додано до обраного');
-    dispatch(
-      addFavMovie({
-        id: Date.now(),
-        poster_path: data.poster_path,
-        title: data.title,
-        vote_average: data.vote_average,
-        status: true,
-        favId: movieId,
-        isWatch: isWatch,
-        release_date: data.release_date,
-      })
-    );
-    setIsFav(true);
-  };
-
-  const handlerAddWatched = () => {
-    // console.log(favData);
-    const movieInFav = favData.find(item => item.favId === movieId);
-
-    if (movieInFav) {
-      console.log('change watched movie');
-      dispatch(toggleWatch({ ...movieInFav, isWatch: !movieInFav.isWatch }));
-      setIsWatch(!movieInFav.isWatch);
-      deleteMovie({ ...movieInFav, isWatch: !movieInFav.isWatch });
+    // Если фильм БОЛЬШЕ НЕ в избранном И НЕ просмотрен — удаляем объект полностью
+    if (!newStatus && !newIsWatch) {
+      dispatch(deleteFavMovie(movieInStore.id));
     } else {
-      addWatched();
+      // Иначе просто обновляем флаги
+      dispatch(
+        toggleWatch({
+          ...movieInStore,
+          ...updatedFields,
+        })
+      );
     }
-    // if (!favData.some(item => item.favId === movieId)) {
-    //   console.log('add new watched movie');
-    //   setIsWatch(true);
-    //   addWatched();
-    // }
   };
 
-  const addWatched = () => {
-    console.log('addwatched', isWatch);
-    dispatch(
-      addFavMovie({
-        poster_path: data.poster_path,
-        title: data.title,
-        vote_average: data.vote_average,
-        status: false,
-        favId: movieId,
-        isWatch: true,
-        release_date: data.release_date,
-      })
-    );
-    setIsWatch(true);
+  const handlerToggleFav = () => {
+    if (movieInStore) {
+      // Переключаем статус избранного
+      handleUpdateOrDelete({ status: !movieInStore.status });
+    } else {
+      // Создаем новый объект фильма
+      dispatch(
+        addFavMovie({
+          id: Date.now(),
+          poster_path: data.poster_path,
+          title: data.title,
+          vote_average: data.vote_average,
+          status: true,
+          favId: movieId,
+          isWatch: false,
+          release_date: data.release_date,
+        })
+      );
+    }
   };
 
-  const deleteMovie = item => {
-    console.log(item.id, item.status, item.isWatch);
-    if (!item.status && !item.isWatch) {
-      dispatch(deleteFavMovie(item.id));
+  const handlerToggleWatched = () => {
+    if (movieInStore) {
+      // Переключаем статус просмотра
+      handleUpdateOrDelete({ isWatch: !movieInStore.isWatch });
+    } else {
+      // Создаем новый объект фильма со статусом "просмотрено"
+      dispatch(
+        addFavMovie({
+          id: Date.now(),
+          poster_path: data.poster_path,
+          title: data.title,
+          vote_average: data.vote_average,
+          status: false,
+          favId: movieId,
+          isWatch: true,
+          release_date: data.release_date,
+        })
+      );
     }
   };
 
@@ -169,14 +151,15 @@ const MovieDetailsPage = () => {
             <div>
               <Toaster position="top-left" reverseOrder={true} />
             </div>
-            <FavButton onAdd={handlerAddFav}>
-              {isFav ? `Прибрати` : `Додати`}
+            <FavButton onAdd={handlerToggleFav}>
+              {isFav ? 'Прибрати' : 'Додати'}
               <FaHeart className={clsx(isFav && css.favactive)} />
             </FavButton>
-            <WatchButton onAdd={handlerAddWatched}>
+            <WatchButton onAdd={handlerToggleWatched}>
               {isWatch ? <IoEye /> : <IoEyeOutline />}
             </WatchButton>
           </div>
+
           <div className={css.detailsWrap}>
             {data.poster_path ? (
               <div style={{ position: 'relative' }}>
@@ -197,6 +180,7 @@ const MovieDetailsPage = () => {
             ) : (
               <FaRegFileImage className={css.posterSVG} />
             )}
+
             <div className={css.movieDescription}>
               <h2>{data.title}</h2>
               <table className={css.infoBox}>
@@ -237,7 +221,6 @@ const MovieDetailsPage = () => {
                       <td>{data.release_date}</td>
                     </tr>
                   )}
-
                   {data.runtime !== 0 && (
                     <tr>
                       <td>
@@ -250,50 +233,46 @@ const MovieDetailsPage = () => {
                       </td>
                     </tr>
                   )}
-                  {data.production_countries &&
-                    data.production_countries.length > 0 && (
-                      <tr>
-                        <td>
-                          <div className={css.country}>
-                            {<span>Країна: </span>}
-                          </div>
-                        </td>
-                        <td>
-                          {data.production_countries.length > 0 && (
-                            <ul>
-                              {data.production_countries.map((item, index) => {
-                                return (
-                                  <li key={index}>
-                                    {item.name}
-                                    {index + 1 <
-                                      data.production_countries.length && `, `}
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          )}
-                        </td>
-                      </tr>
-                    )}
+                  {data.production_countries?.length > 0 && (
+                    <tr>
+                      <td>
+                        <div className={css.country}>
+                          <span>Країна: </span>
+                        </div>
+                      </td>
+                      <td>
+                        <ul>
+                          {data.production_countries.map((item, index) => (
+                            <li key={index}>
+                              {item.name}
+                              {index + 1 < data.production_countries.length &&
+                                ', '}
+                            </li>
+                          ))}
+                        </ul>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
+
               {data.overview && (
                 <>
                   <h4>Опис</h4>
                   <p>{data.overview}</p>
                 </>
               )}
+
               <h4>Жанри</h4>
               <div className={css.genresBox}>
-                {data.genres &&
-                  data.genres.map(item => {
-                    return <p key={item.id}>{item.name}</p>;
-                  })}
+                {data.genres?.map(item => (
+                  <p key={item.id}>{item.name}</p>
+                ))}
               </div>
             </div>
           </div>
+
           <div className={css.addInfo}>
-            {/* <h4>Додаткова інформація</h4> */}
             <ul>
               <li>
                 <NavLink to="cast" className={buildLinkClass}>

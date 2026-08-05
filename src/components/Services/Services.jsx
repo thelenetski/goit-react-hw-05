@@ -20,7 +20,7 @@ export const genres = [
   },
   {
     id: 16,
-    name: 'Мультфільм',
+    name: 'Мультфільми',
     originalName: 'animation',
   },
   {
