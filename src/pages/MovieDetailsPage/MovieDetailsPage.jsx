@@ -44,7 +44,7 @@ const MovieDetailsPage = () => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
 
-  const URL = `https://api.themoviedb.org/3/movie/${movieId}?language=uk-UA`;
+  const URL = `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=credits&language=uk-UA`;
   const location = useLocation();
   const backLinkHref = useRef(location.state ?? '/home');
 
@@ -249,6 +249,25 @@ const MovieDetailsPage = () => {
                                 ', '}
                             </li>
                           ))}
+                        </ul>
+                      </td>
+                    </tr>
+                  )}
+                  {data.credits.crew?.length > 0 && (
+                    <tr>
+                      <td>
+                        <div className={css.country}>
+                          <span>Режисер: </span>
+                        </div>
+                      </td>
+                      <td>
+                        <ul>
+                          {data.credits.crew.map(
+                            (item, index) =>
+                              item.job === 'Director' && (
+                                <li key={index}>{item.name}</li>
+                              )
+                          )}
                         </ul>
                       </td>
                     </tr>
