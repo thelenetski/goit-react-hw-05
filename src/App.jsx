@@ -40,25 +40,25 @@ function renderMovieSubRoutes() {
 function App() {
   const BG = useSelector(selectBG);
   const [currentBg, setCurrentBg] = useState(BG);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Если BG пришел пустой (null, undefined, ''),
-    // мы ИГНОРИРУЕМ его и не даем фону моргнуть/пропасть
     if (!BG) return;
 
-    let isMounted = true; // Защита от гонки запросов / StrictMode
+    let isMounted = true;
 
     const img = new Image();
     img.src = BG;
 
     img.onload = () => {
       if (isMounted) {
-        setCurrentBg(BG); // Меняем фон только когда картинка реально скачалась
+        setCurrentBg(BG);
+        setIsLoaded(true);
       }
     };
 
     return () => {
-      isMounted = false; // Отменяем обновление, если компонент размонтировался или BG сменился
+      isMounted = false;
     };
   }, [BG]);
 
@@ -86,10 +86,12 @@ function App() {
   return (
     <>
       <div className="parallaxBG">
-        <div
-          style={{ backgroundImage: `url(${currentBg})` }}
-          className="backgroundWrap"
-        ></div>
+        {isLoaded && (
+          <div
+            style={{ backgroundImage: `url(${currentBg})` }}
+            className="backgroundWrap fadeIn"
+          ></div>
+        )}
         <div className="backgroundBlur"></div>
         <div className="navHiddenBox"></div>
         <div className="mainWrapper">
