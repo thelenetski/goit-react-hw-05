@@ -1,5 +1,5 @@
 import './App.css';
-import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import Loader from './components/Loader/Loader';
@@ -39,6 +39,28 @@ function renderMovieSubRoutes() {
 
 function App() {
   const BG = useSelector(selectBG);
+  const [currentBg, setCurrentBg] = useState(BG);
+
+  useEffect(() => {
+    // Если BG пришел пустой (null, undefined, ''),
+    // мы ИГНОРИРУЕМ его и не даем фону моргнуть/пропасть
+    if (!BG) return;
+
+    let isMounted = true; // Защита от гонки запросов / StrictMode
+
+    const img = new Image();
+    img.src = BG;
+
+    img.onload = () => {
+      if (isMounted) {
+        setCurrentBg(BG); // Меняем фон только когда картинка реально скачалась
+      }
+    };
+
+    return () => {
+      isMounted = false; // Отменяем обновление, если компонент размонтировался или BG сменился
+    };
+  }, [BG]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,7 +87,7 @@ function App() {
     <>
       <div className="parallaxBG">
         <div
-          style={{ backgroundImage: `url(${BG})` }}
+          style={{ backgroundImage: `url(${currentBg})` }}
           className="backgroundWrap"
         ></div>
         <div className="backgroundBlur"></div>

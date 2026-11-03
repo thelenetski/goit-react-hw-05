@@ -88,7 +88,7 @@
   background-size: cover;
   background-position: center;
   transform: translateY(0);
-  transition: 1s;
+  transition: background-image 1s ease-in-out; /* Плавный переход именно фонового изображения */
   z-index: 0;
 }
 
