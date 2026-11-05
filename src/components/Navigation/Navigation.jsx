@@ -6,12 +6,16 @@ import { RiMenuSearchFill } from 'react-icons/ri';
 import { MdFavorite } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  selectFavMovies,
   selectPage,
   selectPagesNav,
   selectTotalPages,
 } from '../../redux/selectors';
 import { nextPage, prevPage } from '../../redux/moviesSlice';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
+import { MdWhatshot } from 'react-icons/md';
+import NavTitle from '../NavTitle/NavTitle';
+import { BsBookmarkHeartFill } from 'react-icons/bs';
 // import { changeItems } from '../../redux/moviesSlice';
 
 const buildLinkClass = ({ isActive }) => {
@@ -23,7 +27,16 @@ const Navigation = () => {
   const page = useSelector(selectPage);
   const showPagesNav = useSelector(selectPagesNav);
   const totalPages = useSelector(selectTotalPages);
+  const results = useSelector(selectFavMovies);
   const location = useLocation();
+
+  const sumFavMovies = res => {
+    const sum = res.reduce(
+      (accumulator, item) => (item.status ? accumulator + 1 : accumulator),
+      0
+    );
+    return sum;
+  };
 
   return (
     <header className={css.header}>
@@ -50,7 +63,7 @@ const Navigation = () => {
             <span>Обране</span>
           </NavLink>
           {showPagesNav && page > 1 && (
-            <div className={css.navPage}>
+            <div className={clsx(css.navPage, 'fadeIn')}>
               <button
                 type="button"
                 onClick={() => {
@@ -62,7 +75,7 @@ const Navigation = () => {
             </div>
           )}
           {showPagesNav && page < totalPages && (
-            <div className={css.navPage}>
+            <div className={clsx(css.navPage, 'fadeIn')}>
               <button
                 type="button"
                 onClick={() => {
@@ -75,6 +88,22 @@ const Navigation = () => {
           )}
         </div>
       </nav>
+      {location.pathname === '/home' && (
+        <NavTitle
+          title="Сьогодні у тренді"
+          icon={<MdWhatshot size={26} color="orange" />}
+        />
+      )}
+      {location.pathname === '/favorites' && (
+        <NavTitle
+          title={
+            results !== null && sumFavMovies(results) > 0
+              ? `Мої фільми (${sumFavMovies(results)})`
+              : `Немає обраних фільмів`
+          }
+          icon={<BsBookmarkHeartFill size={26} color="var(--color-active)" />}
+        />
+      )}
     </header>
   );
 };

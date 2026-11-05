@@ -13,6 +13,7 @@ const MovieList = ({ link, results, state }) => {
   const pagePath = location.pathname + location.search;
   const [waitScroll, setWaitScroll] = useState(false);
   const dispatch = useDispatch();
+
   useEffect(() => {
     results !== undefined &&
       results.length > 0 &&
@@ -23,16 +24,44 @@ const MovieList = ({ link, results, state }) => {
 
   useEffect(() => {
     if (results !== undefined) {
-      const savedScrollPosition = sessionStorage.getItem(pagePath);
-      savedScrollPosition &&
-        (parseInt(savedScrollPosition) < 1300
-          ? window.scrollTo({
-              top: parseInt(savedScrollPosition),
-              behavior: 'smooth',
-            })
-          : window.scrollTo({
-              top: parseInt(savedScrollPosition),
-            }));
+      const savedData = sessionStorage.getItem(pagePath);
+      let isRestored = false; // Флаг: удалось ли восстановить скролл
+
+      if (savedData) {
+        try {
+          const parsedData = JSON.parse(savedData);
+
+          if (parsedData && typeof parsedData === 'object') {
+            const { position, timestamp } = parsedData;
+            const ONE_HOUR = 60 * 60 * 1000; // 1 час в мс
+
+            if (timestamp && Date.now() - timestamp < ONE_HOUR) {
+              position < 1300
+                ? window.scrollTo({
+                    top: position,
+                    behavior: 'smooth',
+                  })
+                : window.scrollTo({
+                    top: position,
+                  });
+              isRestored = true;
+            }
+          }
+        } catch (e) {
+          const scrollPos = parseInt(savedData, 10);
+          if (!isNaN(scrollPos)) {
+            scrollPos < 1300
+              ? window.scrollTo({ top: scrollPos, behavior: 'smooth' })
+              : window.scrollTo({ top: scrollPos });
+            isRestored = true;
+          }
+        }
+      }
+
+      // Если данных нет или они просрочены — поднимаем страницу наверх
+      if (!isRestored) {
+        window.scrollTo({ top: 0 });
+      }
     }
 
     setTimeout(() => {
@@ -42,13 +71,16 @@ const MovieList = ({ link, results, state }) => {
 
   useEffect(() => {
     const handleScroll = throttle(() => {
-      // console.log('rec');
-      window.scrollY > 1 &&
-        sessionStorage.setItem(pagePath, Math.round(window.scrollY));
+      if (window.scrollY > 1) {
+        const scrollData = {
+          position: Math.round(window.scrollY),
+          timestamp: Date.now(),
+        };
+        sessionStorage.setItem(pagePath, JSON.stringify(scrollData));
+      }
     }, 300);
 
     if (waitScroll) {
-      // console.log('load scroll');
       window.addEventListener('scroll', handleScroll);
     }
 

@@ -3,6 +3,7 @@
   top: 0;
   display: flex;
   justify-content: flex-start;
+  gap: 20px;
   width: 100%;
   margin-top: 20px;
   z-index: 9999;
@@ -32,9 +33,10 @@
   text-transform: uppercase;
 }
 .linkBox {
-  /* width: 100%; */
+  width: fit-content;
   display: flex;
   justify-content: space-around;
+  transition: 0.5s;
 }
 .link {
   display: flex;

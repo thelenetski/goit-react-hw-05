@@ -109,7 +109,7 @@
 .mainWrapper {
   min-height: 100dvh;
   display: flex;
-  padding: 0 20px;
+  padding: 0 40px;
   margin-bottom: 40px;
 }
 
@@ -132,6 +132,7 @@
     display: none;
   }
   .mainWrapper {
+    padding: 0 20px;
     margin-bottom: 20px;
   }
 }

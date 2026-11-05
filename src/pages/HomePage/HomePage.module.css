@@ -4,12 +4,13 @@
   flex-direction: column;
   flex: 1;
   position: relative;
+  margin-top: 20px;
   z-index: 999;
 }
 
 .main h1 {
   width: fit-content;
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
@@ -23,6 +24,7 @@
     margin: 0 0 100px 0;
   }
   .main h1 {
+    display: flex;
     width: 100%;
     font-size: 24px;
   }
